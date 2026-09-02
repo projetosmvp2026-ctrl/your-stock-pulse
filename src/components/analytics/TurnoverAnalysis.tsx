@@ -39,7 +39,7 @@ export function TurnoverAnalysis({ items, movements }: TurnoverAnalysisProps) {
       <CardHeader className="pb-3"><CardTitle className="text-sm">{title}</CardTitle></CardHeader>
       <CardContent className="p-0">
         {list.length === 0 ? (
-          <p className="px-4 pb-4 text-sm text-muted-foreground">No data</p>
+          <p className="px-4 pb-4 text-sm text-muted-foreground">Sem dados</p>
         ) : (
           <div className="divide-y divide-border">
             {list.map((item, i) => (
@@ -61,9 +61,9 @@ export function TurnoverAnalysis({ items, movements }: TurnoverAnalysisProps) {
 
   return (
     <div className="grid gap-4 lg:grid-cols-3">
-      {renderList("Fastest Moving", fastest, (i) => `${i.turnoverRate.toFixed(1)}× turnover`)}
-      {renderList("Slowest Moving", slowest, (i) => `${i.turnoverRate.toFixed(1)}× turnover`)}
-      {renderList("Most Reordered", mostReordered, (i) => `${i.receivedCount} receipts`)}
+      {renderList("Giro Mais Rápido", fastest, (i) => `${i.turnoverRate.toFixed(1)}× giro`)}
+      {renderList("Giro Mais Lento", slowest, (i) => `${i.turnoverRate.toFixed(1)}× giro`)}
+      {renderList("Mais Reabastecido", mostReordered, (i) => `${i.receivedCount} recebimentos`)}
     </div>
   );
 }

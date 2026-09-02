@@ -20,7 +20,7 @@ export function StockSummaryCards({ items }: StockSummaryCardsProps) {
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <div className="relative overflow-hidden rounded-md border border-border bg-card p-5 pl-4">
         <div className="absolute left-2 top-2 bottom-2 w-[3px] rounded-full bg-primary" />
-        <p className="text-sm text-muted-foreground">Total Inventory Value</p>
+        <p className="text-sm text-muted-foreground">Valor Total do Estoque</p>
         <div className="mt-1 flex items-baseline gap-2">
           <DollarSign className="h-4 w-4 text-muted-foreground" />
           <span className="font-mono text-2xl font-bold text-foreground">
@@ -28,9 +28,9 @@ export function StockSummaryCards({ items }: StockSummaryCardsProps) {
           </span>
         </div>
       </div>
-      <MetricCard label="Total SKUs" value={metrics.totalSkus} accentColor="neutral" />
-      <MetricCard label="Avg Stock Level" value={metrics.avgStock} accentColor="healthy" />
-      <MetricCard label="Below Reorder Point" value={metrics.belowReorder} accentColor={metrics.belowReorder > 0 ? "warning" : "healthy"} />
+      <MetricCard label="Total de SKUs" value={metrics.totalSkus} accentColor="neutral" />
+      <MetricCard label="Nível Médio de Estoque" value={metrics.avgStock} accentColor="healthy" />
+      <MetricCard label="Abaixo do Ponto de Reposição" value={metrics.belowReorder} accentColor={metrics.belowReorder > 0 ? "warning" : "healthy"} />
     </div>
   );
 }
