@@ -104,7 +104,7 @@ function handlePrint(itemName: string, sku: string, barcode: string, svgMarkup: 
   if (!printWindow) return;
   printWindow.document.write(`
     <!DOCTYPE html>
-    <html><head><title>Label — ${escapeHtml(sku)}</title>
+    <html><head><title>Etiqueta — ${escapeHtml(sku)}</title>
     <style>
       @page { size: 2.5in 1in; margin: 0; }
       body { font-family: ui-monospace, monospace; text-align: center; padding: 8px; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 1in; box-sizing: border-box; }
@@ -161,14 +161,14 @@ export function BarcodeDisplay({ barcode, itemName, sku, location, onBarcodeChan
   if (!barcode) {
     return (
       <div className="rounded-lg border border-dashed border-border p-4 text-center">
-        <p className="text-sm text-muted-foreground">No barcode assigned</p>
+        <p className="text-sm text-muted-foreground">Nenhum código de barras atribuído</p>
         {onBarcodeChange && (
           editing ? (
             <div className="mt-3 flex items-center gap-2 justify-center">
               <Input
                 value={editValue}
                 onChange={(e) => setEditValue(e.target.value)}
-                placeholder="Enter barcode value"
+                placeholder="Digite o código de barras"
                 className="h-8 w-48 text-sm"
                 autoFocus
                 onKeyDown={(e) => { if (e.key === "Enter") saveEdit(); if (e.key === "Escape") cancelEdit(); }}
@@ -182,7 +182,7 @@ export function BarcodeDisplay({ barcode, itemName, sku, location, onBarcodeChan
             </div>
           ) : (
             <Button variant="outline" size="sm" className="mt-2" onClick={startEdit}>
-              Add Barcode
+              Adicionar Código de Barras
             </Button>
           )
         )}
@@ -196,9 +196,9 @@ export function BarcodeDisplay({ barcode, itemName, sku, location, onBarcodeChan
   return (
     <div className="rounded-lg border border-border bg-card p-4">
       <div className="flex items-center justify-between mb-2">
-        <p className="text-center text-xs uppercase tracking-wider text-muted-foreground flex-1">Barcode</p>
+        <p className="text-center text-xs uppercase tracking-wider text-muted-foreground flex-1">Código de Barras</p>
         {onBarcodeChange && (
-          <Button variant="ghost" size="icon" className="h-6 w-6" onClick={startEdit} aria-label="Edit barcode">
+          <Button variant="ghost" size="icon" className="h-6 w-6" onClick={startEdit} aria-label="Editar código de barras">
             <Pencil className="h-3 w-3" />
           </Button>
         )}
@@ -226,7 +226,7 @@ export function BarcodeDisplay({ barcode, itemName, sku, location, onBarcodeChan
           <div
             className="mx-auto flex justify-center"
             style={{ maxWidth: 240, height: 56 }}
-            aria-label={`Barcode: ${barcode}`}
+            aria-label={`Código de barras: ${barcode}`}
           >
             <BarcodeSVG bars={bars} />
           </div>
@@ -245,7 +245,7 @@ export function BarcodeDisplay({ barcode, itemName, sku, location, onBarcodeChan
           onClick={() => handlePrint(itemName, sku, barcode, svgMarkup, location)}
         >
           <Printer className="h-3.5 w-3.5" />
-          Print Label
+          Imprimir Etiqueta
         </Button>
       </div>
     </div>
