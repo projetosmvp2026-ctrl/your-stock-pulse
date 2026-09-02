@@ -100,10 +100,10 @@ export function DemandForecastChart({ items, movements }: DemandForecastChartPro
   return (
     <Card>
       <CardHeader className="flex-row items-center justify-between gap-4 space-y-0 pb-2">
-        <CardTitle className="text-base">Demand Forecast</CardTitle>
+        <CardTitle className="text-base">Previsão de Demanda</CardTitle>
         <Select value={selectedId} onValueChange={setSelectedId}>
           <SelectTrigger className="w-[220px]">
-            <SelectValue placeholder="Select item" />
+            <SelectValue placeholder="Selecionar item" />
           </SelectTrigger>
           <SelectContent>
             {activeItems.map((item) => (
@@ -118,10 +118,10 @@ export function DemandForecastChart({ items, movements }: DemandForecastChartPro
         {stockoutDay !== null && stockoutDay <= 90 && (
           <div className="mb-2 flex items-center gap-2">
             <Badge variant="destructive" className="text-xs">
-              Projected stockout in {stockoutDay} days
+              Ruptura de estoque prevista em {stockoutDay} dias
             </Badge>
             <span className="text-xs text-muted-foreground">
-              Avg consumption: {avgDaily.toFixed(1)} units/day
+              Consumo médio: {avgDaily.toFixed(1)} unidades/dia
             </span>
           </div>
         )}
@@ -132,17 +132,17 @@ export function DemandForecastChart({ items, movements }: DemandForecastChartPro
             <XAxis
               dataKey="day"
               tick={{ fontSize: 11 }}
-              label={{ value: "Days", position: "insideBottomRight", offset: -5, fontSize: 11 }}
+              label={{ value: "Dias", position: "insideBottomRight", offset: -5, fontSize: 11 }}
               className="fill-muted-foreground"
             />
             <YAxis
               tick={{ fontSize: 11 }}
-              label={{ value: "Qty", angle: -90, position: "insideLeft", fontSize: 11 }}
+              label={{ value: "Qtd", angle: -90, position: "insideLeft", fontSize: 11 }}
               className="fill-muted-foreground"
             />
             <Tooltip
               contentStyle={{ fontSize: 12 }}
-              labelFormatter={(v) => `Day ${v}`}
+              labelFormatter={(v) => `Dia ${v}`}
             />
 
             {/* Threshold zones */}
@@ -158,7 +158,7 @@ export function DemandForecastChart({ items, movements }: DemandForecastChartPro
                   y={selectedItem.reorderPoint}
                   stroke="hsl(25 95% 53%)"
                   strokeDasharray="4 4"
-                  label={{ value: "Reorder Point", fontSize: 10, fill: "hsl(25 95% 53%)" }}
+                  label={{ value: "Ponto de Reposição", fontSize: 10, fill: "hsl(25 95% 53%)" }}
                 />
               </>
             )}

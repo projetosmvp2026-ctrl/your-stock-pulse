@@ -31,7 +31,7 @@ export function CustomFieldManager() {
   useEffect(() => { if (adding) nameRef.current?.focus(); }, [adding]);
 
   const handleAdd = () => {
-    if (!newName.trim()) { toast.error("Field name is required"); return; }
+    if (!newName.trim()) { toast.error("O nome do campo é obrigatório"); return; }
     if (!demoStore) return;
     const def: CustomFieldDefinition = {
       id: crypto.randomUUID(),
@@ -43,7 +43,7 @@ export function CustomFieldManager() {
     };
     demoStore.addCustomFieldDef(def);
     bumpVersion();
-    toast.success("Custom field added");
+    toast.success("Campo personalizado adicionado");
     setNewName(""); setNewType("text"); setNewOptions(""); setAdding(false);
   };
 
@@ -51,7 +51,7 @@ export function CustomFieldManager() {
     if (!deleteTarget || !demoStore) return;
     demoStore.deleteCustomFieldDef(deleteTarget.id);
     bumpVersion();
-    toast.success("Custom field removed");
+    toast.success("Campo personalizado removido");
     setDeleteTarget(null);
   };
 
@@ -66,7 +66,7 @@ export function CustomFieldManager() {
   };
 
   if (fields.length === 0 && !adding) {
-    return <EmptyState icon={ListChecks} title="No custom fields defined" description="Custom fields add extra data to your items, like serial numbers or conditions." actionLabel="Add Field" onAction={() => setAdding(true)} />;
+    return <EmptyState icon={ListChecks} title="Nenhum campo personalizado definido" description="Campos personalizados adicionam dados extras aos seus itens, como números de série ou condições." actionLabel="Adicionar Campo" onAction={() => setAdding(true)} />;
   }
 
   const atLimit = fields.length >= MAX_FIELDS;
@@ -74,17 +74,17 @@ export function CustomFieldManager() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">{fields.length}/{MAX_FIELDS} fields</p>
+        <p className="text-sm text-muted-foreground">{fields.length}/{MAX_FIELDS} campos</p>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <span>
                 <Button size="sm" variant="outline" disabled={atLimit} onClick={() => setAdding(true)}>
-                  <Plus className="mr-1.5 h-3.5 w-3.5" /> Add Field
+                  <Plus className="mr-1.5 h-3.5 w-3.5" /> Adicionar Campo
                 </Button>
               </span>
             </TooltipTrigger>
-            {atLimit && <TooltipContent>Maximum of {MAX_FIELDS} custom fields reached</TooltipContent>}
+            {atLimit && <TooltipContent>Máximo de {MAX_FIELDS} campos personalizados atingido</TooltipContent>}
           </Tooltip>
         </TooltipProvider>
       </div>
@@ -92,7 +92,7 @@ export function CustomFieldManager() {
       {adding && (
         <div className="rounded-lg border border-border p-3 space-y-2">
           <div className="flex items-center gap-2">
-            <Input ref={nameRef} placeholder="Field name" value={newName} onChange={(e) => setNewName(e.target.value)} className="h-8 text-sm flex-1" />
+            <Input ref={nameRef} placeholder="Nome do campo" value={newName} onChange={(e) => setNewName(e.target.value)} className="h-8 text-sm flex-1" />
             <Select value={newType} onValueChange={(v) => setNewType(v as CustomFieldDefinition["fieldType"])}>
               <SelectTrigger className="h-8 w-[120px] text-sm"><SelectValue /></SelectTrigger>
               <SelectContent>
@@ -101,11 +101,11 @@ export function CustomFieldManager() {
             </Select>
           </div>
           {newType === "select" && (
-            <Input placeholder="Options (comma-separated)" value={newOptions} onChange={(e) => setNewOptions(e.target.value)} className="h-8 text-sm" />
+            <Input placeholder="Opções (separadas por vírgula)" value={newOptions} onChange={(e) => setNewOptions(e.target.value)} className="h-8 text-sm" />
           )}
           <div className="flex gap-2">
-            <Button size="sm" onClick={handleAdd}><Check className="mr-1.5 h-3.5 w-3.5" />Save</Button>
-            <Button size="sm" variant="ghost" onClick={() => setAdding(false)}><X className="mr-1.5 h-3.5 w-3.5" />Cancel</Button>
+            <Button size="sm" onClick={handleAdd}><Check className="mr-1.5 h-3.5 w-3.5" />Salvar</Button>
+            <Button size="sm" variant="ghost" onClick={() => setAdding(false)}><X className="mr-1.5 h-3.5 w-3.5" />Cancelar</Button>
           </div>
         </div>
       )}
@@ -132,12 +132,12 @@ export function CustomFieldManager() {
       <AlertDialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Remove "{deleteTarget?.name}"?</AlertDialogTitle>
-            <AlertDialogDescription>Existing item values for this field will be orphaned. This cannot be undone.</AlertDialogDescription>
+            <AlertDialogTitle>Remover "{deleteTarget?.name}"?</AlertDialogTitle>
+            <AlertDialogDescription>Os valores existentes dos itens para este campo ficarão órfãos. Isso não pode ser desfeito.</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">Remove</AlertDialogAction>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">Remover</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

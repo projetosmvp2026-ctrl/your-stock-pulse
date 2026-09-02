@@ -35,8 +35,8 @@ export function DashboardReorderSection({ items, movements, suppliers }: Dashboa
     updateItem.mutate(
       { id: a.itemId, updates: { reorderPoint: a.suggestedReorderPoint, reorderQuantity: a.suggestedReorderQuantity } },
       {
-        onSuccess: () => toast.success(`Reorder settings updated for ${a.itemName}`),
-        onError: (e) => toast.error(e.message || "Failed to update reorder settings."),
+        onSuccess: () => toast.success(`Configurações de reposição atualizadas para ${a.itemName}`),
+        onError: (e) => toast.error(e.message || "Falha ao atualizar configurações de reposição."),
       },
     );
   };
@@ -50,12 +50,12 @@ export function DashboardReorderSection({ items, movements, suppliers }: Dashboa
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Lightbulb className="h-4 w-4 text-amber-500" />
-          <h2 className="text-sm font-semibold">Suggested orders</h2>
+          <h2 className="text-sm font-semibold">Pedidos sugeridos</h2>
           <Badge variant="secondary" className="text-xs">{suggestions.length}</Badge>
         </div>
         <Button variant="ghost" size="sm" asChild className="text-xs">
           <Link to="/app/ai-insights">
-            View all <ArrowRight className="ml-1 h-3 w-3" />
+            Ver tudo <ArrowRight className="ml-1 h-3 w-3" />
           </Link>
         </Button>
       </div>

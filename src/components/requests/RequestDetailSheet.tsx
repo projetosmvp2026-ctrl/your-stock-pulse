@@ -23,12 +23,12 @@ import { RequestStatus } from "@/types/inventory";
 import type { InventoryRequest, Item } from "@/types/inventory";
 
 const STATUS_LABEL: Record<RequestStatus, string> = {
-  [RequestStatus.Pending]: "Pending",
-  [RequestStatus.Approved]: "Approved",
-  [RequestStatus.PartiallyFulfilled]: "Partial",
-  [RequestStatus.Fulfilled]: "Fulfilled",
-  [RequestStatus.Declined]: "Declined",
-  [RequestStatus.Cancelled]: "Cancelled",
+  [RequestStatus.Pending]: "Pendente",
+  [RequestStatus.Approved]: "Aprovado",
+  [RequestStatus.PartiallyFulfilled]: "Parcial",
+  [RequestStatus.Fulfilled]: "Atendido",
+  [RequestStatus.Declined]: "Recusado",
+  [RequestStatus.Cancelled]: "Cancelado",
 };
 
 const STATUS_CLASS: Record<RequestStatus, string> = {
@@ -74,7 +74,7 @@ export function RequestDetailSheet({
       <SheetContent className="w-full overflow-y-auto sm:max-w-[560px]">
         <SheetHeader>
           <SheetTitle>{request.requestNumber}</SheetTitle>
-          <SheetDescription>Request details</SheetDescription>
+          <SheetDescription>Detalhes da solicitação</SheetDescription>
         </SheetHeader>
 
         <div className="mt-6 space-y-5">
@@ -88,7 +88,7 @@ export function RequestDetailSheet({
             </Badge>
             {request.priority === "urgent" && (
               <Badge variant="outline" className="bg-amber-accent/15 text-amber-accent border-amber-accent/20">
-                Urgent
+                Urgente
               </Badge>
             )}
           </div>
@@ -96,31 +96,31 @@ export function RequestDetailSheet({
           {/* Meta */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-xs font-medium text-muted-foreground">Submitted by</p>
+              <p className="text-xs font-medium text-muted-foreground">Enviado por</p>
               <p className="text-sm text-foreground">{request.requestedBy}</p>
             </div>
             <div>
-              <p className="text-xs font-medium text-muted-foreground">Date</p>
+              <p className="text-xs font-medium text-muted-foreground">Data</p>
               <p className="text-sm text-foreground">
-                {format(new Date(request.createdAt), "MMM d, yyyy")}
+                {format(new Date(request.createdAt), "dd/MM/yyyy")}
               </p>
             </div>
           </div>
 
           {/* Title & Reason */}
           <div>
-            <p className="text-xs font-medium text-muted-foreground">Title</p>
+            <p className="text-xs font-medium text-muted-foreground">Título</p>
             <p className="text-sm font-medium text-foreground">{request.title}</p>
           </div>
           <div>
-            <p className="text-xs font-medium text-muted-foreground">Reason / Justification</p>
+            <p className="text-xs font-medium text-muted-foreground">Motivo / Justificativa</p>
             <p className="text-sm text-foreground">{request.reason}</p>
           </div>
 
           {/* Decline reason — prominent */}
           {request.declineReason && (
             <div className="rounded-md border border-destructive/20 bg-destructive/5 p-3">
-              <p className="text-xs font-medium text-destructive">Decline Reason</p>
+              <p className="text-xs font-medium text-destructive">Motivo da Recusa</p>
               <p className="text-sm text-foreground">{request.declineReason}</p>
             </div>
           )}
@@ -130,14 +130,14 @@ export function RequestDetailSheet({
           {/* Line items */}
           <div>
             <p className="mb-2 text-sm font-medium text-foreground">
-              Line Items ({request.items.length})
+              Itens ({request.items.length})
             </p>
             <div className="overflow-x-auto rounded-md border border-border bg-white">
               <Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead>Item</TableHead>
-                    <TableHead className="w-[60px] text-right">Requested</TableHead>
+                    <TableHead className="w-[60px] text-right">Solicitado</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -164,9 +164,9 @@ export function RequestDetailSheet({
 
           {/* Timeline */}
           <div>
-            <p className="mb-2 text-sm font-medium text-foreground">Timeline</p>
+            <p className="mb-2 text-sm font-medium text-foreground">Linha do Tempo</p>
             <div className="space-y-2">
-              <TimelineEntry label="Submitted" date={request.createdAt} by={request.requestedBy} />
+              <TimelineEntry label="Enviado" date={request.createdAt} by={request.requestedBy} />
               {request.status !== RequestStatus.Pending &&
                 request.status !== RequestStatus.Cancelled && (
                   <TimelineEntry
@@ -176,7 +176,7 @@ export function RequestDetailSheet({
                   />
                 )}
               {request.status === RequestStatus.Cancelled && (
-                <TimelineEntry label="Cancelled" date={request.updatedAt} by={request.requestedBy} />
+                <TimelineEntry label="Cancelado" date={request.updatedAt} by={request.requestedBy} />
               )}
             </div>
           </div>
@@ -187,13 +187,13 @@ export function RequestDetailSheet({
               <Separator />
               <div className="flex flex-wrap gap-2">
                 {onApprove && (
-                  <Button size="sm" onClick={() => onApprove(request)}>Approve</Button>
+                  <Button size="sm" onClick={() => onApprove(request)}>Aprovar</Button>
                 )}
                 {onPartial && (
-                  <Button size="sm" variant="outline" onClick={() => onPartial(request)}>Partial Fulfill</Button>
+                  <Button size="sm" variant="outline" onClick={() => onPartial(request)}>Atender Parcialmente</Button>
                 )}
                 {onDecline && (
-                  <Button size="sm" variant="outline" className="text-destructive hover:text-destructive" onClick={() => onDecline(request)}>Decline</Button>
+                  <Button size="sm" variant="outline" className="text-destructive hover:text-destructive" onClick={() => onDecline(request)}>Recusar</Button>
                 )}
               </div>
             </>
@@ -209,7 +209,7 @@ export function RequestDetailSheet({
                 className="text-destructive hover:text-destructive"
                 onClick={() => onCancel(request)}
               >
-                Cancel Request
+                Cancelar Solicitação
               </Button>
             </>
           )}
@@ -225,7 +225,7 @@ function TimelineEntry({ label, date, by }: { label: string; date: string; by?: 
       <div className="h-2 w-2 shrink-0 rounded-full bg-primary" />
       <span className="font-medium text-foreground">{label}</span>
       <span className="text-muted-foreground">{format(new Date(date), "MMM d, yyyy")}</span>
-      {by && <span className="text-muted-foreground">by {by}</span>}
+      {by && <span className="text-muted-foreground">por {by}</span>}
     </div>
   );
 }

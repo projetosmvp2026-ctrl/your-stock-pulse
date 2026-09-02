@@ -31,17 +31,17 @@ interface LineRow {
 }
 
 const schema = z.object({
-  title: z.string().min(1, "Title is required"),
-  reason: z.string().min(1, "Reason is required"),
+  title: z.string().min(1, "Título é obrigatório"),
+  reason: z.string().min(1, "Motivo é obrigatório"),
   priority: z.enum(["normal", "urgent"]),
   lines: z
     .array(
       z.object({
-        itemId: z.string().min(1, "Select an item"),
-        quantity: z.number().min(1, "Qty must be at least 1"),
+        itemId: z.string().min(1, "Selecione um item"),
+        quantity: z.number().min(1, "Qtd deve ser pelo menos 1"),
       }),
     )
-    .min(1, "Add at least one line item"),
+    .min(1, "Adicione pelo menos um item"),
 });
 
 interface RequestFormSheetProps {
@@ -106,7 +106,7 @@ export function RequestFormSheet({ open, onOpenChange, items }: RequestFormSheet
         fieldErrors[key] = issue.message;
       }
       if (result.error.issues.some((i) => i.path[0] === "lines" && i.path.length === 1)) {
-        fieldErrors["lines"] = "Add at least one line item";
+        fieldErrors["lines"] = "Adicione pelo menos um item";
       }
       setErrors(fieldErrors);
       return;
@@ -138,11 +138,11 @@ export function RequestFormSheet({ open, onOpenChange, items }: RequestFormSheet
       },
       {
         onSuccess: () => {
-          toast.success("Request submitted");
+          toast.success("Solicitação enviada");
           resetForm();
           onOpenChange(false);
         },
-        onError: (e) => toast.error(e.message || "Failed to submit request."),
+        onError: (e) => toast.error(e.message || "Falha ao enviar solicitação."),
       },
     );
   }
@@ -157,19 +157,19 @@ export function RequestFormSheet({ open, onOpenChange, items }: RequestFormSheet
     >
       <SheetContent className="w-full overflow-y-auto sm:max-w-[560px]">
         <SheetHeader>
-          <SheetTitle>New Request</SheetTitle>
-          <SheetDescription>Submit an inventory request</SheetDescription>
+          <SheetTitle>Nova Solicitação</SheetTitle>
+          <SheetDescription>Envie uma solicitação de estoque</SheetDescription>
         </SheetHeader>
 
         <div className="mt-6 space-y-4">
           {/* Title */}
           <div className="space-y-1.5">
-            <Label htmlFor="req-title">Title *</Label>
+            <Label htmlFor="req-title">Título *</Label>
             <Input
               id="req-title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Short description of what you need"
+              placeholder="Breve descrição do que você precisa"
             />
             {errors["title"] && (
               <p className="text-xs text-destructive">{errors["title"]}</p>
@@ -178,12 +178,12 @@ export function RequestFormSheet({ open, onOpenChange, items }: RequestFormSheet
 
           {/* Reason */}
           <div className="space-y-1.5">
-            <Label htmlFor="req-reason">Reason / Justification *</Label>
+            <Label htmlFor="req-reason">Motivo / Justificativa *</Label>
             <Textarea
               id="req-reason"
               value={reason}
               onChange={(e) => setReason(e.target.value)}
-              placeholder="Why do you need these items?"
+              placeholder="Por que você precisa desses itens?"
               rows={3}
             />
             {errors["reason"] && (
@@ -193,21 +193,21 @@ export function RequestFormSheet({ open, onOpenChange, items }: RequestFormSheet
 
           {/* Priority */}
           <div className="space-y-1.5">
-            <Label>Priority</Label>
+            <Label>Prioridade</Label>
             <Select value={priority} onValueChange={(v) => setPriority(v as "normal" | "urgent")}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="normal">Normal</SelectItem>
-                <SelectItem value="urgent">Urgent</SelectItem>
+                <SelectItem value="urgent">Urgente</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           {/* Line items */}
           <div className="space-y-2">
-            <Label>Line Items *</Label>
+            <Label>Itens *</Label>
             {errors["lines"] && (
               <p className="text-xs text-destructive">{errors["lines"]}</p>
             )}
@@ -222,14 +222,14 @@ export function RequestFormSheet({ open, onOpenChange, items }: RequestFormSheet
                       onValueChange={(v) => updateLine(line.id, "itemId", v)}
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="Select item" />
+                        <SelectValue placeholder="Selecione o item" />
                       </SelectTrigger>
                       <SelectContent>
                         {items
                           .filter((i) => i.currentStock > 0)
                           .map((i) => (
                             <SelectItem key={i.id} value={i.id}>
-                              {i.name} ({i.currentStock} avail)
+                              {i.name} ({i.currentStock} disp)
                             </SelectItem>
                           ))}
                       </SelectContent>
@@ -263,13 +263,13 @@ export function RequestFormSheet({ open, onOpenChange, items }: RequestFormSheet
             })}
             <Button type="button" size="sm" variant="outline" onClick={addLine} className="gap-1.5">
               <Plus className="h-3.5 w-3.5" />
-              Add Item
+              Adicionar Item
             </Button>
           </div>
 
           {/* Submit */}
           <Button onClick={handleSubmit} className="w-full" disabled={createRequest.isLoading}>
-            Submit Request
+            Enviar Solicitação
           </Button>
         </div>
       </SheetContent>

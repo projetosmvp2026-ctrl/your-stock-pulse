@@ -78,10 +78,10 @@ export function ReorderSuggestionCard({ analysis, onApply, onDismiss }: ReorderS
 
       {/* Metrics */}
       <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
-        <div className="text-muted-foreground">Current Stock</div>
+        <div className="text-muted-foreground">Estoque Atual</div>
         <div className="font-medium text-right">{analysis.currentStock}</div>
 
-        <div className="text-muted-foreground">Reorder Point</div>
+        <div className="text-muted-foreground">Ponto de Reposição</div>
         <div className="font-medium text-right flex items-center justify-end gap-1">
           <span className="text-muted-foreground">{analysis.currentReorderPoint}</span>
           <ArrowRight className="h-3 w-3 text-muted-foreground" />
@@ -90,10 +90,10 @@ export function ReorderSuggestionCard({ analysis, onApply, onDismiss }: ReorderS
           </span>
         </div>
 
-        <div className="text-muted-foreground">Order Qty</div>
+        <div className="text-muted-foreground">Qtd. do Pedido</div>
         <div className="font-medium text-right">{analysis.suggestedReorderQuantity}</div>
 
-        <div className="text-muted-foreground">Avg Daily Use</div>
+        <div className="text-muted-foreground">Uso Médio Diário</div>
         <div className="font-medium text-right">{analysis.avgDailyConsumption.toFixed(1)}</div>
       </div>
 
@@ -102,7 +102,7 @@ export function ReorderSuggestionCard({ analysis, onApply, onDismiss }: ReorderS
         {applied ? (
           <div className="flex items-center gap-1.5 text-xs text-stock-healthy font-medium">
             <Check className="h-3.5 w-3.5" />
-            Applied
+            Aplicado
           </div>
         ) : (
           <>
@@ -115,7 +115,7 @@ export function ReorderSuggestionCard({ analysis, onApply, onDismiss }: ReorderS
                 setApplied(true);
               }}
             >
-              Apply
+              Aplicar
             </Button>
             <Button
               size="sm"
@@ -127,7 +127,7 @@ export function ReorderSuggestionCard({ analysis, onApply, onDismiss }: ReorderS
               }}
             >
               <X className="h-3 w-3 mr-1" />
-              Dismiss
+              Descartar
             </Button>
           </>
         )}

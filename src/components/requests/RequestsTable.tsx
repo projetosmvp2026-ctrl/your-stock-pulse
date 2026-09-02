@@ -13,12 +13,12 @@ import { RequestStatus } from "@/types/inventory";
 import type { InventoryRequest } from "@/types/inventory";
 
 const STATUS_LABEL: Record<RequestStatus, string> = {
-  [RequestStatus.Pending]: "Pending",
-  [RequestStatus.Approved]: "Approved",
-  [RequestStatus.PartiallyFulfilled]: "Partial",
-  [RequestStatus.Fulfilled]: "Fulfilled",
-  [RequestStatus.Declined]: "Declined",
-  [RequestStatus.Cancelled]: "Cancelled",
+  [RequestStatus.Pending]: "Pendente",
+  [RequestStatus.Approved]: "Aprovado",
+  [RequestStatus.PartiallyFulfilled]: "Parcial",
+  [RequestStatus.Fulfilled]: "Atendido",
+  [RequestStatus.Declined]: "Recusado",
+  [RequestStatus.Cancelled]: "Cancelado",
 };
 
 const STATUS_CLASS: Record<RequestStatus, string> = {
@@ -46,7 +46,7 @@ export function RequestsTable({ requests, onRowClick, showRequestor = false, pre
   if (sorted.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border py-16">
-        <p className="text-sm text-muted-foreground">No requests submitted yet.</p>
+        <p className="text-sm text-muted-foreground">Nenhuma solicitação enviada ainda.</p>
       </div>
     );
   }
@@ -56,13 +56,13 @@ export function RequestsTable({ requests, onRowClick, showRequestor = false, pre
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Request ID</TableHead>
-            <TableHead>Title</TableHead>
-            {showRequestor && <TableHead>Requestor</TableHead>}
+            <TableHead>ID da Solicitação</TableHead>
+            <TableHead>Título</TableHead>
+            {showRequestor && <TableHead>Solicitante</TableHead>}
             <TableHead>Status</TableHead>
-            <TableHead className="text-center">Items</TableHead>
-            <TableHead>Priority</TableHead>
-            <TableHead>Created</TableHead>
+            <TableHead className="text-center">Itens</TableHead>
+            <TableHead>Prioridade</TableHead>
+            <TableHead>Criado</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -88,14 +88,14 @@ export function RequestsTable({ requests, onRowClick, showRequestor = false, pre
               <TableCell>
                 {req.priority === "urgent" ? (
                   <Badge variant="outline" className="bg-amber-accent/15 text-amber-accent border-amber-accent/20">
-                    Urgent
+                    Urgente
                   </Badge>
                 ) : (
                   <span className="text-sm text-muted-foreground">Normal</span>
                 )}
               </TableCell>
               <TableCell className="text-sm text-muted-foreground">
-                {format(new Date(req.createdAt), "MMM d, yyyy")}
+                {format(new Date(req.createdAt), "dd/MM/yyyy")}
               </TableCell>
             </TableRow>
           ))}
