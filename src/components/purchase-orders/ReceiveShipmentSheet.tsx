@@ -83,9 +83,9 @@ export function ReceiveShipmentSheet({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full overflow-y-auto sm:max-w-[560px]">
         <SheetHeader>
-          <SheetTitle>Receive Shipment — {purchaseOrder.orderNumber}</SheetTitle>
+          <SheetTitle>Receber Remessa — {purchaseOrder.orderNumber}</SheetTitle>
           <SheetDescription>
-            Enter the quantity received for each line item.
+            Informe a quantidade recebida para cada item.
           </SheetDescription>
         </SheetHeader>
 
@@ -95,10 +95,10 @@ export function ReceiveShipmentSheet({
               <TableHeader>
                 <TableRow>
                   <TableHead>Item</TableHead>
-                  <TableHead className="w-[60px] text-right">Ordered</TableHead>
-                  <TableHead className="w-[70px] text-right">Received</TableHead>
-                  <TableHead className="w-[70px] text-right">Remaining</TableHead>
-                  <TableHead className="w-[90px] text-right">Receiving</TableHead>
+                  <TableHead className="w-[60px] text-right">Pedido</TableHead>
+                  <TableHead className="w-[70px] text-right">Recebido</TableHead>
+                  <TableHead className="w-[70px] text-right">Restante</TableHead>
+                  <TableHead className="w-[90px] text-right">Recebendo</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -139,10 +139,10 @@ export function ReceiveShipmentSheet({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="receive-notes">Shipment Notes</Label>
+            <Label htmlFor="receive-notes">Observações da Remessa</Label>
             <Textarea
               id="receive-notes"
-              placeholder="Optional notes about this shipment..."
+              placeholder="Observações opcionais sobre esta remessa..."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               rows={3}
@@ -154,7 +154,7 @@ export function ReceiveShipmentSheet({
             disabled={!hasAnyQty}
             onClick={handleConfirm}
           >
-            Confirm Receipt
+            Confirmar Recebimento
           </Button>
         </div>
       </SheetContent>

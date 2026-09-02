@@ -30,7 +30,7 @@ function checkStock(
     const item = itemMap.get(li.itemId);
     if (!item) continue;
     if (qty > item.currentStock) {
-      return `Insufficient stock for ${item.name} (available: ${item.currentStock}, requested: ${qty})`;
+      return `Estoque insuficiente para ${item.name} (disponível: ${item.currentStock}, solicitado: ${qty})`;
     }
   }
   return null;
@@ -107,7 +107,7 @@ export function useApprovalActions({ items }: { items: Item[] }) {
         updatedAt: now,
       });
       bumpVersion();
-      toast.success(`${activeRequest.requestNumber} approved`);
+      toast.success(`${activeRequest.requestNumber} aprovado`);
       setDialog(null);
       setActiveRequest(null);
     } finally {
@@ -127,7 +127,7 @@ export function useApprovalActions({ items }: { items: Item[] }) {
         updatedAt: now,
       });
       bumpVersion();
-      toast.success(`${activeRequest.requestNumber} declined`);
+      toast.success(`${activeRequest.requestNumber} recusado`);
       setDialog(null);
       setActiveRequest(null);
     } finally {
@@ -138,7 +138,7 @@ export function useApprovalActions({ items }: { items: Item[] }) {
   function confirmPartial() {
     if (!activeRequest || !isDemo || !demoStore) return;
     const allZero = activeRequest.items.every((li) => (partialQtys[li.id] ?? 0) === 0);
-    if (allZero) { toast.error("Approve at least one item quantity"); return; }
+    if (allZero) { toast.error("Aprove ao menos a quantidade de um item"); return; }
 
     const err = checkStock(activeRequest.items, itemMap, partialQtys);
     if (err) { toast.error(err); return; }
@@ -158,7 +158,7 @@ export function useApprovalActions({ items }: { items: Item[] }) {
       });
       bumpVersion();
       toast.success(
-        `${activeRequest.requestNumber} ${allFull ? "approved" : "partially fulfilled"}`,
+        `${activeRequest.requestNumber} ${allFull ? "aprovado" : "parcialmente atendido"}`,
       );
       setDialog(null);
       setActiveRequest(null);
@@ -174,15 +174,15 @@ export function useApprovalActions({ items }: { items: Item[] }) {
         <AlertDialog open={dialog === "approve"} onOpenChange={(o) => !o && setDialog(null)}>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Approve {activeRequest?.requestNumber}?</AlertDialogTitle>
+              <AlertDialogTitle>Aprovar {activeRequest?.requestNumber}?</AlertDialogTitle>
               <AlertDialogDescription>
-                This will approve all requested quantities and create stock movements.
+                Isso aprovará todas as quantidades solicitadas e criará movimentações de estoque.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogCancel>Cancelar</AlertDialogCancel>
               <AlertDialogAction onClick={confirmApprove}>
-                Confirm Approve
+                Confirmar Aprovação
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
@@ -192,29 +192,29 @@ export function useApprovalActions({ items }: { items: Item[] }) {
         <AlertDialog open={dialog === "decline"} onOpenChange={(o) => !o && setDialog(null)}>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Decline {activeRequest?.requestNumber}?</AlertDialogTitle>
+              <AlertDialogTitle>Recusar {activeRequest?.requestNumber}?</AlertDialogTitle>
               <AlertDialogDescription>
-                Please provide a reason for declining this request.
+                Informe um motivo para recusar esta solicitação.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <div className="py-2">
-              <Label htmlFor="decline-reason">Reason *</Label>
+              <Label htmlFor="decline-reason">Motivo *</Label>
               <Textarea
                 id="decline-reason"
                 value={declineReason}
                 onChange={(e) => setDeclineReason(e.target.value)}
-                placeholder="Why is this request being declined?"
+                placeholder="Por que esta solicitação está sendo recusada?"
                 rows={3}
               />
             </div>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogCancel>Cancelar</AlertDialogCancel>
               <AlertDialogAction
                 className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                 onClick={confirmDecline}
                 disabled={!declineReason.trim()}
               >
-                Confirm Decline
+                Confirmar Recusa
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
@@ -224,9 +224,9 @@ export function useApprovalActions({ items }: { items: Item[] }) {
         <AlertDialog open={dialog === "partial"} onOpenChange={(o) => !o && setDialog(null)}>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Partial Fulfill {activeRequest?.requestNumber}</AlertDialogTitle>
+              <AlertDialogTitle>Atendimento Parcial {activeRequest?.requestNumber}</AlertDialogTitle>
               <AlertDialogDescription>
-                Enter the approved quantity for each line item.
+                Informe a quantidade aprovada para cada item.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <div className="space-y-3 py-2">
@@ -238,7 +238,7 @@ export function useApprovalActions({ items }: { items: Item[] }) {
                       {item?.name ?? li.itemId}
                     </span>
                     <span className="text-xs text-muted-foreground">
-                      of {li.quantity} (avail: {item?.currentStock ?? 0})
+                      de {li.quantity} (disp: {item?.currentStock ?? 0})
                     </span>
                     <Input
                       type="number"
@@ -258,9 +258,9 @@ export function useApprovalActions({ items }: { items: Item[] }) {
               })}
             </div>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogCancel>Cancelar</AlertDialogCancel>
               <AlertDialogAction onClick={confirmPartial}>
-                Confirm
+                Confirmar
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
