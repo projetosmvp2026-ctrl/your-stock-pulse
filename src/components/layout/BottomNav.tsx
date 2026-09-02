@@ -6,10 +6,10 @@ import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { Sidebar } from "./Sidebar";
 
 const NAV_ITEMS = [
-  { label: "Dashboard", href: "/app/dashboard", icon: LayoutDashboard },
-  { label: "Catalog", href: "/app/catalog", icon: Package },
-  { label: "Movements", href: "/app/movements", icon: ArrowLeftRight },
-  { label: "Orders", href: "/app/purchase-orders", icon: ClipboardList },
+  { label: "Painel", href: "/app/dashboard", icon: LayoutDashboard },
+  { label: "Catálogo", href: "/app/catalog", icon: Package },
+  { label: "Movimentações", href: "/app/movements", icon: ArrowLeftRight },
+  { label: "Pedidos", href: "/app/purchase-orders", icon: ClipboardList },
 ] as const;
 
 export function BottomNav() {
@@ -40,13 +40,13 @@ export function BottomNav() {
           className="flex flex-1 flex-col items-center justify-center gap-0.5 text-[10px] text-muted-foreground min-h-[44px]"
         >
           <MoreHorizontal className="h-5 w-5" />
-          More
+          Mais
         </button>
       </nav>
 
       <Sheet open={moreOpen} onOpenChange={setMoreOpen}>
         <SheetContent side="bottom" className="max-h-[70vh] p-0">
-          <SheetTitle className="sr-only">More navigation</SheetTitle>
+          <SheetTitle className="sr-only">Mais navegação</SheetTitle>
           <Sidebar onNavigate={() => setMoreOpen(false)} />
         </SheetContent>
       </Sheet>

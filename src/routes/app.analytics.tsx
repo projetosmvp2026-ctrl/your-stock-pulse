@@ -24,7 +24,7 @@ import { CostTrendChart } from "@/components/analytics/CostTrendChart";
 
 export const Route = createFileRoute("/app/analytics")({
   component: AnalyticsPage,
-  head: () => ({ meta: [{ title: "Analytics — Stackwise" }] }),
+  head: () => ({ meta: [{ title: "Análises — Stackwise" }] }),
 });
 
 function AnalyticsPage() {
@@ -33,7 +33,7 @@ function AnalyticsPage() {
 
   useEffect(() => {
     if (!can("view_analytics")) {
-      toast.error("Access denied");
+      toast.error("Acesso negado");
       navigate({ to: "/app/dashboard" });
     }
   }, [can, navigate]);
@@ -70,7 +70,7 @@ function AnalyticsPage() {
   }, [allMovements, items, filters]);
 
   const handleExportStock = () => {
-    if (items.length === 0 && movements.length === 0) { toast.error("No data to export"); return; }
+    if (items.length === 0 && movements.length === 0) { toast.error("Nenhum dado para exportar"); return; }
     const rows: string[] = ["Section,Name,SKU,Qty,Cost,Value,Status"];
     items.forEach((i) => rows.push(`Stock,${i.name},${i.sku},${i.currentStock},${i.costPrice},${(i.currentStock * i.costPrice).toFixed(2)},${i.status}`));
     rows.push("", "Section,Date,Item,Type,Qty,Reference");
@@ -80,7 +80,7 @@ function AnalyticsPage() {
 
   const handleExportSupplier = () => {
     const metrics = computeMetrics(suppliers, purchaseOrders);
-    if (metrics.length === 0) { toast.error("No data to export"); return; }
+    if (metrics.length === 0) { toast.error("Nenhum dado para exportar"); return; }
     const rows: string[] = ["Section,Name,Total POs,Avg Lead Time (days),On-Time Rate (%),Fulfillment Accuracy (%)"];
     metrics.forEach((m) => rows.push(`Supplier,${m.supplier.name},${m.totalPOs},${m.avgLeadTime},${m.onTimeRate},${m.fulfillmentAccuracy}`));
     rows.push("", "Section,Category,Cost");
@@ -99,18 +99,18 @@ function AnalyticsPage() {
     <div className="mx-auto max-w-[1400px] space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">Analytics</h1>
-          <p className="text-sm text-muted-foreground">Stock, movement & supplier reports</p>
+          <h1 className="text-2xl font-semibold text-foreground">Análises</h1>
+          <p className="text-sm text-muted-foreground">Relatórios de estoque, movimentação e fornecedores</p>
         </div>
         <Button size="sm" variant="outline" onClick={tab === "suppliers" ? handleExportSupplier : handleExportStock}>
-          <Download className="mr-1.5 h-4 w-4" /> Export CSV
+          <Download className="mr-1.5 h-4 w-4" /> Exportar CSV
         </Button>
       </div>
 
       <Tabs value={tab} onValueChange={setTab}>
         <TabsList className="w-full justify-start overflow-x-auto">
-          <TabsTrigger value="stock">Stock Overview</TabsTrigger>
-          <TabsTrigger value="suppliers">Suppliers</TabsTrigger>
+          <TabsTrigger value="stock">Visão Geral do Estoque</TabsTrigger>
+          <TabsTrigger value="suppliers">Fornecedores</TabsTrigger>
         </TabsList>
 
         <div className="mt-4">
@@ -124,7 +124,7 @@ function AnalyticsPage() {
             <Card>
               <CollapsibleTrigger asChild>
                 <CardHeader className="cursor-pointer hover:bg-muted/30 transition-colors">
-                  <CardTitle className="text-base">Stock Overview</CardTitle>
+                  <CardTitle className="text-base">Visão Geral do Estoque</CardTitle>
                 </CardHeader>
               </CollapsibleTrigger>
               <CollapsibleContent>
@@ -132,11 +132,11 @@ function AnalyticsPage() {
                   <ErrorBoundary>
                     <div className="grid gap-6 lg:grid-cols-2">
                       <div>
-                        <h3 className="mb-3 text-sm font-medium text-muted-foreground">Items by Category</h3>
+                        <h3 className="mb-3 text-sm font-medium text-muted-foreground">Itens por Categoria</h3>
                         <StockByCategoryChart items={items} categories={categories} />
                       </div>
                       <div>
-                        <h3 className="mb-3 text-sm font-medium text-muted-foreground">Stock Status Distribution</h3>
+                        <h3 className="mb-3 text-sm font-medium text-muted-foreground">Distribuição por Status de Estoque</h3>
                         <StockStatusChart items={items} />
                       </div>
                     </div>
@@ -150,7 +150,7 @@ function AnalyticsPage() {
             <Card>
               <CollapsibleTrigger asChild>
                 <CardHeader className="cursor-pointer hover:bg-muted/30 transition-colors">
-                  <CardTitle className="text-base">Movement Trends</CardTitle>
+                  <CardTitle className="text-base">Tendências de Movimentação</CardTitle>
                 </CardHeader>
               </CollapsibleTrigger>
               <CollapsibleContent>
@@ -165,7 +165,7 @@ function AnalyticsPage() {
             <Card>
               <CollapsibleTrigger asChild>
                 <CardHeader className="cursor-pointer hover:bg-muted/30 transition-colors">
-                  <CardTitle className="text-base">Turnover & Reorder Analysis</CardTitle>
+                  <CardTitle className="text-base">Análise de Giro e Reposição</CardTitle>
                 </CardHeader>
               </CollapsibleTrigger>
               <CollapsibleContent>
@@ -180,7 +180,7 @@ function AnalyticsPage() {
         <TabsContent value="suppliers" className="space-y-6 mt-4">
           <ErrorBoundary>
             <Card>
-              <CardHeader><CardTitle className="text-base">Supplier Performance</CardTitle></CardHeader>
+              <CardHeader><CardTitle className="text-base">Desempenho do Fornecedor</CardTitle></CardHeader>
               <CardContent>
                 <SupplierScoreCards suppliers={suppliers} purchaseOrders={purchaseOrders} />
               </CardContent>
@@ -190,7 +190,7 @@ function AnalyticsPage() {
           <div className="grid gap-6 lg:grid-cols-2">
             <ErrorBoundary>
               <Card>
-                <CardHeader><CardTitle className="text-base">Spending by Supplier</CardTitle></CardHeader>
+                <CardHeader><CardTitle className="text-base">Gastos por Fornecedor</CardTitle></CardHeader>
                 <CardContent>
                   <SpendBySupplierChart suppliers={suppliers} purchaseOrders={purchaseOrders} />
                 </CardContent>
@@ -199,7 +199,7 @@ function AnalyticsPage() {
 
             <ErrorBoundary>
               <Card>
-                <CardHeader><CardTitle className="text-base">Cost by Category</CardTitle></CardHeader>
+                <CardHeader><CardTitle className="text-base">Custo por Categoria</CardTitle></CardHeader>
                 <CardContent>
                   <CostByCategoryChart items={items} categories={categories} />
                 </CardContent>
@@ -209,7 +209,7 @@ function AnalyticsPage() {
 
           <ErrorBoundary>
             <Card>
-              <CardHeader><CardTitle className="text-base">Cost Trend Over Time</CardTitle></CardHeader>
+              <CardHeader><CardTitle className="text-base">Tendência de Custo ao Longo do Tempo</CardTitle></CardHeader>
               <CardContent>
                 <CostTrendChart purchaseOrders={purchaseOrders} />
               </CardContent>
@@ -229,5 +229,5 @@ function downloadCsv(content: string, prefix: string) {
   a.download = `${prefix}-${new Date().toISOString().slice(0, 10)}.csv`;
   a.click();
   URL.revokeObjectURL(url);
-  toast.success("Report exported");
+  toast.success("Relatório exportado");
 }

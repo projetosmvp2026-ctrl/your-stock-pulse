@@ -44,11 +44,11 @@ export function LocationDeleteDialog({
 
     deleteLocation.mutate(node.id, {
       onSuccess: () => {
-        toast.success(`Location "${node.name}" deleted`);
+        toast.success(`Local "${node.name}" excluído`);
         setOpen(false);
         onDeleted();
       },
-      onError: (e) => toast.error(e.message || "Failed to delete location."),
+      onError: (e) => toast.error(e.message || "Falha ao excluir local."),
     });
   }
 
@@ -69,39 +69,39 @@ export function LocationDeleteDialog({
             }
           }}
           className="shrink-0 rounded p-1 text-muted-foreground opacity-0 transition-opacity hover:text-destructive group-hover:opacity-100"
-          aria-label="Delete location"
+          aria-label="Excluir local"
         >
           <Trash2 className="h-3.5 w-3.5" />
         </span>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Delete "{node.name}"?</AlertDialogTitle>
+          <AlertDialogTitle>Excluir "{node.name}"?</AlertDialogTitle>
           <AlertDialogDescription>
             {hasChildren ? (
               <>
-                Cannot delete a location with sub-locations. Remove or move
-                children first.
+                Não é possível excluir um local com sublocais. Remova ou mova
+                os filhos primeiro.
               </>
             ) : hasItems ? (
               <>
-                This location has {affectedItems.length} item
-                {affectedItems.length !== 1 && "s"}. They will become
-                unassigned.
+                Este local possui {affectedItems.length} item
+                {affectedItems.length !== 1 && "s"}. Eles ficarão
+                sem local atribuído.
               </>
             ) : (
-              <>This location will be permanently deleted.</>
+              <>Este local será excluído permanentemente.</>
             )}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>Cancelar</AlertDialogCancel>
           {!hasChildren && (
             <AlertDialogAction
               onClick={handleDelete}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              Delete
+              Excluir
             </AlertDialogAction>
           )}
         </AlertDialogFooter>
