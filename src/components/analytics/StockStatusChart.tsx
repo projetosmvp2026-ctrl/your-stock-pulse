@@ -7,7 +7,7 @@ interface StockStatusChartProps {
 }
 
 const STATUS_COLORS = ["hsl(142, 71%, 45%)", "hsl(38, 92%, 50%)", "hsl(0, 84%, 60%)"];
-const STATUS_LABELS = ["In Stock", "Low Stock", "Out of Stock"];
+const STATUS_LABELS = ["Em Estoque", "Estoque Baixo", "Sem Estoque"];
 
 export function StockStatusChart({ items }: StockStatusChartProps) {
   const data = useMemo(() => {
@@ -15,16 +15,16 @@ export function StockStatusChart({ items }: StockStatusChartProps) {
     const low = items.filter((i) => i.currentStock > 0 && i.currentStock <= i.reorderPoint).length;
     const out = items.filter((i) => i.currentStock === 0).length;
     return [
-      { name: "In Stock", value: inStock },
-      { name: "Low Stock", value: low },
-      { name: "Out of Stock", value: out },
+      { name: "Em Estoque", value: inStock },
+      { name: "Estoque Baixo", value: low },
+      { name: "Sem Estoque", value: out },
     ].filter((d) => d.value > 0);
   }, [items]);
 
   const total = items.length;
 
   if (total === 0) {
-    return <p className="py-8 text-center text-sm text-muted-foreground">No items to display</p>;
+    return <p className="py-8 text-center text-sm text-muted-foreground">Nenhum item para exibir</p>;
   }
 
   return (

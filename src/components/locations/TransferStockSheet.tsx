@@ -34,10 +34,10 @@ import { MovementType } from "@/types/inventory";
 import type { Item } from "@/types/inventory";
 
 const schema = z.object({
-  itemId: z.string().min(1, "Select an item"),
-  fromLocationId: z.string().min(1, "Select source location"),
-  toLocationId: z.string().min(1, "Select destination location"),
-  quantity: z.coerce.number().int().min(1, "Minimum 1"),
+  itemId: z.string().min(1, "Selecione um item"),
+  fromLocationId: z.string().min(1, "Selecione o local de origem"),
+  toLocationId: z.string().min(1, "Selecione o local de destino"),
+  quantity: z.coerce.number().int().min(1, "Mínimo 1"),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -86,14 +86,14 @@ export function TransferStockSheet({
   function onSubmit(values: FormValues) {
     if (values.fromLocationId === values.toLocationId) {
       form.setError("toLocationId", {
-        message: "Destination must differ from source",
+        message: "O destino deve ser diferente da origem",
       });
       return;
     }
 
     if (values.quantity > maxQty) {
       form.setError("quantity", {
-        message: `Only ${maxQty} available`,
+        message: `Apenas ${maxQty} disponível(is)`,
       });
       return;
     }
@@ -116,7 +116,7 @@ export function TransferStockSheet({
       },
       {
         onSuccess: () => {
-          toast.success("Stock transferred successfully");
+          toast.success("Estoque transferido com sucesso");
           form.reset();
           onOpenChange(false);
         },
@@ -130,10 +130,10 @@ export function TransferStockSheet({
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
             <ArrowRightLeft className="h-5 w-5 text-primary" />
-            Transfer Stock
+            Transferir Estoque
           </SheetTitle>
           <SheetDescription>
-            Move inventory between locations
+            Mova o estoque entre locais
           </SheetDescription>
         </SheetHeader>
 
@@ -162,7 +162,7 @@ export function TransferStockSheet({
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select item" />
+                        <SelectValue placeholder="Selecione o item" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -184,14 +184,14 @@ export function TransferStockSheet({
               name="fromLocationId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>From Location</FormLabel>
+                  <FormLabel>Local de Origem</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     value={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Source location" />
+                        <SelectValue placeholder="Local de origem" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -213,14 +213,14 @@ export function TransferStockSheet({
               name="toLocationId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>To Location</FormLabel>
+                  <FormLabel>Local de Destino</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     value={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Destination location" />
+                        <SelectValue placeholder="Local de destino" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -245,10 +245,10 @@ export function TransferStockSheet({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    Quantity
+                    Quantidade
                     {selectedItem && (
                       <span className="ml-1 font-normal text-muted-foreground">
-                        (max {maxQty})
+                        (máx {maxQty})
                       </span>
                     )}
                   </FormLabel>
@@ -270,7 +270,7 @@ export function TransferStockSheet({
               className="w-full"
               disabled={createMovement.isLoading}
             >
-              {createMovement.isLoading ? "Transferring…" : "Transfer Stock"}
+              {createMovement.isLoading ? "Transferindo…" : "Transferir Estoque"}
             </Button>
           </form>
         </Form>

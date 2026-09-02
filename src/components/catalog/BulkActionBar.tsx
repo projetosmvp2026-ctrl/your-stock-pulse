@@ -24,9 +24,9 @@ interface BulkActionBarProps {
 }
 
 const STATUS_OPTIONS = [
-  { value: ItemStatus.Active, label: "Active" },
-  { value: ItemStatus.Discontinued, label: "Discontinued" },
-  { value: ItemStatus.Archived, label: "Archived" },
+  { value: ItemStatus.Active, label: "Ativo" },
+  { value: ItemStatus.Discontinued, label: "Descontinuado" },
+  { value: ItemStatus.Archived, label: "Arquivado" },
 ];
 
 export function BulkActionBar({
@@ -47,17 +47,17 @@ export function BulkActionBar({
     <div
       className="fixed inset-x-0 bottom-0 z-50 flex items-center justify-between gap-3 border-t border-border bg-card px-4 py-3 shadow-lg animate-in slide-in-from-bottom duration-300 sm:px-6"
       role="toolbar"
-      aria-label="Bulk actions"
+      aria-label="Ações em massa"
     >
       <span className="shrink-0 text-sm font-medium text-foreground">
-        {selectedCount} item{selectedCount !== 1 ? "s" : ""} selected
+        {selectedCount} {selectedCount !== 1 ? "itens selecionados" : "item selecionado"}
       </span>
 
       <div className="flex flex-wrap items-center gap-2">
         {/* Category */}
         <Select onValueChange={onUpdateCategory}>
           <SelectTrigger className="h-8 w-[140px] text-xs">
-            <SelectValue placeholder="Category" />
+            <SelectValue placeholder="Categoria" />
           </SelectTrigger>
           <SelectContent>
             {categories.map((c) => (
@@ -69,7 +69,7 @@ export function BulkActionBar({
         {/* Supplier */}
         <Select onValueChange={onUpdateSupplier}>
           <SelectTrigger className="h-8 w-[140px] text-xs">
-            <SelectValue placeholder="Supplier" />
+            <SelectValue placeholder="Fornecedor" />
           </SelectTrigger>
           <SelectContent>
             {suppliers.map((s) => (
@@ -81,7 +81,7 @@ export function BulkActionBar({
         {/* Location */}
         <Select onValueChange={onUpdateLocation}>
           <SelectTrigger className="h-8 w-[140px] text-xs">
-            <SelectValue placeholder="Location" />
+            <SelectValue placeholder="Local" />
           </SelectTrigger>
           <SelectContent>
             {locations.map((l) => (
@@ -105,13 +105,13 @@ export function BulkActionBar({
         {onPrintLabels && (
           <Button variant="outline" size="sm" onClick={onPrintLabels} className="h-8 gap-1 text-xs">
             <Printer className="h-3 w-3" />
-            Print Labels
+            Imprimir Etiquetas
           </Button>
         )}
 
         <Button variant="ghost" size="sm" onClick={onDeselectAll} className="h-8 gap-1 text-xs">
           <X className="h-3 w-3" />
-          Deselect All
+          Desmarcar Todos
         </Button>
       </div>
     </div>

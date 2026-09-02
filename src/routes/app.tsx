@@ -30,7 +30,7 @@ function AppLayout() {
   // Role-based route guard
   useEffect(() => {
     if (isDemo && !canAccessRoute(location.pathname, role)) {
-      toast.error("You don't have permission to access that page.");
+      toast.error("Você não tem permissão para acessar essa página.");
       navigate({ to: "/app/dashboard" });
     }
   }, [location.pathname, role, navigate, isDemo]);

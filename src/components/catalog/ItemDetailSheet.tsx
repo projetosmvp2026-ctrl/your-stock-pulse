@@ -91,14 +91,14 @@ export function ItemDetailSheet({
             </div>
             <div className="flex shrink-0 items-center gap-1">
               <PermissionGate permission="edit_item">
-                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => onEdit?.(item)} aria-label="Edit">
+                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => onEdit?.(item)} aria-label="Editar">
                   <Pencil className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => onArchive?.(item)} aria-label="Archive">
+                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => onArchive?.(item)} aria-label="Arquivar">
                   <Archive className="h-4 w-4" />
                 </Button>
               </PermissionGate>
-              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => onOpenChange(false)} aria-label="Close">
+              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => onOpenChange(false)} aria-label="Fechar">
                 <X className="h-4 w-4" />
               </Button>
             </div>
@@ -108,9 +108,9 @@ export function ItemDetailSheet({
         {/* Tabs */}
         <Tabs defaultValue="overview" className="px-6 pt-4 pb-8">
           <TabsList className="w-full">
-            <TabsTrigger value="overview" className="flex-1">Overview</TabsTrigger>
-            <TabsTrigger value="history" className="flex-1">History</TabsTrigger>
-            <TabsTrigger value="custom" className="flex-1">Custom Fields</TabsTrigger>
+            <TabsTrigger value="overview" className="flex-1">Visão Geral</TabsTrigger>
+            <TabsTrigger value="history" className="flex-1">Histórico</TabsTrigger>
+            <TabsTrigger value="custom" className="flex-1">Campos Personalizados</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="mt-6 space-y-6">
@@ -121,7 +121,7 @@ export function ItemDetailSheet({
 
             {/* Quantity hero */}
             <div className="rounded-lg border border-border bg-card p-4 text-center">
-              <p className="text-xs uppercase tracking-wider text-muted-foreground">Quantity on Hand</p>
+              <p className="text-xs uppercase tracking-wider text-muted-foreground">Quantidade em Mãos</p>
               <p className={`mt-1 font-mono text-3xl font-bold ${stockColor(item)}`}>
                 {item.currentStock}
               </p>
@@ -131,18 +131,18 @@ export function ItemDetailSheet({
             {/* Detail grid */}
             <div className="grid grid-cols-2 gap-x-6 gap-y-4">
               <DetailRow label="SKU" value={item.sku} mono />
-              <DetailRow label="Category" value={category?.name} />
+              <DetailRow label="Categoria" value={category?.name} />
               <DetailRow label="Tags" value="—" />
-              <DetailRow label="Unit of Measure" value={item.unit} />
-              <DetailRow label="Reorder Threshold" value={item.reorderPoint} />
-              <DetailRow label="Reorder Quantity" value={item.reorderQuantity} />
-              <DetailRow label="Preferred Supplier" value={supplier?.name} />
-              <DetailRow label="Location" value={location?.name} />
-              <DetailRow label="Cost Per Unit" value={`$${item.costPrice.toFixed(2)}`} mono />
-              <DetailRow label="Sale Price" value={`$${item.sellingPrice.toFixed(2)}`} mono />
-              <DetailRow label="Description" value={item.description} />
-              <DetailRow label="Created" value={format(new Date(item.createdAt), "MMM d, yyyy")} />
-              <DetailRow label="Updated" value={format(new Date(item.updatedAt), "MMM d, yyyy")} />
+              <DetailRow label="Unidade de Medida" value={item.unit} />
+              <DetailRow label="Ponto de Reposição" value={item.reorderPoint} />
+              <DetailRow label="Quantidade de Reposição" value={item.reorderQuantity} />
+              <DetailRow label="Fornecedor Preferencial" value={supplier?.name} />
+              <DetailRow label="Local" value={location?.name} />
+              <DetailRow label="Custo Unitário" value={`$${item.costPrice.toFixed(2)}`} mono />
+              <DetailRow label="Preço de Venda" value={`$${item.sellingPrice.toFixed(2)}`} mono />
+              <DetailRow label="Descrição" value={item.description} />
+              <DetailRow label="Criado em" value={format(new Date(item.createdAt), "dd/MM/yyyy")} />
+              <DetailRow label="Atualizado em" value={format(new Date(item.updatedAt), "dd/MM/yyyy")} />
             </div>
 
             {/* Barcode */}

@@ -21,7 +21,7 @@ export function StockByCategoryChart({ items, categories }: StockByCategoryChart
   }, [items, categories]);
 
   if (data.length === 0) {
-    return <p className="py-8 text-center text-sm text-muted-foreground">No category data available</p>;
+    return <p className="py-8 text-center text-sm text-muted-foreground">Nenhum dado de categoria disponível</p>;
   }
 
   const height = Math.max(200, data.length * 40 + 40);
@@ -31,7 +31,7 @@ export function StockByCategoryChart({ items, categories }: StockByCategoryChart
       <BarChart data={data} layout="vertical" margin={{ left: 0, right: 20, top: 5, bottom: 5 }}>
         <XAxis type="number" tick={{ fontSize: 12 }} />
         <YAxis type="category" dataKey="name" width={120} tick={{ fontSize: 12 }} />
-        <Tooltip formatter={(value: number) => [value, "Items"]} />
+        <Tooltip formatter={(value: number) => [value, "Itens"]} />
         <Bar dataKey="count" radius={[0, 4, 4, 0]} cursor="pointer"
           onClick={(d: any) => navigate({ to: "/app/catalog", search: { category: d.id } as any })}>
           {data.map((_, i) => (

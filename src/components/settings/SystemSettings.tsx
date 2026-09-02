@@ -22,15 +22,15 @@ export function SystemSettings() {
   const handleReset = () => {
     resetDemoData();
     setConfirmOpen(false);
-    toast.success("Demo data reset to defaults");
+    toast.success("Dados de demonstração restaurados para os padrões");
   };
 
   return (
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Demo data</CardTitle>
-          <CardDescription>Manage demo seed data for testing and exploration.</CardDescription>
+          <CardTitle>Dados de demonstração</CardTitle>
+          <CardDescription>Gerencie os dados iniciais de demonstração para testes e exploração.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {isDemo ? (
@@ -38,40 +38,40 @@ export function SystemSettings() {
               <div className="grid grid-cols-3 gap-4">
                 <div className="rounded-lg border border-border p-3 text-center">
                   <p className="text-2xl font-semibold text-foreground">{items}</p>
-                  <p className="text-xs text-muted-foreground">Items</p>
+                  <p className="text-xs text-muted-foreground">Itens</p>
                 </div>
                 <div className="rounded-lg border border-border p-3 text-center">
                   <p className="text-2xl font-semibold text-foreground">{suppliers}</p>
-                  <p className="text-xs text-muted-foreground">Suppliers</p>
+                  <p className="text-xs text-muted-foreground">Fornecedores</p>
                 </div>
                 <div className="rounded-lg border border-border p-3 text-center">
                   <p className="text-2xl font-semibold text-foreground">{locations}</p>
-                  <p className="text-xs text-muted-foreground">Locations</p>
+                  <p className="text-xs text-muted-foreground">Locais</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Button variant="outline" onClick={() => setWalkthroughActive(true)} className="gap-1.5">
-                  <Play className="h-4 w-4" /> Start walkthrough
+                  <Play className="h-4 w-4" /> Iniciar tutorial guiado
                 </Button>
                 <Button variant="destructive" onClick={() => setConfirmOpen(true)}>
-                  <RotateCcw className="mr-1.5 h-4 w-4" /> Reset demo data
+                  <RotateCcw className="mr-1.5 h-4 w-4" /> Redefinir dados de demonstração
                 </Button>
               </div>
             </>
           ) : (
-            <p className="text-sm text-muted-foreground">Demo controls not available — enter demo mode first.</p>
+            <p className="text-sm text-muted-foreground">Controles de demonstração não disponíveis — entre no modo demonstração primeiro.</p>
           )}
         </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Info className="h-4 w-4" />About</CardTitle>
+          <CardTitle className="flex items-center gap-2"><Info className="h-4 w-4" />Sobre</CardTitle>
         </CardHeader>
         <CardContent>
           <dl className="grid grid-cols-2 gap-2 text-sm">
-            <dt className="text-muted-foreground">Version</dt><dd className="font-medium">1.0.0</dd>
-            <dt className="text-muted-foreground">Platform</dt><dd className="font-medium">Stackwise Inventory</dd>
+            <dt className="text-muted-foreground">Versão</dt><dd className="font-medium">1.0.0</dd>
+            <dt className="text-muted-foreground">Plataforma</dt><dd className="font-medium">Stackwise Inventory</dd>
           </dl>
         </CardContent>
       </Card>
@@ -79,12 +79,12 @@ export function SystemSettings() {
       <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Reset Demo Data?</AlertDialogTitle>
-            <AlertDialogDescription>This will reset all data to defaults. This cannot be undone.</AlertDialogDescription>
+            <AlertDialogTitle>Redefinir Dados de Demonstração?</AlertDialogTitle>
+            <AlertDialogDescription>Isso redefinirá todos os dados para os padrões. Esta ação não pode ser desfeita.</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleReset} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">Reset</AlertDialogAction>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={handleReset} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">Redefinir</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

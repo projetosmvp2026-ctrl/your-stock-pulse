@@ -154,7 +154,7 @@ function validateRows(
     // Required fields
     for (const f of fields) {
       if (f.required && !row[f.key]?.trim()) {
-        errors.push(`Missing required field: ${f.label}`);
+        errors.push(`Campo obrigatório ausente: ${f.label}`);
       }
     }
 
@@ -162,7 +162,7 @@ function validateRows(
     for (const f of fields) {
       if (f.numeric && row[f.key]?.trim()) {
         const v = Number(row[f.key]);
-        if (isNaN(v)) errors.push(`${f.label} must be a number`);
+        if (isNaN(v)) errors.push(`${f.label} deve ser um número`);
       }
     }
 
@@ -170,7 +170,7 @@ function validateRows(
     const sku = row.sku?.trim().toLowerCase();
     if (sku) {
       if (seenSkus.has(sku) || fileSkus.has(sku)) {
-        errors.push("Duplicate SKU");
+        errors.push("SKU duplicado");
       } else {
         fileSkus.add(sku);
       }
@@ -179,11 +179,11 @@ function validateRows(
     // Category / supplier warnings
     const cat = row.category?.trim();
     if (cat && !catSet.has(cat.toLowerCase())) {
-      warnings.push(`New category: "${cat}"`);
+      warnings.push(`Nova categoria: "${cat}"`);
     }
     const sup = row.supplier?.trim();
     if (sup && !supSet.has(sup.toLowerCase())) {
-      warnings.push(`New supplier: "${sup}"`);
+      warnings.push(`Novo fornecedor: "${sup}"`);
     }
 
     return { data: row, errors, warnings };
@@ -220,7 +220,7 @@ export function CSVImportSheet({
   onOpenChange,
   fields,
   onImport,
-  entityName = "items",
+  entityName = "itens",
   existingSkus = [],
   knownCategories = [],
   knownSuppliers = [],
@@ -254,11 +254,11 @@ export function CSVImportSheet({
     (file: File) => {
       setFileError(null);
       if (!file.name.toLowerCase().endsWith(".csv")) {
-        setFileError("Only .csv files are accepted.");
+        setFileError("Apenas arquivos .csv são aceitos.");
         return;
       }
       if (file.size > 5 * 1024 * 1024) {
-        setFileError("File exceeds 5 MB limit.");
+        setFileError("O arquivo excede o limite de 5 MB.");
         return;
       }
       setFileName(file.name);
@@ -267,14 +267,14 @@ export function CSVImportSheet({
         const text = e.target?.result as string;
         const csv = parseCSV(text);
         if (csv.headers.length === 0) {
-          setFileError("Could not detect any columns. Check the file format.");
+          setFileError("Não foi possível detectar colunas. Verifique o formato do arquivo.");
           return;
         }
         setParsed(csv);
         setMapping(autoMap(csv.headers, fields));
         setStep(2);
       };
-      reader.onerror = () => setFileError("Failed to read file.");
+      reader.onerror = () => setFileError("Falha ao ler o arquivo.");
       reader.readAsText(file);
     },
     [fields],
@@ -364,14 +364,14 @@ export function CSVImportSheet({
       <SheetContent className="w-full sm:max-w-[600px]">
         <SheetHeader>
           <div className="flex items-center justify-between">
-            <SheetTitle>Import {entityName}</SheetTitle>
+            <SheetTitle>Importar {entityName}</SheetTitle>
             <StepIndicator current={step} total={totalSteps} />
           </div>
           <SheetDescription>
-            {step === 1 && "Upload a CSV file to import."}
-            {step === 2 && "Map CSV columns to fields."}
-            {step === 3 && "Review validation results before importing."}
-            {step === 4 && (isImporting ? "Importing rows…" : "Import complete.")}
+            {step === 1 && "Envie um arquivo CSV para importar."}
+            {step === 2 && "Mapeie as colunas do CSV para os campos."}
+            {step === 3 && "Revise os resultados da validação antes de importar."}
+            {step === 4 && (isImporting ? "Importando linhas…" : "Importação concluída.")}
           </SheetDescription>
         </SheetHeader>
 
@@ -396,9 +396,9 @@ export function CSVImportSheet({
                 <Upload className="h-10 w-10 text-muted-foreground" />
                 <div>
                   <p className="text-sm font-medium text-foreground">
-                    Drop a CSV file here or click to browse
+                    Solte um arquivo CSV aqui ou clique para procurar
                   </p>
-                  <p className="mt-1 text-xs text-muted-foreground">.csv only, max 5 MB</p>
+                  <p className="mt-1 text-xs text-muted-foreground">Somente .csv, máximo 5 MB</p>
                 </div>
                 <input
                   ref={inputRef}
@@ -425,7 +425,7 @@ export function CSVImportSheet({
                 <FileSpreadsheet className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm text-foreground font-medium">{fileName}</span>
                 <span className="text-xs text-muted-foreground">
-                  — {parsed.rows.length} rows, {parsed.headers.length} columns
+                  — {parsed.rows.length} linhas, {parsed.headers.length} colunas
                 </span>
               </div>
 
@@ -439,7 +439,7 @@ export function CSVImportSheet({
                         </span>
                         {field.required && (
                           <Badge variant="destructive" className="text-[10px] px-1 py-0">
-                            Required
+                            Obrigatório
                           </Badge>
                         )}
                       </div>
@@ -456,10 +456,10 @@ export function CSVImportSheet({
                         }
                       >
                         <SelectTrigger className="flex-1">
-                          <SelectValue placeholder="Skip" />
+                          <SelectValue placeholder="Ignorar" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="__skip__">— Skip —</SelectItem>
+                          <SelectItem value="__skip__">— Ignorar —</SelectItem>
                           {parsed.headers.map((h) => (
                             <SelectItem key={h} value={h}>
                               {h}
@@ -475,7 +475,7 @@ export function CSVImportSheet({
               {unmappedRequired.length > 0 && (
                 <div className="flex items-center gap-2 rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
                   <AlertCircle className="h-4 w-4 shrink-0" />
-                  Required fields not mapped: {unmappedRequired.map((f) => f.label).join(", ")}
+                  Campos obrigatórios não mapeados: {unmappedRequired.map((f) => f.label).join(", ")}
                 </div>
               )}
             </>
@@ -488,18 +488,18 @@ export function CSVImportSheet({
               <div className="flex flex-wrap gap-3">
                 <div className="flex items-center gap-1.5 rounded-md bg-emerald-500/10 px-3 py-1.5 text-sm font-medium text-emerald-700 dark:text-emerald-400">
                   <CheckCircle2 className="h-4 w-4" />
-                  {validCount} valid
+                  {validCount} válidos
                 </div>
                 {errorCount > 0 && (
                   <div className="flex items-center gap-1.5 rounded-md bg-destructive/10 px-3 py-1.5 text-sm font-medium text-destructive">
                     <XCircle className="h-4 w-4" />
-                    {errorCount} errors
+                    {errorCount} erros
                   </div>
                 )}
                 {warningCount > 0 && (
                   <div className="flex items-center gap-1.5 rounded-md bg-amber-500/10 px-3 py-1.5 text-sm font-medium text-amber-700 dark:text-amber-400">
                     <AlertTriangle className="h-4 w-4" />
-                    {warningCount} warnings
+                    {warningCount} avisos
                   </div>
                 )}
               </div>
@@ -555,7 +555,7 @@ export function CSVImportSheet({
 
               {validatedRows.length > 20 && (
                 <p className="text-xs text-muted-foreground text-center">
-                  Showing first 20 of {validatedRows.length} rows
+                  Mostrando as primeiras 20 de {validatedRows.length} linhas
                 </p>
               )}
             </>
@@ -569,7 +569,7 @@ export function CSVImportSheet({
                   <Loader2 className="h-10 w-10 animate-spin text-primary" />
                   <div className="w-full max-w-xs">
                     <div className="mb-2 flex justify-between text-sm text-muted-foreground">
-                      <span>Importing…</span>
+                      <span>Importando…</span>
                       <span>{importProgress}%</span>
                     </div>
                     <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
@@ -584,10 +584,10 @@ export function CSVImportSheet({
                 <>
                   <CheckCircle2 className="h-12 w-12 text-emerald-500" />
                   <div className="text-center space-y-1">
-                    <p className="text-lg font-semibold text-foreground">Import Complete</p>
+                    <p className="text-lg font-semibold text-foreground">Importação Concluída</p>
                     <p className="text-sm text-muted-foreground">
-                      {importResult.created} {entityName} created
-                      {importResult.failed > 0 && `, ${importResult.failed} failed`}
+                      {importResult.created} {entityName} criados
+                      {importResult.failed > 0 && `, ${importResult.failed} falharam`}
                     </p>
                   </div>
                 </>
@@ -600,7 +600,7 @@ export function CSVImportSheet({
         <div className="mt-6 flex items-center justify-between border-t border-border pt-4">
           {step > 1 && step < 4 ? (
             <Button variant="ghost" size="sm" onClick={() => setStep((s) => s - 1)}>
-              <ChevronLeft className="mr-1 h-4 w-4" /> Back
+              <ChevronLeft className="mr-1 h-4 w-4" /> Voltar
             </Button>
           ) : (
             <div />
@@ -612,7 +612,7 @@ export function CSVImportSheet({
               disabled={unmappedRequired.length > 0}
               onClick={() => setStep(3)}
             >
-              Validate
+              Validar
             </Button>
           )}
 
@@ -629,7 +629,7 @@ export function CSVImportSheet({
                     startImport(validRows);
                   }}
                 >
-                  Import {validCount} Valid Rows
+                  Importar {validCount} Linhas Válidas
                 </Button>
               )}
               {validCount > 0 && errorCount === 0 && (
@@ -642,12 +642,12 @@ export function CSVImportSheet({
                     startImport(validRows);
                   }}
                 >
-                  Import {validCount} Rows
+                  Importar {validCount} Linhas
                 </Button>
               )}
               {validCount === 0 && (
                 <Button size="sm" disabled>
-                  No valid rows
+                  Nenhuma linha válida
                 </Button>
               )}
             </div>
@@ -661,7 +661,7 @@ export function CSVImportSheet({
                 onOpenChange(false);
               }}
             >
-              Done
+              Concluir
             </Button>
           )}
         </div>

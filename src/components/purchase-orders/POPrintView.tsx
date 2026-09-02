@@ -3,11 +3,11 @@ import { OrderStatus } from "@/types/inventory";
 import type { PurchaseOrder, Supplier, Item } from "@/types/inventory";
 
 const STATUS_LABEL: Record<OrderStatus, string> = {
-  [OrderStatus.Draft]: "Draft",
-  [OrderStatus.Submitted]: "Submitted",
-  [OrderStatus.Partial]: "Partially Received",
-  [OrderStatus.Received]: "Fully Received",
-  [OrderStatus.Cancelled]: "Cancelled",
+  [OrderStatus.Draft]: "Rascunho",
+  [OrderStatus.Submitted]: "Enviado",
+  [OrderStatus.Partial]: "Parcialmente Recebido",
+  [OrderStatus.Received]: "Totalmente Recebido",
+  [OrderStatus.Cancelled]: "Cancelado",
 };
 
 interface POPrintViewProps {
@@ -23,7 +23,7 @@ export function POPrintView({ purchaseOrder, supplier, items }: POPrintViewProps
       <div className="mb-6 flex items-start justify-between border-b border-black pb-4">
         <div>
           <h1 className="text-2xl font-bold">Stackwise</h1>
-          <p className="text-sm text-gray-600">Purchase Order</p>
+          <p className="text-sm text-gray-600">Pedido de Compra</p>
         </div>
         <div className="text-right">
           <p className="text-xl font-bold">{purchaseOrder.orderNumber}</p>
@@ -34,21 +34,21 @@ export function POPrintView({ purchaseOrder, supplier, items }: POPrintViewProps
       {/* Dates & Supplier */}
       <div className="mb-6 grid grid-cols-2 gap-8">
         <div>
-          <p className="text-xs font-semibold uppercase text-gray-500">Supplier</p>
-          <p className="font-medium">{supplier?.name ?? "Unknown"}</p>
+          <p className="text-xs font-semibold uppercase text-gray-500">Fornecedor</p>
+          <p className="font-medium">{supplier?.name ?? "Desconhecido"}</p>
           {supplier?.contactName && <p className="text-sm">{supplier.contactName}</p>}
           {supplier?.email && <p className="text-sm">{supplier.email}</p>}
           {supplier?.phone && <p className="text-sm">{supplier.phone}</p>}
           {supplier?.address && <p className="text-sm">{supplier.address}</p>}
         </div>
         <div>
-          <p className="text-xs font-semibold uppercase text-gray-500">Dates</p>
+          <p className="text-xs font-semibold uppercase text-gray-500">Datas</p>
           <p className="text-sm">
-            Created: {format(new Date(purchaseOrder.createdAt), "MMM d, yyyy")}
+            Criado em: {format(new Date(purchaseOrder.createdAt), "dd/MM/yyyy")}
           </p>
           {purchaseOrder.expectedDelivery && (
             <p className="text-sm">
-              Expected: {format(new Date(purchaseOrder.expectedDelivery), "MMM d, yyyy")}
+              Previsto: {format(new Date(purchaseOrder.expectedDelivery), "dd/MM/yyyy")}
             </p>
           )}
         </div>
@@ -60,10 +60,10 @@ export function POPrintView({ purchaseOrder, supplier, items }: POPrintViewProps
           <tr className="border-b-2 border-black">
             <th className="py-2 text-left">Item</th>
             <th className="py-2 text-left">SKU</th>
-            <th className="py-2 text-right">Qty Ordered</th>
-            <th className="py-2 text-right">Received</th>
-            <th className="py-2 text-right">Unit Cost</th>
-            <th className="py-2 text-right">Line Total</th>
+            <th className="py-2 text-right">Qtd Pedida</th>
+            <th className="py-2 text-right">Recebido</th>
+            <th className="py-2 text-right">Custo Unitário</th>
+            <th className="py-2 text-right">Total da Linha</th>
           </tr>
         </thead>
         <tbody>
@@ -99,14 +99,14 @@ export function POPrintView({ purchaseOrder, supplier, items }: POPrintViewProps
       {/* Notes */}
       {purchaseOrder.notes && (
         <div className="mb-4">
-          <p className="text-xs font-semibold uppercase text-gray-500">Notes</p>
+          <p className="text-xs font-semibold uppercase text-gray-500">Observações</p>
           <p className="text-sm">{purchaseOrder.notes}</p>
         </div>
       )}
 
       {/* Receiving Summary */}
       <div className="border-t border-gray-300 pt-3">
-        <p className="text-xs font-semibold uppercase text-gray-500">Receiving Summary</p>
+        <p className="text-xs font-semibold uppercase text-gray-500">Resumo do Recebimento</p>
         {purchaseOrder.items.map((li) => {
           const item = items.get(li.itemId);
           const pct = li.quantityOrdered > 0
@@ -122,7 +122,7 @@ export function POPrintView({ purchaseOrder, supplier, items }: POPrintViewProps
 
       {/* Footer */}
       <div className="mt-8 border-t border-black pt-2 text-center text-xs text-gray-500">
-        Printed from Stackwise · {format(new Date(), "MMM d, yyyy h:mm a")}
+        Impresso do Stackwise · {format(new Date(), "dd/MM/yyyy HH:mm")}
       </div>
     </div>
   );

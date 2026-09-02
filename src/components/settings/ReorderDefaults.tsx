@@ -23,49 +23,49 @@ export function ReorderDefaults() {
 
   const handleSave = () => {
     if (values.reorderPoint < 0 || values.leadTimeDays < 1 || values.safetyMultiplier < 1 || values.orderQuantity < 1) {
-      toast.error("Please fix validation errors"); return;
+      toast.error("Corrija os erros de validação"); return;
     }
     setSaving(true);
     demoStore?.setReorderDefaults(values);
     bumpVersion();
-    setTimeout(() => { setSaving(false); toast.success("Reorder defaults saved"); }, 300);
+    setTimeout(() => { setSaving(false); toast.success("Padrões de reposição salvos"); }, 300);
   };
 
   const handleReset = () => {
     setValues(FACTORY);
     demoStore?.setReorderDefaults(FACTORY);
     bumpVersion();
-    toast.success("Defaults restored");
+    toast.success("Padrões restaurados");
   };
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Reorder Defaults</CardTitle>
-        <CardDescription>Global defaults applied to new items unless overridden.</CardDescription>
+        <CardTitle>Padrões de Reposição</CardTitle>
+        <CardDescription>Padrões globais aplicados a novos itens, salvo substituição.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-1.5">
-            <Label>Default Reorder Point</Label>
+            <Label>Ponto de Reposição Padrão</Label>
             <Input type="number" min={0} value={values.reorderPoint} onChange={(e) => set("reorderPoint", e.target.value)} />
           </div>
           <div className="space-y-1.5">
-            <Label>Default Lead Time (days)</Label>
+            <Label>Prazo de Entrega Padrão (dias)</Label>
             <Input type="number" min={1} value={values.leadTimeDays} onChange={(e) => set("leadTimeDays", e.target.value)} />
           </div>
           <div className="space-y-1.5">
-            <Label>Safety Stock Multiplier</Label>
+            <Label>Multiplicador de Estoque de Segurança</Label>
             <Input type="number" min={1} step={0.1} value={values.safetyMultiplier} onChange={(e) => set("safetyMultiplier", e.target.value)} />
           </div>
           <div className="space-y-1.5">
-            <Label>Default Order Quantity</Label>
+            <Label>Quantidade de Pedido Padrão</Label>
             <Input type="number" min={1} value={values.orderQuantity} onChange={(e) => set("orderQuantity", e.target.value)} />
           </div>
         </div>
         <div className="flex items-center gap-3 pt-2">
-          <Button onClick={handleSave} disabled={saving}>{saving ? "Saving…" : "Save"}</Button>
-          <Button variant="ghost" onClick={handleReset}>Reset to Defaults</Button>
+          <Button onClick={handleSave} disabled={saving}>{saving ? "Salvando…" : "Salvar"}</Button>
+          <Button variant="ghost" onClick={handleReset}>Restaurar Padrões</Button>
         </div>
       </CardContent>
     </Card>

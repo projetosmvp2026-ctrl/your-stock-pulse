@@ -34,12 +34,12 @@ export function DashboardAnomalySection({ movements, items }: DashboardAnomalySe
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <ShieldAlert className="h-4 w-4 text-destructive" />
-          <h2 className="text-sm font-semibold">Anomaly Alerts</h2>
+          <h2 className="text-sm font-semibold">Alertas de Anomalia</h2>
           <Badge variant="destructive" className="text-xs">{anomalies.length}</Badge>
         </div>
         <Button variant="ghost" size="sm" asChild className="text-xs">
           <Link to="/app/ai-insights" hash="anomalies">
-            View all <ArrowRight className="ml-1 h-3 w-3" />
+            Ver tudo <ArrowRight className="ml-1 h-3 w-3" />
           </Link>
         </Button>
       </div>

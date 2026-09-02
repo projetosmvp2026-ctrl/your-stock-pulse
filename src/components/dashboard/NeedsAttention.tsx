@@ -19,10 +19,10 @@ export function NeedsAttention() {
   if (!hasIssues) {
     return (
       <div className="h-full rounded-xl border border-border bg-card p-6 shadow-xs">
-        <h2 className="mb-4 text-base font-semibold">Needs attention</h2>
+        <h2 className="mb-4 text-base font-semibold">Precisa de atenção</h2>
         <div className="flex flex-col items-center gap-2 py-6 text-center">
           <CheckCircle2 className="h-8 w-8 text-stock-healthy" />
-          <p className="text-sm text-muted-foreground">All clear — inventory is healthy</p>
+          <p className="text-sm text-muted-foreground">Tudo certo — o estoque está saudável</p>
         </div>
       </div>
     );
@@ -32,16 +32,16 @@ export function NeedsAttention() {
 
   return (
     <div className="h-full rounded-xl border border-border bg-card p-6 shadow-xs">
-      <h2 className="mb-4 text-base font-semibold">Needs attention</h2>
+      <h2 className="mb-4 text-base font-semibold">Precisa de atenção</h2>
 
       {/* Low stock items */}
       {displayLow.length > 0 && (
         <div className="mb-4">
           <div className="mb-2 flex items-center justify-between">
-            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Low stock</p>
+            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Estoque baixo</p>
             {lowStockItems.length > 5 && (
               <Link to="/app/catalog" className="text-xs font-medium text-primary hover:underline">
-                View all ({lowStockItems.length})
+                Ver todos ({lowStockItems.length})
               </Link>
             )}
           </div>
@@ -64,7 +64,7 @@ export function NeedsAttention() {
       {outOfStockItems.length > 0 && (
         <div className="mb-4">
           <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-            Out of stock ({outOfStockItems.length})
+            Sem estoque ({outOfStockItems.length})
           </p>
           <div className="space-y-2">
             {outOfStockItems.slice(0, 3).map((item) => (
@@ -81,15 +81,15 @@ export function NeedsAttention() {
       {/* Pending + Overdue POs */}
       {(pendingPOs.length > 0 || overduePOs.length > 0) && (
         <div>
-          <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">Purchase orders</p>
+          <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">Pedidos de compra</p>
           <div className="flex gap-4 text-sm">
             {pendingPOs.length > 0 && (
               <Link to="/app/purchase-orders" className="text-primary hover:underline">
-                {pendingPOs.length} pending
+                {pendingPOs.length} pendente(s)
               </Link>
             )}
             {overduePOs.length > 0 && (
-              <span className="font-medium text-stock-out">{overduePOs.length} overdue</span>
+              <span className="font-medium text-stock-out">{overduePOs.length} atrasado(s)</span>
             )}
           </div>
         </div>

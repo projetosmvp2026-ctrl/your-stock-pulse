@@ -19,40 +19,40 @@ export interface ActionDef {
 
 export const ACTIONS: ActionDef[] = [
   {
-    label: "New Item",
+    label: "Novo Item",
     icon: <Plus className="h-4 w-4" />,
     shortcut: "N I",
     action: (nav) => nav({ to: "/app/catalog", search: {} }),
     permission: "create_item",
   },
   {
-    label: "New Movement",
+    label: "Nova Movimentação",
     icon: <ArrowRightLeft className="h-4 w-4" />,
     shortcut: "N M",
     action: (nav) => nav({ to: "/app/movements", search: { item: undefined } }),
     permission: "log_movement",
   },
   {
-    label: "New Purchase Order",
+    label: "Novo Pedido de Compra",
     icon: <ShoppingCart className="h-4 w-4" />,
     shortcut: "N P",
     action: (nav) => nav({ to: "/app/purchase-orders", search: {} }),
     permission: "create_po",
   },
   {
-    label: "New Request",
+    label: "Nova Solicitação",
     icon: <ClipboardList className="h-4 w-4" />,
     action: (nav) => nav({ to: "/app/requests", search: { request: undefined } }),
     permission: "create_request",
   },
   {
-    label: "New Supplier",
+    label: "Novo Fornecedor",
     icon: <Truck className="h-4 w-4" />,
     action: (nav) => nav({ to: "/app/suppliers" }),
     permission: "manage_suppliers",
   },
   {
-    label: "Export Items CSV",
+    label: "Exportar Itens CSV",
     icon: <FileDown className="h-4 w-4" />,
     action: (nav) => nav({ to: "/app/catalog", search: {} }),
     permission: "export_data",

@@ -43,9 +43,9 @@ export function CategoryManager() {
 
   const validate = (name: string, excludeId?: string): string | null => {
     const trimmed = name.trim();
-    if (!trimmed) return "Name is required";
+    if (!trimmed) return "O nome é obrigatório";
     if (categories.some((c) => c.name.toLowerCase() === trimmed.toLowerCase() && c.id !== excludeId))
-      return "Category already exists";
+      return "A categoria já existe";
     return null;
   };
 
@@ -54,7 +54,7 @@ export function CategoryManager() {
     if (err) { setInlineError(err); return; }
     const now = new Date().toISOString();
     createCat.mutate({ id: crypto.randomUUID(), name: newName.trim(), description: "", parentId: null, createdAt: now, updatedAt: now }, {
-      onSuccess: () => { toast.success("Category created"); setNewName(""); setAdding(false); setInlineError(""); },
+      onSuccess: () => { toast.success("Categoria criada"); setNewName(""); setAdding(false); setInlineError(""); },
     });
   };
 
@@ -63,29 +63,29 @@ export function CategoryManager() {
     const err = validate(editName, editingId);
     if (err) { setInlineError(err); return; }
     updateCat.mutate({ id: editingId, updates: { name: editName.trim() } }, {
-      onSuccess: () => { toast.success("Category renamed"); setEditingId(null); setInlineError(""); },
+      onSuccess: () => { toast.success("Categoria renomeada"); setEditingId(null); setInlineError(""); },
     });
   };
 
   const handleDelete = () => {
     if (!deleteTarget) return;
     deleteCat.mutate(deleteTarget.id, {
-      onSuccess: () => { toast.success("Category deleted"); setDeleteTarget(null); },
+      onSuccess: () => { toast.success("Categoria excluída"); setDeleteTarget(null); },
     });
   };
 
   if (categories.length === 0 && !adding) {
     return (
-      <EmptyState icon={Tag} title="No categories yet" description="Categories help organize your inventory items." actionLabel="Add Category" onAction={() => setAdding(true)} />
+      <EmptyState icon={Tag} title="Ainda não há categorias" description="As categorias ajudam a organizar os itens do seu estoque." actionLabel="Adicionar Categoria" onAction={() => setAdding(true)} />
     );
   }
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">{categories.length} categories</p>
+        <p className="text-sm text-muted-foreground">{categories.length} categorias</p>
         <Button size="sm" variant="outline" onClick={() => { setAdding(true); setInlineError(""); }}>
-          <Plus className="mr-1.5 h-3.5 w-3.5" /> Add Category
+          <Plus className="mr-1.5 h-3.5 w-3.5" /> Adicionar Categoria
         </Button>
       </div>
 
@@ -94,7 +94,7 @@ export function CategoryManager() {
           <div className="flex items-center gap-2 p-3">
             <Input ref={addRef} value={newName} onChange={(e) => { setNewName(e.target.value); setInlineError(""); }}
               onKeyDown={(e) => { if (e.key === "Enter") handleAdd(); if (e.key === "Escape") { setAdding(false); setInlineError(""); } }}
-              placeholder="Category name…" className="h-8 text-sm" />
+              placeholder="Nome da categoria…" className="h-8 text-sm" />
             <Button size="icon" variant="ghost" className="h-8 w-8 shrink-0" onClick={handleAdd}><Check className="h-4 w-4" /></Button>
             <Button size="icon" variant="ghost" className="h-8 w-8 shrink-0" onClick={() => { setAdding(false); setInlineError(""); }}><X className="h-4 w-4" /></Button>
           </div>
@@ -120,7 +120,7 @@ export function CategoryManager() {
                 <>
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-medium truncate max-w-[200px]" title={cat.name}>{cat.name.length > 50 ? cat.name.slice(0, 50) + "…" : cat.name}</span>
-                    <Badge variant="secondary" className="text-xs">{count} item{count !== 1 && "s"}</Badge>
+                    <Badge variant="secondary" className="text-xs">{count} item{count !== 1 && "ns"}</Badge>
                   </div>
                   <div className="flex items-center gap-1">
                     <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => { setEditingId(cat.id); setEditName(cat.name); setInlineError(""); }}>
@@ -140,17 +140,17 @@ export function CategoryManager() {
       <AlertDialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete "{deleteTarget?.name}"?</AlertDialogTitle>
+            <AlertDialogTitle>Excluir "{deleteTarget?.name}"?</AlertDialogTitle>
             <AlertDialogDescription>
               {(deleteTarget?.itemCount ?? 0) > 0
-                ? `${deleteTarget!.itemCount} item${deleteTarget!.itemCount !== 1 ? "s" : ""} use this category — they will become uncategorized.`
-                : "This category has no linked items."}
-              {" "}This action cannot be undone.
+                ? `${deleteTarget!.itemCount} item(ns) usam esta categoria — eles ficarão sem categoria.`
+                : "Esta categoria não possui itens vinculados."}
+              {" "}Esta ação não pode ser desfeita.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">Delete</AlertDialogAction>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">Excluir</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

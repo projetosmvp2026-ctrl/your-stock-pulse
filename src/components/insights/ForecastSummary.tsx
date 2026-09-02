@@ -44,23 +44,23 @@ export function ForecastSummary({ analyses }: ForecastSummaryProps) {
 
     return [
       {
-        label: "Items At Risk",
+        label: "Itens em Risco",
         value: atRisk,
         icon: AlertTriangle,
         accent: atRisk > 0 ? "text-destructive" : "text-emerald-600 dark:text-emerald-400",
       },
       {
-        label: "Avg Days of Supply",
+        label: "Média de Dias de Suprimento",
         value: `${avgDaysOfSupply}d`,
         icon: Clock,
       },
       {
-        label: "Suggested Reorder Units",
+        label: "Unidades Sugeridas para Reposição",
         value: totalReorderValue.toLocaleString(),
         icon: DollarSign,
       },
       {
-        label: "Items Needing Attention",
+        label: "Itens que Precisam de Atenção",
         value: needsAttention,
         icon: Settings2,
         accent: needsAttention > 0 ? "text-amber-600 dark:text-amber-400" : undefined,

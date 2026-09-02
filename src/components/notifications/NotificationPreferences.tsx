@@ -14,11 +14,11 @@ import { toast } from "sonner";
 import type { NotificationPrefs } from "@/lib/demo/index";
 
 const PREF_LABELS: { key: keyof NotificationPrefs; label: string; description: string }[] = [
-  { key: "low_stock", label: "Low Stock Alerts", description: "When an item drops below its reorder point" },
-  { key: "zero_stock", label: "Zero Stock Alerts", description: "When an item reaches zero stock" },
-  { key: "po_reminder", label: "PO Reminders", description: "When a PO delivery date is within 3 days" },
-  { key: "po_overdue", label: "PO Overdue", description: "When a PO passes its expected delivery date" },
-  { key: "request_update", label: "Request Updates", description: "When an inventory request status changes" },
+  { key: "low_stock", label: "Alertas de Estoque Baixo", description: "Quando um item fica abaixo do ponto de reposição" },
+  { key: "zero_stock", label: "Alertas de Estoque Zerado", description: "Quando um item atinge estoque zero" },
+  { key: "po_reminder", label: "Lembretes de Pedido", description: "Quando a entrega de um pedido está a até 3 dias" },
+  { key: "po_overdue", label: "Pedido Atrasado", description: "Quando um pedido ultrapassa a data prevista de entrega" },
+  { key: "request_update", label: "Atualizações de Solicitação", description: "Quando o status de uma solicitação de estoque muda" },
 ];
 
 interface NotificationPreferencesProps {
@@ -41,7 +41,7 @@ export function NotificationPreferences({ open, onOpenChange }: NotificationPref
   const handleSave = () => {
     demoStore?.setNotificationPrefs(prefs);
     bumpVersion();
-    toast.success("Notification preferences saved.");
+    toast.success("Preferências de notificação salvas.");
     onOpenChange(false);
   };
 
@@ -51,7 +51,7 @@ export function NotificationPreferences({ open, onOpenChange }: NotificationPref
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-base">
             <Settings2 className="h-4 w-4" />
-            Notification Preferences
+            Preferências de Notificação
           </DialogTitle>
         </DialogHeader>
 
@@ -71,7 +71,7 @@ export function NotificationPreferences({ open, onOpenChange }: NotificationPref
           ))}
         </div>
 
-        <Button onClick={handleSave} className="w-full mt-2">Save Preferences</Button>
+        <Button onClick={handleSave} className="w-full mt-2">Salvar Preferências</Button>
       </DialogContent>
     </Dialog>
   );

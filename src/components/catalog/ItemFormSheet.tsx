@@ -20,8 +20,8 @@ import type { Item, Category, Supplier, Location } from "@/types/inventory";
 import { ItemStatus } from "@/types/inventory";
 
 const schema = z.object({
-  name: z.string().min(1, "Name is required"),
-  sku: z.string().min(1, "SKU is required"),
+  name: z.string().min(1, "Nome é obrigatório"),
+  sku: z.string().min(1, "SKU é obrigatório"),
   description: z.string(),
   categoryId: z.string(),
   supplierId: z.string(),
@@ -107,7 +107,7 @@ export function ItemFormSheet({
     const skuConflict = existingSkus.filter((s) => s === data.sku);
     const allowed = isEdit && item?.sku === data.sku ? 1 : 0;
     if (skuConflict.length > allowed) {
-      setError("sku", { message: "SKU already exists" });
+      setError("sku", { message: "SKU já existe" });
       return;
     }
     onSave({
@@ -125,75 +125,75 @@ export function ItemFormSheet({
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full sm:max-w-[480px] overflow-y-auto">
-        <SheetTitle>{isEdit ? "Edit Item" : "New Item"}</SheetTitle>
+        <SheetTitle>{isEdit ? "Editar Item" : "Novo Item"}</SheetTitle>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-6">
           {/* Basic Info */}
           <fieldset className="space-y-3">
-            <legend className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Basic Info</legend>
+            <legend className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Informações Básicas</legend>
             <div>
-              <label className={labelCls}>Name *</label>
+              <label className={labelCls}>Nome *</label>
               <input {...register("name")} className={inputCls} />
               {errors.name && <p className={errCls}>{errors.name.message}</p>}
             </div>
             <div>
-              <label className={`${labelCls} flex items-center gap-1`}>SKU * <HelpTooltip text="Unique identifier for this item. Must be different from all other items." /></label>
+              <label className={`${labelCls} flex items-center gap-1`}>SKU * <HelpTooltip text="Identificador único para este item. Deve ser diferente de todos os outros itens." /></label>
               <input {...register("sku")} className={inputCls} placeholder="STK-XXXX" />
               {errors.sku && <p className={errCls}>{errors.sku.message}</p>}
             </div>
             <div>
-              <label className={labelCls}>Description</label>
+              <label className={labelCls}>Descrição</label>
               <textarea {...register("description")} rows={2} className={`${inputCls} h-auto py-2`} />
             </div>
           </fieldset>
 
           {/* Classification */}
           <fieldset className="space-y-3">
-            <legend className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Classification</legend>
+            <legend className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Classificação</legend>
             <div>
-              <label className={labelCls}>Category</label>
+              <label className={labelCls}>Categoria</label>
               <Select value={watch("categoryId") ?? ""} onValueChange={(v) => setValue("categoryId", v || "")}>
-                <SelectTrigger className="h-9"><SelectValue placeholder="Select category" /></SelectTrigger>
+                <SelectTrigger className="h-9"><SelectValue placeholder="Selecionar categoria" /></SelectTrigger>
                 <SelectContent>
                   {categories.map((c) => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
             <div>
-              <label className={labelCls}>Unit of Measure</label>
-              <input {...register("unit")} className={inputCls} placeholder="each, kg, box…" />
+              <label className={labelCls}>Unidade de Medida</label>
+              <input {...register("unit")} className={inputCls} placeholder="unidade, kg, caixa…" />
             </div>
           </fieldset>
 
           {/* Stock Settings */}
           <fieldset className="space-y-3">
-            <legend className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Stock Settings</legend>
+            <legend className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Configurações de Estoque</legend>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className={labelCls}>Current Stock</label>
+                <label className={labelCls}>Estoque Atual</label>
                 <input type="number" {...register("currentStock")} className={inputCls} />
               </div>
               <div>
-                <label className={`${labelCls} flex items-center gap-1`}>Reorder Point <HelpTooltip text="Minimum quantity before a low-stock alert is triggered. Set based on your typical usage rate." /></label>
+                <label className={`${labelCls} flex items-center gap-1`}>Ponto de Reposição <HelpTooltip text="Quantidade mínima antes de disparar um alerta de estoque baixo. Defina com base na sua taxa de uso típica." /></label>
                 <input type="number" {...register("reorderPoint")} className={inputCls} />
               </div>
             </div>
             <div>
-              <label className={labelCls}>Reorder Quantity</label>
+              <label className={labelCls}>Quantidade de Reposição</label>
               <input type="number" {...register("reorderQuantity")} className={inputCls} />
             </div>
           </fieldset>
 
           {/* Pricing */}
           <fieldset className="space-y-3">
-            <legend className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Pricing</legend>
+            <legend className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Preços</legend>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className={labelCls}>Cost Price</label>
+                <label className={labelCls}>Custo Unitário</label>
                 <input type="number" step="0.01" {...register("costPrice")} className={inputCls} />
               </div>
               <div>
-                <label className={labelCls}>Selling Price</label>
+                <label className={labelCls}>Preço de Venda</label>
                 <input type="number" step="0.01" {...register("sellingPrice")} className={inputCls} />
               </div>
             </div>
@@ -201,20 +201,20 @@ export function ItemFormSheet({
 
           {/* Assignment */}
           <fieldset className="space-y-3">
-            <legend className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Assignment</legend>
+            <legend className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Atribuição</legend>
             <div>
-              <label className={labelCls}>Supplier</label>
+              <label className={labelCls}>Fornecedor</label>
               <Select value={watch("supplierId") ?? ""} onValueChange={(v) => setValue("supplierId", v || "")}>
-                <SelectTrigger className="h-9"><SelectValue placeholder="Select supplier" /></SelectTrigger>
+                <SelectTrigger className="h-9"><SelectValue placeholder="Selecionar fornecedor" /></SelectTrigger>
                 <SelectContent>
                   {suppliers.map((s) => <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
             <div>
-              <label className={labelCls}>Location</label>
+              <label className={labelCls}>Local</label>
               <Select value={watch("locationId") ?? ""} onValueChange={(v) => setValue("locationId", v || "")}>
-                <SelectTrigger className="h-9"><SelectValue placeholder="Select location" /></SelectTrigger>
+                <SelectTrigger className="h-9"><SelectValue placeholder="Selecionar local" /></SelectTrigger>
                 <SelectContent>
                   {locations.map((l) => <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>)}
                 </SelectContent>
@@ -228,9 +228,9 @@ export function ItemFormSheet({
             <Select value={watch("status")} onValueChange={(v) => setValue("status", v as ItemStatus)}>
               <SelectTrigger className="h-9"><SelectValue /></SelectTrigger>
               <SelectContent>
-                <SelectItem value={ItemStatus.Active}>Active</SelectItem>
-                <SelectItem value={ItemStatus.Discontinued}>Discontinued</SelectItem>
-                <SelectItem value={ItemStatus.Archived}>Archived</SelectItem>
+                <SelectItem value={ItemStatus.Active}>Ativo</SelectItem>
+                <SelectItem value={ItemStatus.Discontinued}>Descontinuado</SelectItem>
+                <SelectItem value={ItemStatus.Archived}>Arquivado</SelectItem>
               </SelectContent>
             </Select>
           </fieldset>
@@ -238,10 +238,10 @@ export function ItemFormSheet({
           {/* Actions */}
           <div className="flex gap-3 pt-2">
             <Button type="submit" disabled={loading} className="flex-1">
-              {loading ? "Saving…" : "Save"}
+              {loading ? "Salvando…" : "Salvar"}
             </Button>
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="flex-1">
-              Cancel
+              Cancelar
             </Button>
           </div>
         </form>

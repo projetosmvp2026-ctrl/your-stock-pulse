@@ -26,7 +26,7 @@ export function CSVExportButton<T>({
   data,
   columns,
   filename,
-  label = "Export CSV",
+  label = "Exportar CSV",
 }: CSVExportButtonProps<T>) {
   const [loading, setLoading] = useState(false);
 
@@ -65,7 +65,7 @@ export function CSVExportButton<T>({
       disabled={loading || data.length === 0}
     >
       <Download className="mr-1.5 h-4 w-4" />
-      {loading ? "Exporting…" : label}
+      {loading ? "Exportando…" : label}
     </Button>
   );
 }

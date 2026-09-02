@@ -21,9 +21,9 @@ export function POSummaryStats({ purchaseOrders }: POSummaryStatsProps) {
 
   const pills = [
     { label: "Total", value: stats.total },
-    { label: "Draft", value: stats.draft },
-    { label: "Awaiting Delivery", value: stats.awaiting },
-    { label: "Completed", value: stats.completed },
+    { label: "Rascunho", value: stats.draft },
+    { label: "Aguardando Entrega", value: stats.awaiting },
+    { label: "Concluído", value: stats.completed },
   ];
 
   return (

@@ -7,12 +7,12 @@ import type { RequestFilters } from "./request-filter-types";
 import { EMPTY_REQUEST_FILTERS } from "./request-filter-types";
 
 const STATUSES: { value: RequestStatus; label: string }[] = [
-  { value: RequestStatus.Pending, label: "Pending" },
-  { value: RequestStatus.Approved, label: "Approved" },
-  { value: RequestStatus.PartiallyFulfilled, label: "Partial" },
-  { value: RequestStatus.Fulfilled, label: "Fulfilled" },
-  { value: RequestStatus.Declined, label: "Declined" },
-  { value: RequestStatus.Cancelled, label: "Cancelled" },
+  { value: RequestStatus.Pending, label: "Pendente" },
+  { value: RequestStatus.Approved, label: "Aprovado" },
+  { value: RequestStatus.PartiallyFulfilled, label: "Parcial" },
+  { value: RequestStatus.Fulfilled, label: "Atendido" },
+  { value: RequestStatus.Declined, label: "Recusado" },
+  { value: RequestStatus.Cancelled, label: "Cancelado" },
 ];
 
 interface RequestsFiltersProps {
@@ -44,7 +44,7 @@ export function RequestsFilters({ filters, onChange }: RequestsFiltersProps) {
         </Badge>
       ))}
       <Input
-        placeholder="Requestor..."
+        placeholder="Solicitante..."
         value={filters.requestor}
         onChange={(e) => onChange({ ...filters, requestor: e.target.value })}
         className="h-8 w-32"
@@ -54,14 +54,14 @@ export function RequestsFilters({ filters, onChange }: RequestsFiltersProps) {
         value={filters.dateFrom}
         onChange={(e) => onChange({ ...filters, dateFrom: e.target.value })}
         className="h-8 w-36"
-        aria-label="From date"
+        aria-label="Data inicial"
       />
       <Input
         type="date"
         value={filters.dateTo}
         onChange={(e) => onChange({ ...filters, dateTo: e.target.value })}
         className="h-8 w-36"
-        aria-label="To date"
+        aria-label="Data final"
       />
       {hasFilters && (
         <Button
@@ -71,7 +71,7 @@ export function RequestsFilters({ filters, onChange }: RequestsFiltersProps) {
           onClick={() => onChange(EMPTY_REQUEST_FILTERS)}
         >
           <X className="h-3 w-3" />
-          Clear
+          Limpar
         </Button>
       )}
     </div>

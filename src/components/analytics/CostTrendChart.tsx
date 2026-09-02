@@ -44,14 +44,14 @@ export function CostTrendChart({ purchaseOrders }: Props) {
   }, [purchaseOrders]);
 
   if (data.length === 0) {
-    return <EmptyState icon={TrendingUp} title="No spending trend" description="No received POs to chart over time." />;
+    return <EmptyState icon={TrendingUp} title="Sem tendência de gastos" description="Nenhum pedido recebido para exibir ao longo do tempo." />;
   }
 
   return (
     <div className="space-y-3">
       <div className="flex gap-2">
-        <Button size="sm" variant={cumulative ? "outline" : "default"} onClick={() => setCumulative(false)}>Per Period</Button>
-        <Button size="sm" variant={cumulative ? "default" : "outline"} onClick={() => setCumulative(true)}>Cumulative</Button>
+        <Button size="sm" variant={cumulative ? "outline" : "default"} onClick={() => setCumulative(false)}>Por Período</Button>
+        <Button size="sm" variant={cumulative ? "default" : "outline"} onClick={() => setCumulative(true)}>Acumulado</Button>
       </div>
       <ResponsiveContainer width="100%" height={280}>
         <LineChart data={data} margin={{ left: 10, right: 20, top: 5, bottom: 5 }}>

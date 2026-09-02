@@ -44,8 +44,8 @@ export function detectQuantitySpike(
     itemId: movement.itemId,
     type: "quantity_spike",
     severity: isCritical ? "critical" : "warning",
-    title: `Quantity spike: ${qty} units`,
-    description: `This movement of ${qty} units is ${ratio}× the average of ${Math.round(avg)} units for this item.`,
+    title: `Pico de quantidade: ${qty} unidades`,
+    description: `Esta movimentação de ${qty} unidades é ${ratio}× a média de ${Math.round(avg)} unidades para este item.`,
     detectedAt: movement.createdAt,
   };
 }
@@ -77,8 +77,8 @@ export function detectFrequentAdjustments(
     itemId: latest.itemId,
     type: "frequent_adjustments",
     severity: adjustments.length > 5 ? "critical" : "warning",
-    title: `${adjustments.length} adjustments in ${windowDays} days`,
-    description: `This item has been adjusted ${adjustments.length} times in the last ${windowDays} days, which may indicate counting issues or process problems.`,
+    title: `${adjustments.length} ajustes em ${windowDays} dias`,
+    description: `Este item foi ajustado ${adjustments.length} vezes nos últimos ${windowDays} dias, o que pode indicar problemas de contagem ou de processo.`,
     detectedAt: latest.createdAt,
   };
 }
@@ -108,8 +108,8 @@ export function detectUnusualTiming(
       itemId: movement.itemId,
       type: "unusual_timing",
       severity: "warning",
-      title: "Unusual weekend activity",
-      description: `This movement occurred on a weekend, while only ${weekendHistory.length} of ${itemHistory.length} prior movements were on weekends.`,
+      title: "Atividade incomum no fim de semana",
+      description: `Esta movimentação ocorreu em um fim de semana, enquanto apenas ${weekendHistory.length} de ${itemHistory.length} movimentações anteriores ocorreram em fins de semana.`,
       detectedAt: movement.createdAt,
     };
   }

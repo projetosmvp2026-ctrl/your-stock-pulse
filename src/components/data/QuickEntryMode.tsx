@@ -85,7 +85,7 @@ export function QuickEntryMode({ open, onOpenChange }: QuickEntryModeProps) {
       quantity: Number(quantity),
       fromLocationId: null,
       toLocationId: null,
-      reference: `Quick Entry`,
+      reference: `Entrada Rápida`,
       notes,
       performedBy: "Demo Admin",
       createdAt: new Date().toISOString(),
@@ -115,15 +115,15 @@ export function QuickEntryMode({ open, onOpenChange }: QuickEntryModeProps) {
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
             <ScanBarcode className="h-5 w-5" />
-            Quick Entry
+            Entrada Rápida
           </SheetTitle>
-          <SheetDescription>Scan or type a barcode to look up an item and log a movement.</SheetDescription>
+          <SheetDescription>Escaneie ou digite um código de barras para buscar um item e registrar uma movimentação.</SheetDescription>
         </SheetHeader>
 
         <div className="mt-6 space-y-6">
           {/* Barcode input */}
           <div>
-            <Label htmlFor="barcode-scan" className="text-sm font-medium">Barcode / SKU</Label>
+            <Label htmlFor="barcode-scan" className="text-sm font-medium">Código de Barras / SKU</Label>
             <div className="mt-1.5 flex gap-2">
               <Input
                 id="barcode-scan"
@@ -131,13 +131,13 @@ export function QuickEntryMode({ open, onOpenChange }: QuickEntryModeProps) {
                 value={barcodeInput}
                 onChange={(e) => setBarcodeInput(e.target.value)}
                 onKeyDown={(e) => { if (e.key === "Enter") handleLookup(); }}
-                placeholder="Scan or type barcode…"
+                placeholder="Escaneie ou digite o código de barras…"
                 className="h-12 text-lg font-mono"
                 autoFocus
                 autoComplete="off"
               />
               <Button onClick={handleLookup} className="h-12 px-5" disabled={!barcodeInput.trim()}>
-                Look up
+                Buscar
               </Button>
             </div>
           </div>
@@ -145,10 +145,10 @@ export function QuickEntryMode({ open, onOpenChange }: QuickEntryModeProps) {
           {/* Not found */}
           {notFound && (
             <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4 text-center">
-              <p className="text-sm font-medium text-destructive">Item not found</p>
+              <p className="text-sm font-medium text-destructive">Item não encontrado</p>
               <p className="mt-1 font-mono text-xs text-muted-foreground">{notFound}</p>
               <Button variant="ghost" size="sm" className="mt-2" onClick={resetForm}>
-                Try again
+                Tentar novamente
               </Button>
             </div>
           )}
@@ -162,12 +162,12 @@ export function QuickEntryMode({ open, onOpenChange }: QuickEntryModeProps) {
                     <p className="font-semibold text-foreground">{foundItem.name}</p>
                     <p className="text-xs text-muted-foreground font-mono">{foundItem.sku}</p>
                   </div>
-                  <Button variant="ghost" size="icon" className="h-8 w-8" onClick={resetForm} aria-label="Clear item">
+                  <Button variant="ghost" size="icon" className="h-8 w-8" onClick={resetForm} aria-label="Limpar item">
                     <X className="h-4 w-4" />
                   </Button>
                 </div>
                 <div className="mt-2 flex gap-4 text-sm">
-                  <span className="text-muted-foreground">Current stock:</span>
+                  <span className="text-muted-foreground">Estoque atual:</span>
                   <span className="font-semibold font-mono">{foundItem.currentStock}</span>
                 </div>
               </div>
@@ -175,39 +175,39 @@ export function QuickEntryMode({ open, onOpenChange }: QuickEntryModeProps) {
               {/* Compact movement form */}
               <div className="space-y-3">
                 <div>
-                  <Label className="text-sm">Movement Type</Label>
+                  <Label className="text-sm">Tipo de Movimentação</Label>
                   <Select value={movementType} onValueChange={(v) => setMovementType(v as MovementType)}>
                     <SelectTrigger className="mt-1">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value={MovementType.Received}>Received</SelectItem>
-                      <SelectItem value={MovementType.Shipped}>Shipped</SelectItem>
-                      <SelectItem value={MovementType.Adjusted}>Adjusted</SelectItem>
-                      <SelectItem value={MovementType.Transferred}>Transferred</SelectItem>
+                      <SelectItem value={MovementType.Received}>Recebido</SelectItem>
+                      <SelectItem value={MovementType.Shipped}>Enviado</SelectItem>
+                      <SelectItem value={MovementType.Adjusted}>Ajustado</SelectItem>
+                      <SelectItem value={MovementType.Transferred}>Transferido</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div>
-                  <Label className="text-sm">Quantity</Label>
+                  <Label className="text-sm">Quantidade</Label>
                   <Input
                     type="number"
                     min="1"
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
-                    placeholder="Enter quantity"
+                    placeholder="Digite a quantidade"
                     className="mt-1"
                     onKeyDown={(e) => { if (e.key === "Enter" && quantity) handleSubmit(); }}
                   />
                 </div>
 
                 <div>
-                  <Label className="text-sm">Notes (optional)</Label>
+                  <Label className="text-sm">Observações (opcional)</Label>
                   <Textarea
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Optional notes"
+                    placeholder="Observações opcionais"
                     className="mt-1"
                     rows={2}
                   />
@@ -218,7 +218,7 @@ export function QuickEntryMode({ open, onOpenChange }: QuickEntryModeProps) {
                   disabled={!quantity || createMovement.isLoading}
                   className="w-full"
                 >
-                  {createMovement.isLoading ? "Logging…" : "Log Movement"}
+                  {createMovement.isLoading ? "Registrando…" : "Registrar Movimentação"}
                 </Button>
               </div>
             </>

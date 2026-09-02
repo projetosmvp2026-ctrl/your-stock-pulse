@@ -33,42 +33,42 @@ interface NavGroup {
 
 const navGroups: NavGroup[] = [
   {
-    label: "Operations",
+    label: "Operações",
     items: [
-      { label: "Dashboard", href: "/app/dashboard", icon: LayoutDashboard },
-      { label: "Catalog", href: "/app/catalog", icon: Package },
-      { label: "Movements", href: "/app/movements", icon: ArrowLeftRight, permKey: "canLogMovements" },
-      { label: "Locations", href: "/app/locations", icon: MapPin },
+      { label: "Painel", href: "/app/dashboard", icon: LayoutDashboard },
+      { label: "Catálogo", href: "/app/catalog", icon: Package },
+      { label: "Movimentações", href: "/app/movements", icon: ArrowLeftRight, permKey: "canLogMovements" },
+      { label: "Locais", href: "/app/locations", icon: MapPin },
     ],
   },
   {
-    label: "Procurement",
+    label: "Compras",
     permKey: "canManagePOs",
     items: [
-      { label: "Suppliers", href: "/app/suppliers", icon: Truck },
-      { label: "Purchase orders", href: "/app/purchase-orders", icon: ClipboardList },
+      { label: "Fornecedores", href: "/app/suppliers", icon: Truck },
+      { label: "Pedidos de compra", href: "/app/purchase-orders", icon: ClipboardList },
     ],
   },
   {
-    label: "Intelligence",
+    label: "Inteligência",
     permKey: "canViewAnalytics",
     items: [
-      { label: "Analytics", href: "/app/analytics", icon: BarChart3 },
-      { label: "AI insights", href: "/app/ai-insights", icon: Sparkles },
+      { label: "Análises", href: "/app/analytics", icon: BarChart3 },
+      { label: "Insights de IA", href: "/app/ai-insights", icon: Sparkles },
     ],
   },
   {
-    label: "Admin",
+    label: "Administrador",
     permKey: "canAccessSettings",
     items: [
-      { label: "Settings", href: "/app/settings", icon: Settings },
+      { label: "Configurações", href: "/app/settings", icon: Settings },
     ],
   },
 ];
 
 const standaloneLinks: NavItem[] = [
-  { label: "Requests", href: "/app/requests", icon: Inbox },
-  { label: "Help", href: "/app/help", icon: HelpCircle },
+  { label: "Solicitações", href: "/app/requests", icon: Inbox },
+  { label: "Ajuda", href: "/app/help", icon: HelpCircle },
 ];
 
 interface SidebarProps {

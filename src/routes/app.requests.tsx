@@ -33,7 +33,7 @@ import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
 
 export const Route = createFileRoute("/app/requests")({
   component: RequestsPage,
-  head: () => ({ meta: [{ title: "Requests — Stackwise" }] }),
+  head: () => ({ meta: [{ title: "Solicitações — Stackwise" }] }),
   validateSearch: (search: Record<string, unknown>) => ({
     request: (search.request as string) || undefined,
   }),
@@ -131,7 +131,7 @@ function RequestsPage() {
       updatedAt: new Date().toISOString(),
     });
     bumpVersion();
-    toast.success(`${cancelTarget.requestNumber} cancelled`);
+    toast.success(`${cancelTarget.requestNumber} cancelada`);
     setCancelTarget(null);
   }
 
@@ -139,12 +139,12 @@ function RequestsPage() {
     <div className="mx-auto max-w-[1400px] space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">Inventory Requests</h1>
-          <p className="text-sm text-muted-foreground">{requests.length} requests</p>
+          <h1 className="text-2xl font-semibold text-foreground">Solicitações de Estoque</h1>
+          <p className="text-sm text-muted-foreground">{requests.length} solicitações</p>
         </div>
         <Button size="sm" onClick={() => setFormOpen(true)}>
           <Plus className="mr-1.5 h-4 w-4" />
-          New Request
+          Nova Solicitação
         </Button>
       </div>
 
@@ -152,17 +152,17 @@ function RequestsPage() {
       {requests.length === 0 ? (
         <EmptyState
           icon={FileText}
-          title="No requests submitted"
-          description="Inventory requests let team members request stock for their departments."
-          actionLabel="New Request"
+          title="Nenhuma solicitação enviada"
+          description="As solicitações de estoque permitem que membros da equipe peçam itens para seus departamentos."
+          actionLabel="Nova Solicitação"
           onAction={() => setFormOpen(true)}
         />
       ) : isManagerOrAdmin ? (
         <Tabs defaultValue="all">
           <TabsList>
-            <TabsTrigger value="all">All Requests</TabsTrigger>
+            <TabsTrigger value="all">Todas as Solicitações</TabsTrigger>
             <TabsTrigger value="pending" className="gap-1.5">
-              Pending Approval
+              Aprovação Pendente
               {pendingCount > 0 && (
                 <Badge variant="secondary" className="ml-1 h-5 min-w-5 px-1.5 text-xs">
                   {pendingCount}
@@ -205,18 +205,18 @@ function RequestsPage() {
       <AlertDialog open={!!cancelTarget} onOpenChange={(o) => !o && setCancelTarget(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Cancel {cancelTarget?.requestNumber}?</AlertDialogTitle>
+            <AlertDialogTitle>Cancelar {cancelTarget?.requestNumber}?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. The request will be marked as cancelled.
+              Esta ação não pode ser desfeita. A solicitação será marcada como cancelada.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Keep Request</AlertDialogCancel>
+            <AlertDialogCancel>Manter Solicitação</AlertDialogCancel>
             <AlertDialogAction
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
               onClick={confirmCancel}
             >
-              Confirm Cancel
+              Confirmar Cancelamento
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

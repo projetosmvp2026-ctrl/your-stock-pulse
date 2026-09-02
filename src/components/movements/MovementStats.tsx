@@ -21,9 +21,9 @@ export function MovementStats({ movements }: MovementStatsProps) {
 
   const pills = [
     { label: "Total", value: stats.total },
-    { label: "Received", value: stats.received },
-    { label: "Shipped", value: stats.shipped },
-    { label: "Adjustments", value: stats.adjusted },
+    { label: "Recebido", value: stats.received },
+    { label: "Enviado", value: stats.shipped },
+    { label: "Ajustes", value: stats.adjusted },
   ];
 
   return (

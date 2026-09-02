@@ -67,7 +67,7 @@ export function AnomalyAlertCard({ alert, itemName, itemSku, onDismiss }: Anomal
           )}
 
           <div className="mt-2 flex items-center gap-2 text-[10px] text-muted-foreground">
-            <span>{format(new Date(alert.detectedAt), "MMM d, yyyy h:mm a")}</span>
+            <span>{format(new Date(alert.detectedAt), "d MMM, yyyy HH:mm")}</span>
             <span>·</span>
             <span className="capitalize">{alert.type.replace(/_/g, " ")}</span>
           </div>
@@ -76,7 +76,7 @@ export function AnomalyAlertCard({ alert, itemName, itemSku, onDismiss }: Anomal
             <Button size="sm" variant="outline" className="h-6 text-xs" asChild>
               <Link to="/app/catalog" search={{ item: alert.itemId }}>
                 <Search className="h-3 w-3 mr-1" />
-                Investigate
+                Investigar
               </Link>
             </Button>
             <Button
@@ -89,7 +89,7 @@ export function AnomalyAlertCard({ alert, itemName, itemSku, onDismiss }: Anomal
               }}
             >
               <X className="h-3 w-3 mr-1" />
-              Dismiss
+              Descartar
             </Button>
           </div>
         </div>

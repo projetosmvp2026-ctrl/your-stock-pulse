@@ -20,7 +20,7 @@ interface SuppliersSearch {
 
 export const Route = createFileRoute("/app/suppliers")({
   component: SuppliersPage,
-  head: () => ({ meta: [{ title: "Suppliers — Stackwise" }] }),
+  head: () => ({ meta: [{ title: "Fornecedores — Stackwise" }] }),
   validateSearch: (search: Record<string, unknown>): SuppliersSearch => ({
     supplier: typeof search.supplier === "string" ? search.supplier : undefined,
   }),
@@ -45,14 +45,14 @@ function SuppliersPage() {
   const [detailSupplier, setDetailSupplier] = useState<Supplier | null>(null);
 
   const supplierCsvColumns = useMemo<CSVColumn<Supplier>[]>(() => [
-    { header: "Name", accessor: (s) => s.name },
-    { header: "Contact Person", accessor: (s) => s.contactName },
-    { header: "Email", accessor: (s) => s.email },
-    { header: "Phone", accessor: (s) => s.phone },
-    { header: "Address", accessor: (s) => s.address },
-    { header: "Lead Time Days", accessor: (s) => s.leadTimeDays },
-    { header: "Rating", accessor: (s) => s.rating },
-    { header: "Notes", accessor: (s) => s.notes },
+    { header: "Nome", accessor: (s) => s.name },
+    { header: "Pessoa de Contato", accessor: (s) => s.contactName },
+    { header: "E-mail", accessor: (s) => s.email },
+    { header: "Telefone", accessor: (s) => s.phone },
+    { header: "Endereço", accessor: (s) => s.address },
+    { header: "Prazo de Entrega (dias)", accessor: (s) => s.leadTimeDays },
+    { header: "Avaliação", accessor: (s) => s.rating },
+    { header: "Observações", accessor: (s) => s.notes },
   ], []);
 
   useEffect(() => {
@@ -101,8 +101,8 @@ function SuppliersPage() {
     <div className="mx-auto max-w-[1400px] space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">Supplier Directory</h1>
-          <p className="text-sm text-muted-foreground">{suppliers.length} suppliers</p>
+          <h1 className="text-2xl font-semibold text-foreground">Diretório de Fornecedores</h1>
+          <p className="text-sm text-muted-foreground">{suppliers.length} fornecedores</p>
         </div>
         <div className="flex items-center gap-2">
           <CSVExportButton
@@ -113,7 +113,7 @@ function SuppliersPage() {
           {canManageSuppliers && (
             <Button size="sm" onClick={openCreate}>
               <Plus className="mr-1.5 h-4 w-4" />
-              New Supplier
+              Novo Fornecedor
             </Button>
           )}
         </div>
@@ -123,9 +123,9 @@ function SuppliersPage() {
       {suppliers.length === 0 ? (
         <EmptyState
           icon={Truck}
-          title="No suppliers added yet"
-          description="Add your suppliers to track lead times, contact info, and order history."
-          actionLabel={canManageSuppliers ? "Add Supplier" : undefined}
+          title="Ainda não há fornecedores adicionados"
+          description="Adicione seus fornecedores para acompanhar prazos de entrega, informações de contato e histórico de pedidos."
+          actionLabel={canManageSuppliers ? "Adicionar Fornecedor" : undefined}
           onAction={canManageSuppliers ? openCreate : undefined}
         />
       ) : (

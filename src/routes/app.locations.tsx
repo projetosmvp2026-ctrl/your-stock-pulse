@@ -15,7 +15,7 @@ import type { LocationTreeNode } from "@/hooks/useLocations";
 
 export const Route = createFileRoute("/app/locations")({
   component: LocationsPage,
-  head: () => ({ meta: [{ title: "Locations — Stackwise" }] }),
+  head: () => ({ meta: [{ title: "Locais — Stackwise" }] }),
 });
 
 function findNode(nodes: LocationTreeNode[], id: string): LocationTreeNode | null {
@@ -44,9 +44,9 @@ function LocationsPage() {
     <div className="mx-auto max-w-[1400px] space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">Locations</h1>
+          <h1 className="text-2xl font-semibold text-foreground">Locais</h1>
           <p className="text-sm text-muted-foreground">
-            {allLocations.length} location{allLocations.length !== 1 && "s"}
+            {allLocations.length} local{allLocations.length !== 1 && "is"}
           </p>
         </div>
         <PermissionGate permission="create_item">
@@ -57,11 +57,11 @@ function LocationsPage() {
               onClick={() => setTransferOpen(true)}
             >
               <ArrowRightLeft className="mr-1.5 h-4 w-4" />
-              Transfer Stock
+              Transferir Estoque
             </Button>
             <Button size="sm" onClick={() => setFormOpen(true)}>
               <Plus className="mr-1.5 h-4 w-4" />
-              New Location
+              Novo Local
             </Button>
           </div>
         </PermissionGate>
@@ -71,9 +71,9 @@ function LocationsPage() {
       {tree.length === 0 ? (
         <EmptyState
           icon={MapPin}
-          title="No locations configured"
-          description="Add warehouses, zones, and shelves to organize your inventory by location."
-          actionLabel="Add Location"
+          title="Nenhum local configurado"
+          description="Adicione armazéns, zonas e prateleiras para organizar seu estoque por local."
+          actionLabel="Adicionar Local"
           onAction={() => setFormOpen(true)}
         />
       ) : (
@@ -95,7 +95,7 @@ function LocationsPage() {
               />
             ) : (
               <p className="py-12 text-center text-sm text-muted-foreground">
-                Select a location to view details
+                Selecione um local para ver detalhes
               </p>
             )}
           </div>

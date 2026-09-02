@@ -107,7 +107,7 @@ function AiInsightsPage() {
   if (!can("view_analytics")) {
     return (
       <div className="flex items-center justify-center py-20">
-        <p className="text-muted-foreground">You don't have permission to view this page.</p>
+        <p className="text-muted-foreground">Você não tem permissão para ver esta página.</p>
       </div>
     );
   }
@@ -116,8 +116,8 @@ function AiInsightsPage() {
     updateItem.mutate(
       { id: a.itemId, updates: { reorderPoint: a.suggestedReorderPoint, reorderQuantity: a.suggestedReorderQuantity } },
       {
-        onSuccess: () => toast.success(`Reorder settings updated for ${a.itemName}`),
-        onError: (e) => toast.error(e.message || "Failed to update reorder settings."),
+        onSuccess: () => toast.success(`Configurações de reposição atualizadas para ${a.itemName}`),
+        onError: (e) => toast.error(e.message || "Falha ao atualizar as configurações de reposição."),
       },
     );
   };
@@ -129,7 +129,7 @@ function AiInsightsPage() {
       {/* Header */}
       <div className="flex items-center gap-3">
         <Sparkles className="h-5 w-5 text-primary" />
-        <h1 className="text-2xl font-semibold text-foreground">AI insights</h1>
+        <h1 className="text-2xl font-semibold text-foreground">Insights de IA</h1>
         <Badge variant="secondary" className="text-xs">Beta</Badge>
       </div>
 
@@ -143,47 +143,47 @@ function AiInsightsPage() {
       <div className="flex flex-wrap items-center gap-3">
         <Select value={urgency} onValueChange={(v) => setUrgency(v as UrgencyFilter)}>
           <SelectTrigger className="w-[140px]">
-            <SelectValue placeholder="Urgency" />
+            <SelectValue placeholder="Urgência" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Urgency</SelectItem>
-            <SelectItem value="critical">Critical (&lt;7d)</SelectItem>
-            <SelectItem value="moderate">Moderate (7-14d)</SelectItem>
-            <SelectItem value="low">Low (&gt;14d)</SelectItem>
+            <SelectItem value="all">Toda Urgência</SelectItem>
+            <SelectItem value="critical">Crítico (&lt;7d)</SelectItem>
+            <SelectItem value="moderate">Moderado (7-14d)</SelectItem>
+            <SelectItem value="low">Baixo (&gt;14d)</SelectItem>
           </SelectContent>
         </Select>
 
         <Select value={confidence} onValueChange={(v) => setConfidence(v as ConfidenceFilter)}>
           <SelectTrigger className="w-[150px]">
-            <SelectValue placeholder="Confidence" />
+            <SelectValue placeholder="Confiança" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Confidence</SelectItem>
-            <SelectItem value="high">High</SelectItem>
-            <SelectItem value="medium">Medium</SelectItem>
-            <SelectItem value="low">Low</SelectItem>
+            <SelectItem value="all">Toda Confiança</SelectItem>
+            <SelectItem value="high">Alta</SelectItem>
+            <SelectItem value="medium">Média</SelectItem>
+            <SelectItem value="low">Baixa</SelectItem>
           </SelectContent>
         </Select>
 
         <Select value={sortBy} onValueChange={(v) => setSortBy(v as SortBy)}>
           <SelectTrigger className="w-[160px]">
-            <SelectValue placeholder="Sort by" />
+            <SelectValue placeholder="Ordenar por" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="stockout">Days to Stockout</SelectItem>
-            <SelectItem value="delta">Order delta</SelectItem>
+            <SelectItem value="stockout">Dias até Esgotar</SelectItem>
+            <SelectItem value="delta">Variação do pedido</SelectItem>
           </SelectContent>
         </Select>
 
         <span className="text-xs text-muted-foreground ml-auto">
-          {filtered.length} order{filtered.length !== 1 ? "s" : ""}
+          {filtered.length} pedido{filtered.length !== 1 ? "s" : ""}
         </span>
       </div>
 
       {/* Suggestion Cards */}
       {filtered.length === 0 ? (
         <p className="text-center text-sm text-muted-foreground py-8">
-          No suggested orders match the current filters.
+          Nenhum pedido sugerido corresponde aos filtros atuais.
         </p>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -202,20 +202,20 @@ function AiInsightsPage() {
       <div id="anomalies" className="space-y-4 pt-4">
         <div className="flex items-center gap-3">
           <ShieldAlert className="h-5 w-5 text-destructive" />
-          <h2 className="text-xl font-semibold">Anomaly Detection</h2>
+          <h2 className="text-xl font-semibold">Detecção de Anomalias</h2>
           <Badge variant="destructive" className="text-xs">{allAnomalies.length}</Badge>
         </div>
 
         {/* Anomaly summary */}
         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
           <span>Total: {allAnomalies.length}</span>
-          <span>Critical: {allAnomalies.filter((a) => a.severity === "critical").length}</span>
+          <span>Crítico: {allAnomalies.filter((a) => a.severity === "critical").length}</span>
           {allAnomalies.length > 0 && (() => {
             const counts = new Map<string, number>();
             allAnomalies.forEach((a) => counts.set(a.itemId, (counts.get(a.itemId) ?? 0) + 1));
             const [topId, topCount] = [...counts.entries()].sort((a, b) => b[1] - a[1])[0];
             const topItem = itemMap.get(topId);
-            return topItem ? <span>Most affected: {topItem.name} ({topCount})</span> : null;
+            return topItem ? <span>Mais afetado: {topItem.name} ({topCount})</span> : null;
           })()}
         </div>
 
@@ -223,24 +223,24 @@ function AiInsightsPage() {
         <div className="flex flex-wrap items-center gap-3">
           <Select value={anomSeverity} onValueChange={(v) => setAnomSeverity(v as AnomalySeverityFilter)}>
             <SelectTrigger className="w-[130px]">
-              <SelectValue placeholder="Severity" />
+              <SelectValue placeholder="Severidade" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Severity</SelectItem>
-              <SelectItem value="critical">Critical</SelectItem>
-              <SelectItem value="warning">Warning</SelectItem>
+              <SelectItem value="all">Toda Severidade</SelectItem>
+              <SelectItem value="critical">Crítico</SelectItem>
+              <SelectItem value="warning">Aviso</SelectItem>
             </SelectContent>
           </Select>
 
           <Select value={anomType} onValueChange={(v) => setAnomType(v as AnomalyTypeFilter)}>
             <SelectTrigger className="w-[170px]">
-              <SelectValue placeholder="Type" />
+              <SelectValue placeholder="Tipo" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Types</SelectItem>
-              <SelectItem value="quantity_spike">Quantity Spike</SelectItem>
-              <SelectItem value="frequent_adjustments">Frequent Adjustments</SelectItem>
-              <SelectItem value="unusual_timing">Unusual Timing</SelectItem>
+              <SelectItem value="all">Todos os Tipos</SelectItem>
+              <SelectItem value="quantity_spike">Pico de Quantidade</SelectItem>
+              <SelectItem value="frequent_adjustments">Ajustes Frequentes</SelectItem>
+              <SelectItem value="unusual_timing">Horário Incomum</SelectItem>
             </SelectContent>
           </Select>
 
@@ -250,13 +250,13 @@ function AiInsightsPage() {
               checked={showDismissed}
               onCheckedChange={setShowDismissed}
             />
-            <Label htmlFor="show-dismissed" className="text-xs">Show Dismissed</Label>
+            <Label htmlFor="show-dismissed" className="text-xs">Mostrar Descartados</Label>
           </div>
         </div>
 
         {filteredAnomalies.length === 0 ? (
           <p className="text-center text-sm text-muted-foreground py-8">
-            No anomalies match the current filters.
+            Nenhuma anomalia corresponde aos filtros atuais.
           </p>
         ) : (
           <div className="grid gap-3">

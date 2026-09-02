@@ -15,17 +15,17 @@ import { useDemo } from "@/hooks/useDemo";
 import { useOnboarding, type TourStep } from "@/hooks/useOnboarding";
 
 const TOUR_STEPS: TourStep[] = [
-  { title: "Welcome to Stackwise!", description: "Let's take a quick tour of the key features. This will only take a minute." },
-  { target: "sidebar", title: "Navigation", description: "Use the sidebar to switch between sections — catalog, movements, suppliers, and more." },
-  { target: "metrics", title: "Stock health", description: "Your inventory health at a glance — total SKUs, in-stock, low-stock, and out-of-stock counts." },
-  { target: "needs-attention", title: "Needs attention", description: "Items that need action appear here — low stock, overdue POs, and pending requests." },
-  { target: "search", title: "Command palette", description: "Press CMD+K (or Ctrl+K) to search anything — items, suppliers, orders, and more." },
-  { title: "You're all set!", description: "Explore the app or try the guided walkthrough to learn the core workflow. Happy managing!" },
+  { title: "Bem-vindo ao Stackwise!", description: "Vamos fazer um tour rápido pelos principais recursos. Isso leva apenas um minuto." },
+  { target: "sidebar", title: "Navegação", description: "Use a barra lateral para alternar entre seções — catálogo, movimentações, fornecedores e mais." },
+  { target: "metrics", title: "Saúde do estoque", description: "A saúde do seu estoque em um relance — total de SKUs, contagem de itens em estoque, estoque baixo e sem estoque." },
+  { target: "needs-attention", title: "Precisa de atenção", description: "Itens que precisam de ação aparecem aqui — estoque baixo, pedidos atrasados e solicitações pendentes." },
+  { target: "search", title: "Paleta de comandos", description: "Pressione CMD+K (ou Ctrl+K) para buscar qualquer coisa — itens, fornecedores, pedidos e mais." },
+  { title: "Tudo pronto!", description: "Explore o app ou faça o tour guiado para aprender o fluxo principal. Boa gestão!" },
 ];
 
 export const Route = createFileRoute("/app/dashboard")({
   component: DashboardPage,
-  head: () => ({ meta: [{ title: "Dashboard — Stackwise" }] }),
+  head: () => ({ meta: [{ title: "Painel — Stackwise" }] }),
 });
 
 function DashboardPage() {
@@ -50,22 +50,22 @@ function DashboardPage() {
 
   const handleTourComplete = () => {
     tour.completeTour();
-    toast.success("Tour complete! Explore freely or start the walkthrough.");
+    toast.success("Tour concluído! Explore livremente ou inicie o passo a passo.");
   };
 
   return (
     <div className="mx-auto max-w-[1400px] space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold text-foreground">Dashboard</h1>
-        <p className="text-sm text-muted-foreground">Welcome back — here's your inventory overview.</p>
+        <h1 className="text-2xl font-semibold text-foreground">Painel</h1>
+        <p className="text-sm text-muted-foreground">Bem-vindo de volta — aqui está a visão geral do seu estoque.</p>
       </div>
 
       <div data-tour="metrics" className="rounded-xl border border-border bg-card p-3 shadow-xs">
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
-          <MetricCard label="Total SKUs" value={summary.total} accentColor="neutral" icon={Package} />
-          <MetricCard label="In stock" value={summary.inStock} accentColor="healthy" icon={CheckCircle2} />
-          <MetricCard label="Low stock" value={summary.lowStock} accentColor="warning" icon={AlertTriangle} />
-          <MetricCard label="Out of stock" value={summary.outOfStock} accentColor="danger" icon={XCircle} />
+          <MetricCard label="Total de SKUs" value={summary.total} accentColor="neutral" icon={Package} />
+          <MetricCard label="Em estoque" value={summary.inStock} accentColor="healthy" icon={CheckCircle2} />
+          <MetricCard label="Estoque baixo" value={summary.lowStock} accentColor="warning" icon={AlertTriangle} />
+          <MetricCard label="Sem estoque" value={summary.outOfStock} accentColor="danger" icon={XCircle} />
         </div>
       </div>
 

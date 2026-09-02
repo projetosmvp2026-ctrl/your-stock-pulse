@@ -32,11 +32,11 @@ export function generateStockAlerts(store: DemoStore): void {
       id: `notif-auto-${type}-${item.id}-${Date.now()}`,
       type,
       title: isOut
-        ? `Out of Stock: ${item.name}`
-        : `Low Stock: ${item.name}`,
+        ? `Sem Estoque: ${item.name}`
+        : `Estoque Baixo: ${item.name}`,
       message: isOut
-        ? `${item.name} (${item.sku}) has reached zero stock. Reorder immediately.`
-        : `${item.name} (${item.sku}) stock is at ${item.currentStock} units, below reorder point of ${item.reorderPoint}.`,
+        ? `${item.name} (${item.sku}) chegou a zero de estoque. Reponha imediatamente.`
+        : `${item.name} (${item.sku}) está com ${item.currentStock} unidades, abaixo do ponto de reposição de ${item.reorderPoint}.`,
       isRead: false,
       link: `/app/catalog?item=${item.id}`,
       referenceId: item.id,
@@ -76,8 +76,8 @@ export function generatePOAlerts(store: DemoStore): void {
         store.addNotification({
           id: `notif-auto-po_overdue-${po.id}-${Date.now()}`,
           type: "po_overdue",
-          title: `PO Overdue: ${po.orderNumber}`,
-          message: `Purchase order ${po.orderNumber} was expected ${Math.abs(daysUntil)} days ago and has not been fully received.`,
+          title: `Pedido Atrasado: ${po.orderNumber}`,
+          message: `O pedido de compra ${po.orderNumber} era esperado há ${Math.abs(daysUntil)} dias e ainda não foi totalmente recebido.`,
           isRead: false,
           link: `/app/purchase-orders?po=${po.id}`,
           referenceId: po.id,
@@ -96,8 +96,8 @@ export function generatePOAlerts(store: DemoStore): void {
         store.addNotification({
           id: `notif-auto-po_reminder-${po.id}-${Date.now()}`,
           type: "po_reminder",
-          title: `PO Arriving Soon: ${po.orderNumber}`,
-          message: `Purchase order ${po.orderNumber} is expected to arrive in ${daysUntil} day${daysUntil !== 1 ? "s" : ""}.`,
+          title: `Pedido Chegando em Breve: ${po.orderNumber}`,
+          message: `O pedido de compra ${po.orderNumber} deve chegar em ${daysUntil} dia${daysUntil !== 1 ? "s" : ""}.`,
           isRead: false,
           link: `/app/purchase-orders?po=${po.id}`,
           referenceId: po.id,

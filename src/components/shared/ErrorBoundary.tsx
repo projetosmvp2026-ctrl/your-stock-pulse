@@ -43,23 +43,23 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
         <Card className={this.props.fallbackClassName}>
           <CardContent className="flex flex-col items-center justify-center py-10 px-4 text-center">
             <AlertTriangle className="h-10 w-10 text-destructive/70 mb-3" strokeWidth={1.5} />
-            <h3 className="text-base font-semibold text-foreground">Something went wrong</h3>
+            <h3 className="text-base font-semibold text-foreground">Algo deu errado</h3>
             {isDev && this.state.error && (
               <p className="mt-1 max-w-md text-xs text-destructive font-mono break-all">
                 {this.state.error.message}
               </p>
             )}
             <p className="mt-1 text-sm text-muted-foreground">
-              An unexpected error occurred in this section.
+              Ocorreu um erro inesperado nesta seção.
             </p>
             <div className="mt-4 flex items-center gap-3">
               <Button size="sm" variant="default" onClick={this.handleReset}>
                 <RotateCcw className="mr-1.5 h-3.5 w-3.5" />
-                Try Again
+                Tentar Novamente
               </Button>
               <Button size="sm" variant="ghost" onClick={this.handleReload}>
                 <RefreshCw className="mr-1.5 h-3.5 w-3.5" />
-                Reload Page
+                Recarregar Página
               </Button>
             </div>
           </CardContent>

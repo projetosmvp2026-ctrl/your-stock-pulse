@@ -20,8 +20,8 @@ function FieldInput({ value, onSave, onCancel }: { value: string | number | bool
           onChange={(e) => onSave(e.target.value === "true")}
           className="h-8 rounded-md border border-input bg-background px-2 text-sm"
         >
-          <option value="true">Yes</option>
-          <option value="false">No</option>
+          <option value="true">Sim</option>
+          <option value="false">Não</option>
         </select>
         <Button variant="ghost" size="icon" className="h-6 w-6" onClick={onCancel}><X className="h-3 w-3" /></Button>
       </div>
@@ -64,9 +64,9 @@ export function CustomFieldsTab({ customFields, onUpdate }: CustomFieldsTabProps
   if (entries.length === 0) {
     return (
       <div className="py-8 text-center">
-        <p className="text-sm text-muted-foreground">No custom fields defined.</p>
+        <p className="text-sm text-muted-foreground">Nenhum campo personalizado definido.</p>
         <PermissionGate permission="access_settings">
-          <p className="mt-1 text-xs text-muted-foreground">Admins can add custom fields in Settings.</p>
+          <p className="mt-1 text-xs text-muted-foreground">Administradores podem adicionar campos personalizados em Configurações.</p>
         </PermissionGate>
       </div>
     );
@@ -87,7 +87,7 @@ export function CustomFieldsTab({ customFields, onUpdate }: CustomFieldsTabProps
                 role={canEdit ? "button" : undefined}
                 tabIndex={canEdit ? 0 : undefined}
               >
-                {typeof value === "boolean" ? (value ? "Yes" : "No") : String(value)}
+                {typeof value === "boolean" ? (value ? "Sim" : "Não") : String(value)}
               </span>
             )}
           </div>

@@ -102,15 +102,15 @@ export function CatalogTable({
   const allSelected = paged.length > 0 && paged.every((i) => selected.has(i.id));
 
   if (sorted.length === 0) {
-    return <p className="py-16 text-center text-sm text-muted-foreground">No items in catalog</p>;
+    return <p className="py-16 text-center text-sm text-muted-foreground">Nenhum item no catálogo</p>;
   }
 
   const pagination = (
     <div className="mt-3 flex items-center justify-between text-sm text-muted-foreground">
-      <span>Showing {start}–{end} of {sorted.length} items</span>
+      <span>Mostrando {start}–{end} de {sorted.length} itens</span>
       <div className="flex gap-2">
-        <Button variant="outline" size="sm" disabled={safePage === 0} onClick={() => changePage(safePage - 1)}>Previous</Button>
-        <Button variant="outline" size="sm" disabled={safePage >= totalPages - 1} onClick={() => changePage(safePage + 1)}>Next</Button>
+        <Button variant="outline" size="sm" disabled={safePage === 0} onClick={() => changePage(safePage - 1)}>Anterior</Button>
+        <Button variant="outline" size="sm" disabled={safePage >= totalPages - 1} onClick={() => changePage(safePage + 1)}>Próximo</Button>
       </div>
     </div>
   );
@@ -137,15 +137,15 @@ export function CatalogTable({
                   <span className="font-mono text-xs">{item.sku}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Qty</span>
+                  <span className="text-muted-foreground">Qtd</span>
                   <span className="font-mono">{item.currentStock}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Category</span>
+                  <span className="text-muted-foreground">Categoria</span>
                   <span className="truncate ml-2">{catMap.get(item.categoryId ?? "") ?? "—"}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Supplier</span>
+                  <span className="text-muted-foreground">Fornecedor</span>
                   <span className="truncate ml-2">{supMap.get(item.supplierId ?? "") ?? "—"}</span>
                 </div>
                 {actionRenderer && (
@@ -179,12 +179,12 @@ export function CatalogTable({
                   />
                 </TableHead>
               )}
-              <TableHead className="cursor-pointer select-none" onClick={() => toggleSort("name")}>Name<SortIcon col="name" /></TableHead>
+              <TableHead className="cursor-pointer select-none" onClick={() => toggleSort("name")}>Nome<SortIcon col="name" /></TableHead>
               <TableHead className="cursor-pointer select-none" onClick={() => toggleSort("sku")}>SKU<SortIcon col="sku" /></TableHead>
-              <TableHead className="cursor-pointer select-none" onClick={() => toggleSort("categoryId")}>Category<SortIcon col="categoryId" /></TableHead>
-              <TableHead className="cursor-pointer select-none" onClick={() => toggleSort("currentStock")}>Qty<SortIcon col="currentStock" /></TableHead>
-              <TableHead>Location</TableHead>
-              <TableHead className="cursor-pointer select-none" onClick={() => toggleSort("supplierId")}>Supplier<SortIcon col="supplierId" /></TableHead>
+              <TableHead className="cursor-pointer select-none" onClick={() => toggleSort("categoryId")}>Categoria<SortIcon col="categoryId" /></TableHead>
+              <TableHead className="cursor-pointer select-none" onClick={() => toggleSort("currentStock")}>Qtd<SortIcon col="currentStock" /></TableHead>
+              <TableHead>Local</TableHead>
+              <TableHead className="cursor-pointer select-none" onClick={() => toggleSort("supplierId")}>Fornecedor<SortIcon col="supplierId" /></TableHead>
               {actionRenderer && <TableHead className="w-12" />}
             </TableRow>
           </TableHeader>
@@ -209,15 +209,15 @@ export function CatalogTable({
                 )}
                 <TableCell className="font-medium">{item.name}</TableCell>
                 <TableCell className="font-mono text-xs">{item.sku}</TableCell>
-                <TableCell className="text-sm text-muted-foreground">{catMap.get(item.categoryId ?? "") ?? (item.categoryId ? <span className="italic text-muted-foreground/60">Unknown Category</span> : "—")}</TableCell>
+                <TableCell className="text-sm text-muted-foreground">{catMap.get(item.categoryId ?? "") ?? (item.categoryId ? <span className="italic text-muted-foreground/60">Categoria Desconhecida</span> : "—")}</TableCell>
                 <TableCell>
                   <span className="inline-flex items-center gap-2">
                     <span className="font-mono text-sm">{item.currentStock}</span>
                     <StatusBadge status={stockStatus(item)} />
                   </span>
                 </TableCell>
-                <TableCell className="text-sm text-muted-foreground">{locMap.get(item.locationId ?? "") ?? (item.locationId ? <span className="italic text-muted-foreground/60">Unknown Location</span> : "—")}</TableCell>
-                <TableCell className="text-sm text-muted-foreground">{supMap.get(item.supplierId ?? "") ?? (item.supplierId ? <span className="italic text-muted-foreground/60">Unknown Supplier</span> : "—")}</TableCell>
+                <TableCell className="text-sm text-muted-foreground">{locMap.get(item.locationId ?? "") ?? (item.locationId ? <span className="italic text-muted-foreground/60">Local Desconhecido</span> : "—")}</TableCell>
+                <TableCell className="text-sm text-muted-foreground">{supMap.get(item.supplierId ?? "") ?? (item.supplierId ? <span className="italic text-muted-foreground/60">Fornecedor Desconhecido</span> : "—")}</TableCell>
                 {actionRenderer && (
                   <TableCell onClick={(e) => e.stopPropagation()}>{actionRenderer(item)}</TableCell>
                 )}

@@ -49,7 +49,7 @@ export function DashboardSearch() {
           onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
           onFocus={() => query && setOpen(true)}
           onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
-          placeholder="Search items by name, SKU, or barcode..."
+          placeholder="Buscar itens por nome, SKU ou código de barras..."
           className="h-full flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
         />
       </div>
@@ -57,7 +57,7 @@ export function DashboardSearch() {
       {open && query.trim() && (
         <div className="absolute top-full z-40 mt-1 w-full rounded-md border border-border bg-popover shadow-lg">
           {results.length === 0 ? (
-            <p className="px-3 py-4 text-center text-sm text-muted-foreground">No items found</p>
+            <p className="px-3 py-4 text-center text-sm text-muted-foreground">Nenhum item encontrado</p>
           ) : (
             <ul className="divide-y divide-border py-1">
               {results.map((item) => (

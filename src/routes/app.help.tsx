@@ -12,7 +12,7 @@ import { FAQ_DATA } from "@/lib/faq-data";
 
 export const Route = createFileRoute("/app/help")({
   component: HelpPage,
-  head: () => ({ meta: [{ title: "Help Center — Stackwise" }] }),
+  head: () => ({ meta: [{ title: "Central de Ajuda — Stackwise" }] }),
 });
 
 function HelpPage() {
@@ -36,15 +36,15 @@ function HelpPage() {
       <div className="flex items-center gap-3">
         <HelpCircle className="h-7 w-7 text-primary shrink-0" />
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">Help Center</h1>
-          <p className="text-sm text-muted-foreground">Find answers to common questions about Stackwise.</p>
+          <h1 className="text-2xl font-semibold text-foreground">Central de Ajuda</h1>
+          <p className="text-sm text-muted-foreground">Encontre respostas para perguntas comuns sobre o Stackwise.</p>
         </div>
       </div>
 
       <div className="relative">
         <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
         <Input
-          placeholder="Search questions…"
+          placeholder="Buscar perguntas…"
           className="h-10 pl-9"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -53,7 +53,7 @@ function HelpPage() {
 
       {filtered.length === 0 ? (
         <div className="py-16 text-center">
-          <p className="text-sm text-muted-foreground">No matching questions for "{search}"</p>
+          <p className="text-sm text-muted-foreground">Nenhuma pergunta encontrada para "{search}"</p>
         </div>
       ) : (
         <div className="space-y-6">
@@ -75,7 +75,7 @@ function HelpPage() {
             </div>
           ))}
           {search && (
-            <p className="text-xs text-muted-foreground text-center">{totalResults} result{totalResults !== 1 ? "s" : ""} found</p>
+            <p className="text-xs text-muted-foreground text-center">{totalResults} resultado{totalResults !== 1 ? "s" : ""} encontrado{totalResults !== 1 ? "s" : ""}</p>
           )}
         </div>
       )}

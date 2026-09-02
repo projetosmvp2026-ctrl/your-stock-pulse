@@ -17,11 +17,11 @@ const TYPE_COLOR: Record<LocationType, string> = {
 };
 
 const TYPE_LABEL: Record<LocationType, string> = {
-  warehouse: "Warehouse",
-  zone: "Zone",
-  aisle: "Aisle",
-  shelf: "Shelf",
-  bin: "Bin",
+  warehouse: "Armazém",
+  zone: "Zona",
+  aisle: "Corredor",
+  shelf: "Prateleira",
+  bin: "Compartimento",
 };
 
 interface LocationTreeProps {
@@ -46,7 +46,7 @@ export function LocationTree({ tree, items, selectedId, onSelect }: LocationTree
     return (
       <div className="flex flex-col items-center justify-center gap-2 py-12 text-center">
         <MapPin className="h-8 w-8 text-muted-foreground/40" />
-        <p className="text-sm text-muted-foreground">No locations configured yet.</p>
+        <p className="text-sm text-muted-foreground">Nenhum local configurado ainda.</p>
       </div>
     );
   }
@@ -112,7 +112,7 @@ function TreeNode({
               if (e.key === "Enter") { e.stopPropagation(); setExpanded((p) => !p); }
             }}
             className="shrink-0 rounded p-0.5 hover:bg-muted"
-            aria-label={expanded ? "Collapse" : "Expand"}
+            aria-label={expanded ? "Recolher" : "Expandir"}
           >
             <ChevronRight
               className={cn(

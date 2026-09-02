@@ -170,28 +170,28 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
           className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5"
         >
           <CommandInput
-            placeholder="Search items, pages, actions…"
+            placeholder="Buscar itens, páginas, ações…"
             value={query}
             onValueChange={setQuery}
           />
           <CommandList>
-            {!hasResults && <CommandEmpty>No items match your query.</CommandEmpty>}
+            {!hasResults && <CommandEmpty>Nenhum item corresponde à sua busca.</CommandEmpty>}
 
             {/* NL Search Results */}
             {isNL && nlItems.length > 0 && (
-              <CommandGroup heading="Search Results">
+              <CommandGroup heading="Resultados da busca">
                 <div className="px-2 pb-2 flex flex-wrap gap-1">
                   {parsed.filters.status && (
                     <Badge variant="outline" className="text-[10px]">status: {parsed.filters.status}</Badge>
                   )}
                   {parsed.filters.category && (
-                    <Badge variant="outline" className="text-[10px]">category: {parsed.filters.category}</Badge>
+                    <Badge variant="outline" className="text-[10px]">categoria: {parsed.filters.category}</Badge>
                   )}
                   {parsed.filters.supplier && (
-                    <Badge variant="outline" className="text-[10px]">supplier: {parsed.filters.supplier}</Badge>
+                    <Badge variant="outline" className="text-[10px]">fornecedor: {parsed.filters.supplier}</Badge>
                   )}
                   {parsed.searchTerms.length > 0 && (
-                    <Badge variant="outline" className="text-[10px]">terms: {parsed.searchTerms.join(", ")}</Badge>
+                    <Badge variant="outline" className="text-[10px]">termos: {parsed.searchTerms.join(", ")}</Badge>
                   )}
                 </div>
                 {nlItems.map((item) => (
@@ -209,13 +209,13 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
             {isNL && nlItems.length === 0 && q.length > 0 && (
               <CommandEmpty>
                 <div className="space-y-1">
-                  <p>No items match your query.</p>
+                  <p>Nenhum item corresponde à sua busca.</p>
                   <div className="flex flex-wrap gap-1 justify-center">
                     {parsed.filters.status && (
                       <Badge variant="outline" className="text-[10px]">status: {parsed.filters.status}</Badge>
                     )}
                     {parsed.filters.category && (
-                      <Badge variant="outline" className="text-[10px]">category: {parsed.filters.category}</Badge>
+                      <Badge variant="outline" className="text-[10px]">categoria: {parsed.filters.category}</Badge>
                     )}
                   </div>
                 </div>
@@ -224,7 +224,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
 
             {/* Standard item search */}
             {matchedItems.length > 0 && (
-              <CommandGroup heading="Items">
+              <CommandGroup heading="Itens">
                 {matchedItems.map((item) => (
                   <CommandItem
                     key={item.id}
@@ -238,7 +238,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
             )}
 
             {matchedPages.length > 0 && (
-              <CommandGroup heading="Pages">
+              <CommandGroup heading="Páginas">
                 {matchedPages.map((page) => (
                   <CommandItem
                     key={page.path}
@@ -253,7 +253,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
             )}
 
             {matchedActions.length > 0 && (
-              <CommandGroup heading="Actions">
+              <CommandGroup heading="Ações">
                 {matchedActions.map((action) => (
                   <CommandItem
                     key={action.label}

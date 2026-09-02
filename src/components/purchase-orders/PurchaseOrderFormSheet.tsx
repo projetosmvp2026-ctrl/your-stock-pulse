@@ -37,16 +37,16 @@ import { LineItemsEditor, type LineItemRow } from "./LineItemsEditor";
 import { LowStockSuggestions } from "./LowStockSuggestions";
 
 const STATUS_LABEL: Record<OrderStatus, string> = {
-  [OrderStatus.Draft]: "Draft",
-  [OrderStatus.Submitted]: "Submitted",
-  [OrderStatus.Partial]: "Partially Received",
-  [OrderStatus.Received]: "Fully Received",
-  [OrderStatus.Cancelled]: "Cancelled",
+  [OrderStatus.Draft]: "Rascunho",
+  [OrderStatus.Submitted]: "Enviado",
+  [OrderStatus.Partial]: "Parcialmente Recebido",
+  [OrderStatus.Received]: "Totalmente Recebido",
+  [OrderStatus.Cancelled]: "Cancelado",
 };
 
 const schema = z.object({
-  supplierId: z.string().min(1, "Supplier is required"),
-  expectedDelivery: z.string().min(1, "Expected delivery date is required"),
+  supplierId: z.string().min(1, "Fornecedor é obrigatório"),
+  expectedDelivery: z.string().min(1, "Data de entrega prevista é obrigatória"),
   notes: z.string(),
 });
 
@@ -110,11 +110,11 @@ export function PurchaseOrderFormSheet({
 
   function onSubmit(values: FormValues) {
     if (lineItems.length === 0) {
-      setLineError("At least one line item is required");
+      setLineError("Pelo menos um item é obrigatório");
       return;
     }
     if (lineItems.some((r) => !r.itemId)) {
-      setLineError("All line items must have an item selected");
+      setLineError("Todos os itens devem ter um item selecionado");
       return;
     }
     setLineError("");
@@ -145,8 +145,8 @@ export function PurchaseOrderFormSheet({
           },
         },
         {
-          onSuccess: () => { toast.success(`${purchaseOrder.orderNumber} updated`); onOpenChange(false); },
-          onError: (e) => toast.error(e.message || "Failed to update purchase order."),
+          onSuccess: () => { toast.success(`${purchaseOrder.orderNumber} atualizado`); onOpenChange(false); },
+          onError: (e) => toast.error(e.message || "Falha ao atualizar pedido de compra."),
         },
       );
     } else {
@@ -167,8 +167,8 @@ export function PurchaseOrderFormSheet({
         updatedAt: now,
       };
       createPO.mutate(newPO, {
-        onSuccess: () => { toast.success(`${orderNumber} created`); onOpenChange(false); },
-        onError: (e) => toast.error(e.message || "Failed to create purchase order."),
+        onSuccess: () => { toast.success(`${orderNumber} criado`); onOpenChange(false); },
+        onError: (e) => toast.error(e.message || "Falha ao criar pedido de compra."),
       });
     }
   }
@@ -178,10 +178,10 @@ export function PurchaseOrderFormSheet({
       <SheetContent className="w-full overflow-y-auto sm:max-w-[600px]">
         <SheetHeader>
           <SheetTitle>
-            {isEdit ? `Edit ${purchaseOrder?.orderNumber}` : "New Purchase Order"}
+            {isEdit ? `Editar ${purchaseOrder?.orderNumber}` : "Novo Pedido de Compra"}
           </SheetTitle>
           <SheetDescription>
-            {isEdit ? "Update purchase order details." : "Create a new purchase order for a supplier."}
+            {isEdit ? "Atualize os detalhes do pedido de compra." : "Crie um novo pedido de compra para um fornecedor."}
           </SheetDescription>
         </SheetHeader>
 
@@ -199,11 +199,11 @@ export function PurchaseOrderFormSheet({
               name="supplierId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Supplier *</FormLabel>
+                  <FormLabel>Fornecedor *</FormLabel>
                   <Select value={field.value} onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a supplier" />
+                        <SelectValue placeholder="Selecione um fornecedor" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -222,7 +222,7 @@ export function PurchaseOrderFormSheet({
               name="expectedDelivery"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Expected Delivery *</FormLabel>
+                  <FormLabel>Entrega Prevista *</FormLabel>
                   <FormControl><Input type="date" {...field} /></FormControl>
                   <FormMessage />
                 </FormItem>
@@ -234,8 +234,8 @@ export function PurchaseOrderFormSheet({
               name="notes"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Notes</FormLabel>
-                  <FormControl><Textarea {...field} rows={2} placeholder="Additional notes…" /></FormControl>
+                  <FormLabel>Observações</FormLabel>
+                  <FormControl><Textarea {...field} rows={2} placeholder="Observações adicionais…" /></FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -260,8 +260,8 @@ export function PurchaseOrderFormSheet({
             />
 
             <div className="flex justify-end gap-2 pt-4">
-              <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
-              <Button type="submit">{isEdit ? "Save Changes" : "Create PO"}</Button>
+              <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Cancelar</Button>
+              <Button type="submit">{isEdit ? "Salvar Alterações" : "Criar Pedido"}</Button>
             </div>
           </form>
         </Form>

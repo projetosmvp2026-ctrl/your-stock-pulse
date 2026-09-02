@@ -32,10 +32,10 @@ interface MovementFormSheetProps {
 }
 
 const TYPE_OPTIONS = [
-  { value: MovementType.Received, label: "Received" },
-  { value: MovementType.Shipped, label: "Shipped" },
-  { value: MovementType.Adjusted, label: "Adjusted" },
-  { value: MovementType.Transferred, label: "Transferred" },
+  { value: MovementType.Received, label: "Recebido" },
+  { value: MovementType.Shipped, label: "Enviado" },
+  { value: MovementType.Adjusted, label: "Ajustado" },
+  { value: MovementType.Transferred, label: "Transferido" },
 ];
 
 function directionForType(type: MovementType): "in" | "out" | "configurable" {
@@ -85,12 +85,12 @@ export function MovementFormSheet({
 
   const validate = (): boolean => {
     const errs: Record<string, string> = {};
-    if (!itemId) errs.itemId = "Item is required";
+    if (!itemId) errs.itemId = "Item é obrigatório";
 
     const num = Number(quantity);
     const qty = parseInt(quantity, 10);
     if (!quantity || isNaN(qty) || qty <= 0 || !Number.isInteger(num)) {
-      errs.quantity = "Quantity must be a positive integer";
+      errs.quantity = "Quantidade deve ser um número inteiro positivo";
     }
 
     const selectedItem = items.find((i) => i.id === itemId);
@@ -98,28 +98,28 @@ export function MovementFormSheet({
     // Shipped: cannot exceed current stock
     if (!errs.quantity && selectedItem && (type === MovementType.Shipped || (type === MovementType.Transferred))) {
       if (qty > selectedItem.currentStock) {
-        errs.quantity = `Insufficient stock. Current quantity: ${selectedItem.currentStock}`;
+        errs.quantity = `Estoque insuficiente. Quantidade atual: ${selectedItem.currentStock}`;
       }
     }
 
     // Adjusted out: also cannot exceed current stock
     if (!errs.quantity && selectedItem && type === MovementType.Adjusted && direction === "out") {
       if (qty > selectedItem.currentStock) {
-        errs.quantity = `Insufficient stock. Current quantity: ${selectedItem.currentStock}`;
+        errs.quantity = `Estoque insuficiente. Quantidade atual: ${selectedItem.currentStock}`;
       }
     }
 
     // Adjusted: note required
     if (type === MovementType.Adjusted && !reference.trim()) {
-      errs.reference = "Reason for adjustment is required";
+      errs.reference = "Motivo do ajuste é obrigatório";
     }
 
     // Transferred: both locations required and different
     if (type === MovementType.Transferred) {
-      if (!fromLocationId) errs.fromLocationId = "Source location is required";
-      if (!toLocationId) errs.toLocationId = "Destination location is required";
+      if (!fromLocationId) errs.fromLocationId = "Local de origem é obrigatório";
+      if (!toLocationId) errs.toLocationId = "Local de destino é obrigatório";
       if (fromLocationId && toLocationId && fromLocationId === toLocationId) {
-        errs.toLocationId = "Source and destination must differ";
+        errs.toLocationId = "Origem e destino devem ser diferentes";
       }
     }
 
@@ -151,12 +151,12 @@ export function MovementFormSheet({
       onSuccess: () => {
         const label = selectedItem?.name ?? itemId;
         const sign = direction === "in" ? "+" : "−";
-        toast.success(`Movement logged: ${sign}${qty} ${label} (${type})`, {
+        toast.success(`Movimentação registrada: ${sign}${qty} ${label} (${type})`, {
           duration: 5000,
         });
         onOpenChange(false);
       },
-      onError: (e) => toast.error(e.message || "Failed to log movement. Please try again."),
+      onError: (e) => toast.error(e.message || "Falha ao registrar movimentação. Tente novamente."),
     });
   };
 
@@ -167,8 +167,8 @@ export function MovementFormSheet({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-[400px] sm:max-w-[440px] overflow-y-auto">
         <SheetHeader>
-          <SheetTitle>Log Movement</SheetTitle>
-          <SheetDescription>Record a stock movement for an inventory item.</SheetDescription>
+          <SheetTitle>Registrar Movimentação</SheetTitle>
+          <SheetDescription>Registre uma movimentação de estoque para um item do inventário.</SheetDescription>
         </SheetHeader>
 
         <div className="mt-6 space-y-4">
@@ -181,10 +181,10 @@ export function MovementFormSheet({
               disabled={!!preSelectedItemId}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Select item" />
+                <SelectValue placeholder="Selecionar item" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="__none__" disabled>Select item</SelectItem>
+                <SelectItem value="__none__" disabled>Selecionar item</SelectItem>
                 {items.map((i) => (
                   <SelectItem key={i.id} value={i.id}>{i.name}</SelectItem>
                 ))}
@@ -195,7 +195,7 @@ export function MovementFormSheet({
 
           {/* Type */}
           <div>
-            <Label className="mb-1.5 block text-sm">Movement Type</Label>
+            <Label className="mb-1.5 block text-sm">Tipo de Movimentação</Label>
             <Select value={type} onValueChange={(v) => setType(v as MovementType)}>
               <SelectTrigger>
                 <SelectValue />
@@ -210,12 +210,12 @@ export function MovementFormSheet({
 
           {/* Quantity */}
           <div>
-            <Label className="mb-1.5 block text-sm">Quantity *</Label>
+            <Label className="mb-1.5 block text-sm">Quantidade *</Label>
             <Input
               type="number"
               min={1}
               step={1}
-              placeholder="Enter quantity"
+              placeholder="Digite a quantidade"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
             />
@@ -225,14 +225,14 @@ export function MovementFormSheet({
           {/* Direction (only for adjusted) */}
           {isAdjusted && (
             <div>
-              <Label className="mb-1.5 block text-sm">Direction</Label>
+              <Label className="mb-1.5 block text-sm">Direção</Label>
               <Select value={direction} onValueChange={(v) => setDirection(v as "in" | "out")}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="in">In (add stock)</SelectItem>
-                  <SelectItem value="out">Out (remove stock)</SelectItem>
+                  <SelectItem value="in">Entrada (adicionar estoque)</SelectItem>
+                  <SelectItem value="out">Saída (remover estoque)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -242,13 +242,13 @@ export function MovementFormSheet({
           {isTransfer && (
             <>
               <div>
-                <Label className="mb-1.5 block text-sm">From Location</Label>
+                <Label className="mb-1.5 block text-sm">Local de Origem</Label>
                 <Select value={fromLocationId || "__none__"} onValueChange={(v) => setFromLocationId(v === "__none__" ? "" : v)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select location" />
+                    <SelectValue placeholder="Selecionar local" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="__none__" disabled>Select location</SelectItem>
+                    <SelectItem value="__none__" disabled>Selecionar local</SelectItem>
                     {locations.map((l) => (
                       <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>
                     ))}
@@ -257,13 +257,13 @@ export function MovementFormSheet({
                 {errors.fromLocationId && <p className="mt-1 text-xs text-destructive">{errors.fromLocationId}</p>}
               </div>
               <div>
-                <Label className="mb-1.5 block text-sm">To Location</Label>
+                <Label className="mb-1.5 block text-sm">Local de Destino</Label>
                 <Select value={toLocationId || "__none__"} onValueChange={(v) => setToLocationId(v === "__none__" ? "" : v)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select location" />
+                    <SelectValue placeholder="Selecionar local" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="__none__" disabled>Select location</SelectItem>
+                    <SelectItem value="__none__" disabled>Selecionar local</SelectItem>
                     {locations.map((l) => (
                       <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>
                     ))}
@@ -276,9 +276,9 @@ export function MovementFormSheet({
 
           {/* Reference note */}
           <div>
-            <Label className="mb-1.5 block text-sm">Reference Note{isAdjusted ? " *" : ""}</Label>
+            <Label className="mb-1.5 block text-sm">Observação de Referência{isAdjusted ? " *" : ""}</Label>
             <Textarea
-              placeholder={isAdjusted ? "Reason for adjustment (required)" : "Optional note or reference"}
+              placeholder={isAdjusted ? "Motivo do ajuste (obrigatório)" : "Observação ou referência opcional"}
               value={reference}
               onChange={(e) => setReference(e.target.value)}
               rows={3}
@@ -289,9 +289,9 @@ export function MovementFormSheet({
           {/* Actions */}
           <div className="flex gap-2 pt-2">
             <Button onClick={handleSave} disabled={isLoading} className="flex-1">
-              {isLoading ? "Saving…" : "Save Movement"}
+              {isLoading ? "Salvando…" : "Salvar Movimentação"}
             </Button>
-            <Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
+            <Button variant="outline" onClick={() => onOpenChange(false)}>Cancelar</Button>
           </div>
         </div>
       </SheetContent>

@@ -3,10 +3,10 @@ import { RequestStatus } from "@/types/inventory";
 import { cn } from "@/lib/utils";
 
 const STEPS = [
-  { key: "submitted", label: "Submitted" },
-  { key: "review", label: "Under Review" },
-  { key: "decision", label: "Decision" },
-  { key: "fulfilled", label: "Fulfilled" },
+  { key: "submitted", label: "Enviado" },
+  { key: "review", label: "Em Análise" },
+  { key: "decision", label: "Decisão" },
+  { key: "fulfilled", label: "Atendido" },
 ] as const;
 
 function resolveStep(status: RequestStatus): {
@@ -17,19 +17,19 @@ function resolveStep(status: RequestStatus): {
 } {
   switch (status) {
     case RequestStatus.Pending:
-      return { activeIdx: 1, decisionLabel: "Decision", isTerminal: false, isNegative: false };
+      return { activeIdx: 1, decisionLabel: "Decisão", isTerminal: false, isNegative: false };
     case RequestStatus.Approved:
-      return { activeIdx: 2, decisionLabel: "Approved", isTerminal: false, isNegative: false };
+      return { activeIdx: 2, decisionLabel: "Aprovado", isTerminal: false, isNegative: false };
     case RequestStatus.PartiallyFulfilled:
-      return { activeIdx: 2, decisionLabel: "Partial", isTerminal: false, isNegative: false };
+      return { activeIdx: 2, decisionLabel: "Parcial", isTerminal: false, isNegative: false };
     case RequestStatus.Fulfilled:
-      return { activeIdx: 3, decisionLabel: "Approved", isTerminal: true, isNegative: false };
+      return { activeIdx: 3, decisionLabel: "Aprovado", isTerminal: true, isNegative: false };
     case RequestStatus.Declined:
-      return { activeIdx: 2, decisionLabel: "Declined", isTerminal: true, isNegative: true };
+      return { activeIdx: 2, decisionLabel: "Recusado", isTerminal: true, isNegative: true };
     case RequestStatus.Cancelled:
-      return { activeIdx: 1, decisionLabel: "Decision", isTerminal: true, isNegative: true };
+      return { activeIdx: 1, decisionLabel: "Decisão", isTerminal: true, isNegative: true };
     default:
-      return { activeIdx: 0, decisionLabel: "Decision", isTerminal: false, isNegative: false };
+      return { activeIdx: 0, decisionLabel: "Decisão", isTerminal: false, isNegative: false };
   }
 }
 
@@ -45,7 +45,7 @@ export function StatusStepper({ status }: StatusStepperProps) {
   );
 
   return (
-    <div className="flex items-center gap-0" role="list" aria-label="Request status">
+    <div className="flex items-center gap-0" role="list" aria-label="Status da solicitação">
       {labels.map((label, idx) => {
         const isCompleted = idx < activeIdx;
         const isActive = idx === activeIdx;

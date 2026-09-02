@@ -41,29 +41,29 @@ export function LocationSettings() {
   };
 
   const handleSaveNew = (parentId: string | null, parentType: LocationType | null) => {
-    if (!newName.trim()) { toast.error("Name is required"); return; }
+    if (!newName.trim()) { toast.error("O nome é obrigatório"); return; }
     const type: LocationType = parentType ? (CHILD_TYPE[parentType] ?? "bin") : "warehouse";
     const now = new Date().toISOString();
     createLoc.mutate({
       id: crypto.randomUUID(), name: newName.trim(), type, parentId,
       description: "", address: "", isActive: true, createdAt: now, updatedAt: now,
     }, {
-      onSuccess: () => { toast.success("Location added"); setAddingParentId(null); setNewName(""); },
+      onSuccess: () => { toast.success("Local adicionado"); setAddingParentId(null); setNewName(""); },
     });
   };
 
   const handleRename = () => {
     if (!editingId || !editName.trim()) return;
     updateLoc.mutate({ id: editingId, updates: { name: editName.trim() } }, {
-      onSuccess: () => { toast.success("Location renamed"); setEditingId(null); },
+      onSuccess: () => { toast.success("Local renomeado"); setEditingId(null); },
     });
   };
 
   const handleDelete = (node: LocationTreeNode) => {
     const count = itemCountMap.get(node.id) ?? 0;
-    if (count > 0) { toast.error(`${count} item${count !== 1 ? "s" : ""} assigned — remove items first`); return; }
-    if (node.children.length > 0) { toast.error("Remove children first"); return; }
-    deleteLoc.mutate(node.id, { onSuccess: () => toast.success("Location deleted") });
+    if (count > 0) { toast.error(`${count} item(ns) atribuído(s) — remova os itens primeiro`); return; }
+    if (node.children.length > 0) { toast.error("Remova os itens filhos primeiro"); return; }
+    deleteLoc.mutate(node.id, { onSuccess: () => toast.success("Local excluído") });
   };
 
   const renderNode = (node: LocationTreeNode) => {
@@ -92,7 +92,7 @@ export function LocationSettings() {
               </div>
               <div className="flex items-center gap-0.5 shrink-0">
                 {childType && (
-                  <Button size="icon" variant="ghost" className="h-7 w-7" title={`Add ${childType}`}
+                  <Button size="icon" variant="ghost" className="h-7 w-7" title={`Adicionar ${childType}`}
                     onClick={() => { setAddingParentId(node.id); setNewName(""); }}>
                     <Plus className="h-3.5 w-3.5" />
                   </Button>
@@ -112,7 +112,7 @@ export function LocationSettings() {
           <div className="flex items-center gap-1 py-1" style={{ paddingLeft: `${(node.depth + 1) * 20 + 8}px` }}>
             <Input ref={addRef} value={newName} onChange={(e) => setNewName(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter") handleSaveNew(node.id, node.type); if (e.key === "Escape") setAddingParentId(null); }}
-              placeholder={`New ${childType}…`} className="h-7 text-sm" />
+              placeholder={`Novo ${childType}…`} className="h-7 text-sm" />
             <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => handleSaveNew(node.id, node.type)}><Check className="h-3.5 w-3.5" /></Button>
             <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => setAddingParentId(null)}><X className="h-3.5 w-3.5" /></Button>
           </div>
@@ -124,15 +124,15 @@ export function LocationSettings() {
   };
 
   if (tree.length === 0 && addingParentId !== "__root__") {
-    return <EmptyState icon={Warehouse} title="No locations configured" description="Build your location hierarchy starting with warehouses." actionLabel="Add Warehouse" onAction={handleAddRoot} />;
+    return <EmptyState icon={Warehouse} title="Nenhum local configurado" description="Construa sua hierarquia de locais começando pelos armazéns." actionLabel="Adicionar Armazém" onAction={handleAddRoot} />;
   }
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">{tree.length} root location{tree.length !== 1 && "s"}</p>
+        <p className="text-sm text-muted-foreground">{tree.length} local(is) raiz</p>
         <Button size="sm" variant="outline" onClick={handleAddRoot}>
-          <Plus className="mr-1.5 h-3.5 w-3.5" /> Add Warehouse
+          <Plus className="mr-1.5 h-3.5 w-3.5" /> Adicionar Armazém
         </Button>
       </div>
 
@@ -140,7 +140,7 @@ export function LocationSettings() {
         <div className="flex items-center gap-1 rounded-lg border border-border p-3">
           <Input ref={addRef} value={newName} onChange={(e) => setNewName(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter") handleSaveNew(null, null); if (e.key === "Escape") setAddingParentId(null); }}
-            placeholder="Warehouse name…" className="h-8 text-sm" />
+            placeholder="Nome do armazém…" className="h-8 text-sm" />
           <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => handleSaveNew(null, null)}><Check className="h-4 w-4" /></Button>
           <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => setAddingParentId(null)}><X className="h-4 w-4" /></Button>
         </div>

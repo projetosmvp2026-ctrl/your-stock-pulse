@@ -6,32 +6,32 @@ type BadgeStatus = StockStatus | ItemStatus;
 
 const config: Record<BadgeStatus, { label: string; dotClass: string; textClass: string }> = {
   "in-stock": {
-    label: "In Stock",
+    label: "Em Estoque",
     dotClass: "bg-stock-healthy",
     textClass: "text-stock-healthy",
   },
   "low-stock": {
-    label: "Low Stock",
+    label: "Estoque Baixo",
     dotClass: "bg-stock-low animate-pulse",
     textClass: "text-stock-low",
   },
   "out-of-stock": {
-    label: "Out of Stock",
+    label: "Sem Estoque",
     dotClass: "bg-stock-out",
     textClass: "text-stock-out",
   },
   active: {
-    label: "Active",
+    label: "Ativo",
     dotClass: "bg-primary",
     textClass: "text-primary",
   },
   discontinued: {
-    label: "Discontinued",
+    label: "Descontinuado",
     dotClass: "bg-muted-foreground",
     textClass: "text-muted-foreground",
   },
   archived: {
-    label: "Archived",
+    label: "Arquivado",
     dotClass: "bg-muted-foreground/50",
     textClass: "text-muted-foreground/50",
   },

@@ -67,7 +67,7 @@ export function SupplierScoreCards({ suppliers, purchaseOrders }: Props) {
   const metrics = useMemo(() => computeMetrics(suppliers, purchaseOrders), [suppliers, purchaseOrders]);
 
   if (metrics.length === 0) {
-    return <EmptyState icon={Package} title="No supplier data" description="No suppliers have purchase orders yet." />;
+    return <EmptyState icon={Package} title="Sem dados de fornecedores" description="Nenhum fornecedor possui pedidos de compra ainda." />;
   }
 
   return (
@@ -79,19 +79,19 @@ export function SupplierScoreCards({ suppliers, purchaseOrders }: Props) {
           </CardHeader>
           <CardContent className="space-y-2 text-sm">
             <div className="flex items-center justify-between">
-              <span className="flex items-center gap-1.5 text-muted-foreground"><Package className="h-3.5 w-3.5" /> Total POs</span>
+              <span className="flex items-center gap-1.5 text-muted-foreground"><Package className="h-3.5 w-3.5" /> Total de Pedidos</span>
               <span className="font-medium">{m.totalPOs}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="flex items-center gap-1.5 text-muted-foreground"><Clock className="h-3.5 w-3.5" /> Avg Lead Time</span>
+              <span className="flex items-center gap-1.5 text-muted-foreground"><Clock className="h-3.5 w-3.5" /> Prazo Médio de Entrega</span>
               <span className="font-medium">{m.avgLeadTime}d</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="flex items-center gap-1.5 text-muted-foreground"><CheckCircle className="h-3.5 w-3.5" /> On-Time Rate</span>
+              <span className="flex items-center gap-1.5 text-muted-foreground"><CheckCircle className="h-3.5 w-3.5" /> Taxa de Pontualidade</span>
               <span className={`font-medium ${rateColor(m.onTimeRate)}`}>{m.onTimeRate}%</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="flex items-center gap-1.5 text-muted-foreground"><Target className="h-3.5 w-3.5" /> Fulfillment</span>
+              <span className="flex items-center gap-1.5 text-muted-foreground"><Target className="h-3.5 w-3.5" /> Cumprimento</span>
               <span className={`font-medium ${rateColor(m.fulfillmentAccuracy)}`}>{m.fulfillmentAccuracy}%</span>
             </div>
           </CardContent>

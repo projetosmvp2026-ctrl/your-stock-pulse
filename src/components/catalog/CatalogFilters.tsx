@@ -21,10 +21,10 @@ interface CatalogFiltersProps {
 }
 
 const STATUS_OPTIONS = [
-  { value: "all", label: "All Status" },
-  { value: "in-stock", label: "In Stock" },
-  { value: "low-stock", label: "Low Stock" },
-  { value: "out-of-stock", label: "Out of Stock" },
+  { value: "all", label: "Todos os Status" },
+  { value: "in-stock", label: "Em Estoque" },
+  { value: "low-stock", label: "Estoque Baixo" },
+  { value: "out-of-stock", label: "Sem Estoque" },
 ];
 
 export function CatalogFilters({ filters, onChange, categories, suppliers, locations }: CatalogFiltersProps) {
@@ -39,24 +39,24 @@ export function CatalogFilters({ filters, onChange, categories, suppliers, locat
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap">
       <input
         type="text"
-        placeholder="Search name or SKU…"
+        placeholder="Buscar nome ou SKU…"
         value={filters.search ?? ""}
         onChange={(e) => update({ search: e.target.value || undefined })}
         className="h-9 w-full rounded-md border border-input bg-white px-3 text-sm outline-none transition-colors focus:border-primary sm:w-48"
       />
 
       <Select value={filters.categoryId ?? "all"} onValueChange={(v) => update({ categoryId: v === "all" ? undefined : v })}>
-        <SelectTrigger className="h-9 w-full sm:w-40"><SelectValue placeholder="Category" /></SelectTrigger>
+        <SelectTrigger className="h-9 w-full sm:w-40"><SelectValue placeholder="Categoria" /></SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All Categories</SelectItem>
+          <SelectItem value="all">Todas as Categorias</SelectItem>
           {categories.map((c) => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
         </SelectContent>
       </Select>
 
       <Select value={filters.supplierId ?? "all"} onValueChange={(v) => update({ supplierId: v === "all" ? undefined : v })}>
-        <SelectTrigger className="h-9 w-full sm:w-40"><SelectValue placeholder="Supplier" /></SelectTrigger>
+        <SelectTrigger className="h-9 w-full sm:w-40"><SelectValue placeholder="Fornecedor" /></SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All Suppliers</SelectItem>
+          <SelectItem value="all">Todos os Fornecedores</SelectItem>
           {suppliers.map((s) => <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>)}
         </SelectContent>
       </Select>
@@ -69,16 +69,16 @@ export function CatalogFilters({ filters, onChange, categories, suppliers, locat
       </Select>
 
       <Select value={filters.locationId ?? "all"} onValueChange={(v) => update({ locationId: v === "all" ? undefined : v })}>
-        <SelectTrigger className="h-9 w-full sm:w-40"><SelectValue placeholder="Location" /></SelectTrigger>
+        <SelectTrigger className="h-9 w-full sm:w-40"><SelectValue placeholder="Local" /></SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All Locations</SelectItem>
+          <SelectItem value="all">Todos os Locais</SelectItem>
           {locations.map((l) => <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>)}
         </SelectContent>
       </Select>
 
       {activeCount > 0 && (
         <Button variant="ghost" size="sm" onClick={clear} className="gap-1 text-muted-foreground">
-          <X className="h-3 w-3" />Clear Filters
+          <X className="h-3 w-3" />Limpar Filtros
         </Button>
       )}
     </div>
@@ -93,14 +93,14 @@ export function CatalogFilters({ filters, onChange, categories, suppliers, locat
       <div className="sm:hidden">
         <Button variant="outline" size="sm" onClick={() => setMobileOpen(true)} className="gap-2">
           <Filter className="h-4 w-4" />
-          Filters
+          Filtros
           {activeCount > 0 && (
             <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">{activeCount}</span>
           )}
         </Button>
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
           <SheetContent side="bottom" className="max-h-[80vh]">
-            <SheetTitle>Filters</SheetTitle>
+            <SheetTitle>Filtros</SheetTitle>
             <div className="mt-4">{filterControls}</div>
           </SheetContent>
         </Sheet>

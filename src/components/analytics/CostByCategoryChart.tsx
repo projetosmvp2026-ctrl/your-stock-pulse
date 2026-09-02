@@ -33,7 +33,7 @@ export function CostByCategoryChart({ items, categories }: Props) {
     });
     const catMap = new Map(categories.map((c) => [c.id, c.name]));
     const data = [...costMap.entries()]
-      .map(([id, cost]) => ({ name: catMap.get(id) || "Uncategorized", value: Math.round(cost * 100) / 100 }))
+      .map(([id, cost]) => ({ name: catMap.get(id) || "Sem categoria", value: Math.round(cost * 100) / 100 }))
       .filter((d) => d.value > 0)
       .sort((a, b) => b.value - a.value);
     const total = data.reduce((s, d) => s + d.value, 0);
@@ -41,7 +41,7 @@ export function CostByCategoryChart({ items, categories }: Props) {
   }, [items, categories]);
 
   if (data.length === 0) {
-    return <EmptyState icon={Layers} title="No cost data" description="No categorized items with cost data." />;
+    return <EmptyState icon={Layers} title="Sem dados de custo" description="Nenhum item categorizado com dados de custo." />;
   }
 
   return (
