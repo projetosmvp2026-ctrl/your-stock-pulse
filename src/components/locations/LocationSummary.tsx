@@ -6,11 +6,11 @@ import type { Item, Location } from "@/types/inventory";
 import type { LocationTreeNode } from "@/hooks/useLocations";
 
 const TYPE_LABEL: Record<string, string> = {
-  warehouse: "Warehouse",
-  zone: "Zone",
-  aisle: "Aisle",
-  shelf: "Shelf",
-  bin: "Bin",
+  warehouse: "Armazém",
+  zone: "Zona",
+  aisle: "Corredor",
+  shelf: "Prateleira",
+  bin: "Compartimento",
 };
 
 interface LocationSummaryProps {
@@ -75,14 +75,14 @@ export function LocationSummary({ node, allLocations, items }: LocationSummaryPr
         <div className="rounded-md border border-border bg-muted/40 p-3">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Package className="h-3.5 w-3.5" />
-            Items
+            Itens
           </div>
           <p className="mt-1 text-xl font-semibold text-foreground">{locationItems.length}</p>
         </div>
         <div className="rounded-md border border-border bg-muted/40 p-3">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <DollarSign className="h-3.5 w-3.5" />
-            Total Value
+            Valor Total
           </div>
           <p className="mt-1 text-xl font-semibold text-foreground">
             ${totalValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -92,11 +92,11 @@ export function LocationSummary({ node, allLocations, items }: LocationSummaryPr
 
       {/* Item list */}
       {locationItems.length === 0 ? (
-        <p className="py-6 text-center text-sm text-muted-foreground">No items stored here</p>
+        <p className="py-6 text-center text-sm text-muted-foreground">Nenhum item armazenado aqui</p>
       ) : (
         <div className="space-y-2">
           <h3 className="text-sm font-medium text-foreground">
-            Top Items {locationItems.length > 10 && `(${locationItems.length} total)`}
+            Principais Itens {locationItems.length > 10 && `(${locationItems.length} no total)`}
           </h3>
           <div className="divide-y divide-border rounded-md border border-border">
             {top10.map((item) => (
@@ -116,7 +116,7 @@ export function LocationSummary({ node, allLocations, items }: LocationSummaryPr
             href={`/app/catalog?location=${node.id}`}
             className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
           >
-            View all in catalog
+            Ver todos no catálogo
             <ExternalLink className="h-3 w-3" />
           </a>
         </div>

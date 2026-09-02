@@ -42,7 +42,7 @@ export function MovementTrendsChart({ movements, days }: MovementTrendsChartProp
   }, [movements, days]);
 
   if (data.length === 0) {
-    return <p className="py-8 text-center text-sm text-muted-foreground">No movements in this period</p>;
+    return <p className="py-8 text-center text-sm text-muted-foreground">Nenhuma movimentação neste período</p>;
   }
 
   return (

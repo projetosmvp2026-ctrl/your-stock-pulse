@@ -27,7 +27,7 @@ export function MovementTimeline({ movements, itemId, maxEntries = 20 }: Movemen
   }, [movements, itemId, maxEntries]);
 
   if (filtered.length === 0) {
-    return <p className="py-8 text-center text-sm text-muted-foreground">No movement history for this item.</p>;
+    return <p className="py-8 text-center text-sm text-muted-foreground">Nenhum histórico de movimentação para este item.</p>;
   }
 
   return (
@@ -71,7 +71,7 @@ export function MovementTimeline({ movements, itemId, maxEntries = 20 }: Movemen
           href={`/app/movements?item=${itemId}`}
           className="text-sm font-medium text-primary hover:underline"
         >
-          View all in movements →
+          Ver todas em movimentações →
         </a>
       </div>
     </div>

@@ -9,7 +9,7 @@ export function HelpTooltip({ text }: Props) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button type="button" className="inline-flex items-center justify-center h-5 w-5 text-muted-foreground/60 hover:text-muted-foreground transition-colors" aria-label="Help">
+        <button type="button" className="inline-flex items-center justify-center h-5 w-5 text-muted-foreground/60 hover:text-muted-foreground transition-colors" aria-label="Ajuda">
           <HelpCircle className="h-3.5 w-3.5" />
         </button>
       </PopoverTrigger>

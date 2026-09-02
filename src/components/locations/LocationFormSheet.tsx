@@ -34,11 +34,11 @@ import { useCreateLocation, useUpdateLocation } from "@/hooks/useInventoryMutati
 import type { Location, LocationType } from "@/types/inventory";
 
 const LOCATION_TYPES: { value: LocationType; label: string }[] = [
-  { value: "warehouse", label: "Warehouse" },
-  { value: "zone", label: "Zone" },
-  { value: "aisle", label: "Aisle" },
-  { value: "shelf", label: "Shelf" },
-  { value: "bin", label: "Bin" },
+  { value: "warehouse", label: "Armazém" },
+  { value: "zone", label: "Zona" },
+  { value: "aisle", label: "Corredor" },
+  { value: "shelf", label: "Prateleira" },
+  { value: "bin", label: "Compartimento" },
 ];
 
 const VALID_PARENTS: Record<LocationType, LocationType[]> = {
@@ -50,7 +50,7 @@ const VALID_PARENTS: Record<LocationType, LocationType[]> = {
 };
 
 const schema = z.object({
-  name: z.string().min(1, "Name is required").max(100),
+  name: z.string().min(1, "Nome é obrigatório").max(100),
   type: z.enum(["warehouse", "zone", "aisle", "shelf", "bin"]),
   parentId: z.string().nullable(),
   description: z.string().max(500),
@@ -127,10 +127,10 @@ export function LocationFormSheet({ open, onOpenChange, editLocation }: Location
         { id: editLocation.id, updates: { name: values.name, type: values.type, parentId: values.parentId, description: values.description, isActive: values.isActive } },
         {
           onSuccess: () => {
-            toast.success("Location updated");
+            toast.success("Local atualizado");
             onOpenChange(false);
           },
-          onError: (e) => toast.error(e.message || "Failed to update location."),
+          onError: (e) => toast.error(e.message || "Falha ao atualizar local."),
         },
       );
     } else {
@@ -147,10 +147,10 @@ export function LocationFormSheet({ open, onOpenChange, editLocation }: Location
       };
       createMutation.mutate(newLocation, {
         onSuccess: () => {
-          toast.success("Location created");
+          toast.success("Local criado");
           onOpenChange(false);
         },
-        onError: (e) => toast.error(e.message || "Failed to create location."),
+        onError: (e) => toast.error(e.message || "Falha ao criar local."),
       });
     }
   }
@@ -161,9 +161,9 @@ export function LocationFormSheet({ open, onOpenChange, editLocation }: Location
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full sm:max-w-md overflow-y-auto">
         <SheetHeader>
-          <SheetTitle>{isEdit ? "Edit Location" : "New Location"}</SheetTitle>
+          <SheetTitle>{isEdit ? "Editar Local" : "Novo Local"}</SheetTitle>
           <SheetDescription>
-            {isEdit ? "Update location details." : "Add a new storage location."}
+            {isEdit ? "Atualize os detalhes do local." : "Adicione um novo local de armazenamento."}
           </SheetDescription>
         </SheetHeader>
 
@@ -174,9 +174,9 @@ export function LocationFormSheet({ open, onOpenChange, editLocation }: Location
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Nome</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g. Main Warehouse" {...field} />
+                    <Input placeholder="ex. Armazém Principal" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -188,7 +188,7 @@ export function LocationFormSheet({ open, onOpenChange, editLocation }: Location
               name="type"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Type</FormLabel>
+                  <FormLabel>Tipo</FormLabel>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger>
@@ -214,18 +214,18 @@ export function LocationFormSheet({ open, onOpenChange, editLocation }: Location
                 name="parentId"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Parent Location</FormLabel>
+                    <FormLabel>Local Pai</FormLabel>
                     <Select
                       onValueChange={(v) => field.onChange(v === "__none__" ? null : v)}
                       value={field.value ?? "__none__"}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select parent" />
+                          <SelectValue placeholder="Selecione o local pai" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="__none__">None</SelectItem>
+                        <SelectItem value="__none__">Nenhum</SelectItem>
                         {validParents.map((loc) => (
                           <SelectItem key={loc.id} value={loc.id}>
                             {loc.name}
@@ -244,9 +244,9 @@ export function LocationFormSheet({ open, onOpenChange, editLocation }: Location
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>Descrição</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Optional description" rows={3} {...field} />
+                    <Textarea placeholder="Descrição opcional" rows={3} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -258,7 +258,7 @@ export function LocationFormSheet({ open, onOpenChange, editLocation }: Location
               name="isActive"
               render={({ field }) => (
                 <FormItem className="flex items-center justify-between rounded-md border border-border p-3">
-                  <FormLabel className="cursor-pointer">Active</FormLabel>
+                  <FormLabel className="cursor-pointer">Ativo</FormLabel>
                   <FormControl>
                     <Switch checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
@@ -268,10 +268,10 @@ export function LocationFormSheet({ open, onOpenChange, editLocation }: Location
 
             <div className="flex justify-end gap-2 pt-2">
               <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-                Cancel
+                Cancelar
               </Button>
               <Button type="submit" disabled={createMutation.isLoading || updateMutation.isLoading}>
-                {isEdit ? "Update" : "Create"}
+                {isEdit ? "Atualizar" : "Criar"}
               </Button>
             </div>
           </form>

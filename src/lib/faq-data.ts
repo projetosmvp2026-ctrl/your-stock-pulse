@@ -10,48 +10,48 @@ export interface FaqCategory {
 
 export const FAQ_DATA: FaqCategory[] = [
   {
-    title: "Getting Started",
+    title: "Primeiros Passos",
     items: [
-      { question: "What is Stackwise?", answer: "Stackwise is an inventory management system that helps you track stock levels, manage suppliers, create purchase orders, and gain insights through analytics." },
-      { question: "How do I enter demo mode?", answer: "Click 'Try Demo' on the landing page. Demo mode pre-loads sample data so you can explore all features without creating an account." },
-      { question: "How do I navigate the app?", answer: "Use the sidebar (desktop) or bottom navigation bar (mobile) to switch between sections. Press CMD+K to open the command palette for quick search." },
-      { question: "Can I reset demo data?", answer: "Yes! Go to Settings → System and click 'Reset Demo Data' to restore all sample data to its original state." },
-      { question: "What roles are available?", answer: "Three roles: Admin (full access), Manager (can manage inventory and POs), and Requestor (can browse catalog and submit requests)." },
+      { question: "O que é o Stackwise?", answer: "Stackwise é um sistema de gestão de estoque que ajuda você a acompanhar níveis de estoque, gerenciar fornecedores, criar pedidos de compra e obter insights por meio de análises." },
+      { question: "Como entro no modo demonstração?", answer: "Clique em 'Experimentar Demonstração' na página inicial. O modo demonstração pré-carrega dados de exemplo para você explorar todos os recursos sem criar uma conta." },
+      { question: "Como navego pelo aplicativo?", answer: "Use a barra lateral (desktop) ou a barra de navegação inferior (mobile) para alternar entre as seções. Pressione CMD+K para abrir a paleta de comandos e fazer buscas rápidas." },
+      { question: "Posso redefinir os dados de demonstração?", answer: "Sim! Vá em Configurações → Sistema e clique em 'Redefinir Dados de Demonstração' para restaurar todos os dados de exemplo ao estado original." },
+      { question: "Quais perfis estão disponíveis?", answer: "Três perfis: Administrador (acesso total), Gerente (pode gerenciar estoque e pedidos de compra) e Solicitante (pode navegar pelo catálogo e enviar solicitações)." },
     ],
   },
   {
-    title: "Inventory Management",
+    title: "Gestão de Estoque",
     items: [
-      { question: "How do I add a new item?", answer: "Go to Catalog and click '+ New Item'. Fill in the name, SKU, category, and stock details. The SKU must be unique." },
-      { question: "What do the stock status colors mean?", answer: "Green (In Stock): quantity above reorder point. Amber (Low Stock): quantity at or below reorder point. Red (Out of Stock): zero quantity." },
-      { question: "How do I log a stock movement?", answer: "Go to Movements and click 'Log Movement'. Select the type (Received, Shipped, Adjusted, or Transferred), choose the item, and enter the quantity." },
-      { question: "What is a reorder point?", answer: "The minimum quantity threshold that triggers a low-stock alert. When stock drops to or below this level, the item appears in 'Needs Attention'." },
-      { question: "How do I bulk update items?", answer: "In the Catalog, select multiple items using checkboxes, then use the bulk action bar to update category, archive, or delete selected items." },
+      { question: "Como adiciono um novo item?", answer: "Vá até Catálogo e clique em '+ Novo Item'. Preencha o nome, SKU, categoria e detalhes de estoque. O SKU deve ser único." },
+      { question: "O que significam as cores de status do estoque?", answer: "Verde (Em Estoque): quantidade acima do ponto de reposição. Âmbar (Estoque Baixo): quantidade igual ou abaixo do ponto de reposição. Vermelho (Sem Estoque): quantidade zero." },
+      { question: "Como registro uma movimentação de estoque?", answer: "Vá até Movimentações e clique em 'Registrar Movimentação'. Selecione o tipo (Recebido, Enviado, Ajustado ou Transferido), escolha o item e informe a quantidade." },
+      { question: "O que é ponto de reposição?", answer: "O limite mínimo de quantidade que dispara um alerta de estoque baixo. Quando o estoque atinge ou fica abaixo desse nível, o item aparece em 'Precisa de Atenção'." },
+      { question: "Como atualizo itens em massa?", answer: "No Catálogo, selecione vários itens usando as caixas de seleção e use a barra de ações em massa para atualizar categoria, arquivar ou excluir os itens selecionados." },
     ],
   },
   {
-    title: "Purchase Orders",
+    title: "Pedidos de Compra",
     items: [
-      { question: "How do I create a purchase order?", answer: "Go to Purchase Orders and click 'Create PO'. Select a supplier, add line items with quantities and costs, then submit." },
-      { question: "What are PO statuses?", answer: "Draft (not yet sent), Submitted (sent to supplier), Partially Received (some items received), Fully Received (all items received), Cancelled." },
-      { question: "How do I receive a shipment?", answer: "Open a submitted PO and click 'Receive Shipment'. Enter the quantities received for each line item. Stock is automatically updated." },
-      { question: "Can I print a purchase order?", answer: "Yes, open the PO detail view and click the print icon. This generates a printable view with all order details." },
+      { question: "Como crio um pedido de compra?", answer: "Vá até Pedidos de Compra e clique em 'Criar Pedido'. Selecione um fornecedor, adicione itens com quantidades e custos, e depois envie." },
+      { question: "Quais são os status de um pedido de compra?", answer: "Rascunho (ainda não enviado), Enviado (enviado ao fornecedor), Parcialmente Recebido (alguns itens recebidos), Totalmente Recebido (todos os itens recebidos), Cancelado." },
+      { question: "Como recebo um envio?", answer: "Abra um pedido de compra enviado e clique em 'Receber Envio'. Informe as quantidades recebidas para cada item. O estoque é atualizado automaticamente." },
+      { question: "Posso imprimir um pedido de compra?", answer: "Sim, abra a visualização detalhada do pedido e clique no ícone de impressão. Isso gera uma visualização imprimível com todos os detalhes do pedido." },
     ],
   },
   {
-    title: "Reports & Analytics",
+    title: "Relatórios e Análises",
     items: [
-      { question: "What reports are available?", answer: "Stock Overview (by category and status), Movement Trends (over time), Turnover Analysis, Supplier Performance scorecards, and Cost breakdowns." },
-      { question: "Can I export data?", answer: "Yes, use the 'Export CSV' button on the Analytics page or the export button on data tables to download your data." },
-      { question: "What are AI Insights?", answer: "AI-powered features including reorder suggestions based on demand patterns, anomaly detection for unusual movements, and natural language search." },
+      { question: "Quais relatórios estão disponíveis?", answer: "Visão Geral de Estoque (por categoria e status), Tendências de Movimentação (ao longo do tempo), Análise de Giro, painéis de Desempenho de Fornecedores e detalhamentos de Custos." },
+      { question: "Posso exportar dados?", answer: "Sim, use o botão 'Exportar CSV' na página de Análises ou o botão de exportação nas tabelas de dados para baixar seus dados." },
+      { question: "O que são os Insights de IA?", answer: "Recursos com inteligência artificial, incluindo sugestões de reposição com base em padrões de demanda, detecção de anomalias em movimentações incomuns e busca em linguagem natural." },
     ],
   },
   {
-    title: "Account & Settings",
+    title: "Conta e Configurações",
     items: [
-      { question: "How do I manage users?", answer: "Admins can go to Settings → Users to invite new users, change roles, and deactivate accounts." },
-      { question: "How do I change categories?", answer: "Go to Settings → Categories to add, rename, or delete categories. Items in a deleted category become uncategorized." },
-      { question: "Where are notification preferences?", answer: "Click the bell icon in the header, then the gear icon to customize which notifications you receive." },
+      { question: "Como gerencio usuários?", answer: "Administradores podem ir em Configurações → Usuários para convidar novos usuários, alterar perfis e desativar contas." },
+      { question: "Como altero categorias?", answer: "Vá em Configurações → Categorias para adicionar, renomear ou excluir categorias. Itens de uma categoria excluída ficam sem categoria." },
+      { question: "Onde estão as preferências de notificação?", answer: "Clique no ícone de sino no cabeçalho e, em seguida, no ícone de engrenagem para personalizar quais notificações você recebe." },
     ],
   },
 ];

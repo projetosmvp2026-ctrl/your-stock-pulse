@@ -13,7 +13,7 @@ import { UserManagement } from "@/components/settings/UserManagement";
 
 export const Route = createFileRoute("/app/settings")({
   component: SettingsPage,
-  head: () => ({ meta: [{ title: "Settings — Stackwise" }] }),
+  head: () => ({ meta: [{ title: "Configurações — Stackwise" }] }),
 });
 
 function SettingsPage() {
@@ -22,7 +22,7 @@ function SettingsPage() {
 
   useEffect(() => {
     if (!can("access_settings")) {
-      toast.error("Access denied");
+      toast.error("Acesso negado");
       navigate({ to: "/app/dashboard" });
     }
   }, [can, navigate]);
@@ -32,18 +32,18 @@ function SettingsPage() {
   return (
     <div className="mx-auto max-w-[1000px] space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold text-foreground">Settings</h1>
-        <p className="text-sm text-muted-foreground">System configuration and management</p>
+        <h1 className="text-2xl font-semibold text-foreground">Configurações</h1>
+        <p className="text-sm text-muted-foreground">Configuração e gestão do sistema</p>
       </div>
 
       <Tabs defaultValue="categories" className="w-full">
         <TabsList className="w-full justify-start overflow-x-auto">
-          <TabsTrigger value="categories">Categories</TabsTrigger>
-          <TabsTrigger value="custom-fields">Custom Fields</TabsTrigger>
-          <TabsTrigger value="locations">Locations</TabsTrigger>
-          <TabsTrigger value="reorder-defaults">Reorder Defaults</TabsTrigger>
-          <TabsTrigger value="users">Users</TabsTrigger>
-          <TabsTrigger value="system">System</TabsTrigger>
+          <TabsTrigger value="categories">Categorias</TabsTrigger>
+          <TabsTrigger value="custom-fields">Campos Personalizados</TabsTrigger>
+          <TabsTrigger value="locations">Locais</TabsTrigger>
+          <TabsTrigger value="reorder-defaults">Padrões de Reposição</TabsTrigger>
+          <TabsTrigger value="users">Usuários</TabsTrigger>
+          <TabsTrigger value="system">Sistema</TabsTrigger>
         </TabsList>
 
         <div className="mt-6">

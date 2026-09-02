@@ -19,10 +19,10 @@ import type { MovementFilters } from "./movement-filter-types";
 import { EMPTY_MOVEMENT_FILTERS, isFiltersActive, activeFilterCount } from "./movement-filter-types";
 
 const TYPE_OPTIONS = [
-  { value: MovementType.Received, label: "Received" },
-  { value: MovementType.Shipped, label: "Shipped" },
-  { value: MovementType.Adjusted, label: "Adjusted" },
-  { value: MovementType.Transferred, label: "Transferred" },
+  { value: MovementType.Received, label: "Recebido" },
+  { value: MovementType.Shipped, label: "Enviado" },
+  { value: MovementType.Adjusted, label: "Ajustado" },
+  { value: MovementType.Transferred, label: "Transferido" },
 ];
 
 interface MovementsFiltersProps {
@@ -44,7 +44,7 @@ function FilterControls({ filters, onChange, items, performers }: MovementsFilte
     <div className="flex flex-col gap-3">
       {/* Type multi-select */}
       <div>
-        <Label className="mb-1.5 block text-xs text-muted-foreground">Type</Label>
+        <Label className="mb-1.5 block text-xs text-muted-foreground">Tipo</Label>
         <div className="flex flex-wrap gap-2">
           {TYPE_OPTIONS.map((o) => (
             <label key={o.value} className="flex items-center gap-1.5 text-sm">
@@ -66,10 +66,10 @@ function FilterControls({ filters, onChange, items, performers }: MovementsFilte
           onValueChange={(v) => onChange({ ...filters, itemId: v === "__all__" ? null : v })}
         >
           <SelectTrigger className="h-8 text-xs">
-            <SelectValue placeholder="All items" />
+            <SelectValue placeholder="Todos os itens" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="__all__">All items</SelectItem>
+            <SelectItem value="__all__">Todos os itens</SelectItem>
             {items.map((i) => (
               <SelectItem key={i.id} value={i.id}>{i.name}</SelectItem>
             ))}
@@ -80,7 +80,7 @@ function FilterControls({ filters, onChange, items, performers }: MovementsFilte
       {/* Date range */}
       <div className="flex gap-2">
         <div className="flex-1">
-          <Label className="mb-1.5 block text-xs text-muted-foreground">From</Label>
+          <Label className="mb-1.5 block text-xs text-muted-foreground">De</Label>
           <Input
             type="date"
             className="h-8 text-xs"
@@ -89,7 +89,7 @@ function FilterControls({ filters, onChange, items, performers }: MovementsFilte
           />
         </div>
         <div className="flex-1">
-          <Label className="mb-1.5 block text-xs text-muted-foreground">To</Label>
+          <Label className="mb-1.5 block text-xs text-muted-foreground">Até</Label>
           <Input
             type="date"
             className="h-8 text-xs"
@@ -101,16 +101,16 @@ function FilterControls({ filters, onChange, items, performers }: MovementsFilte
 
       {/* Performer */}
       <div>
-        <Label className="mb-1.5 block text-xs text-muted-foreground">Performed By</Label>
+        <Label className="mb-1.5 block text-xs text-muted-foreground">Realizado Por</Label>
         <Select
           value={filters.performedBy ?? "__all__"}
           onValueChange={(v) => onChange({ ...filters, performedBy: v === "__all__" ? null : v })}
         >
           <SelectTrigger className="h-8 text-xs">
-            <SelectValue placeholder="All" />
+            <SelectValue placeholder="Todos" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="__all__">All</SelectItem>
+            <SelectItem value="__all__">Todos</SelectItem>
             {performers.map((p) => (
               <SelectItem key={p} value={p}>{p}</SelectItem>
             ))}
@@ -120,7 +120,7 @@ function FilterControls({ filters, onChange, items, performers }: MovementsFilte
 
       {isFiltersActive(filters) && (
         <Button variant="ghost" size="sm" className="w-fit gap-1 text-xs" onClick={() => onChange(EMPTY_MOVEMENT_FILTERS)}>
-          <X className="h-3 w-3" />Clear Filters
+          <X className="h-3 w-3" />Limpar Filtros
         </Button>
       )}
     </div>
@@ -137,13 +137,13 @@ export function MovementsFilters(props: MovementsFiltersProps) {
         <SheetTrigger asChild>
           <Button variant="outline" size="sm" className="gap-1.5">
             <Filter className="h-4 w-4" />
-            Filters
+            Filtros
             {count > 0 && <Badge variant="secondary" className="ml-1 h-5 px-1.5 text-xs">{count}</Badge>}
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="w-[300px]">
           <SheetHeader>
-            <SheetTitle>Filters</SheetTitle>
+            <SheetTitle>Filtros</SheetTitle>
           </SheetHeader>
           <div className="mt-4">
             <FilterControls {...props} />
@@ -158,7 +158,7 @@ export function MovementsFilters(props: MovementsFiltersProps) {
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {/* Type */}
         <div>
-          <Label className="mb-1.5 block text-xs text-muted-foreground">Type</Label>
+          <Label className="mb-1.5 block text-xs text-muted-foreground">Tipo</Label>
           <div className="flex flex-wrap gap-2">
             {TYPE_OPTIONS.map((o) => (
               <label key={o.value} className="flex items-center gap-1.5 text-sm">
@@ -185,10 +185,10 @@ export function MovementsFilters(props: MovementsFiltersProps) {
             onValueChange={(v) => props.onChange({ ...props.filters, itemId: v === "__all__" ? null : v })}
           >
             <SelectTrigger className="h-8 text-xs">
-              <SelectValue placeholder="All items" />
+              <SelectValue placeholder="Todos os itens" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="__all__">All items</SelectItem>
+              <SelectItem value="__all__">Todos os itens</SelectItem>
               {props.items.map((i) => (
                 <SelectItem key={i.id} value={i.id}>{i.name}</SelectItem>
               ))}
@@ -198,7 +198,7 @@ export function MovementsFilters(props: MovementsFiltersProps) {
 
         {/* Date range */}
         <div>
-          <Label className="mb-1.5 block text-xs text-muted-foreground">Date Range</Label>
+          <Label className="mb-1.5 block text-xs text-muted-foreground">Intervalo de Datas</Label>
           <div className="flex gap-1">
             <Input
               type="date"
@@ -218,16 +218,16 @@ export function MovementsFilters(props: MovementsFiltersProps) {
         {/* Performer */}
         <div className="flex items-end gap-2">
           <div className="flex-1">
-            <Label className="mb-1.5 block text-xs text-muted-foreground">Performed By</Label>
+            <Label className="mb-1.5 block text-xs text-muted-foreground">Realizado Por</Label>
             <Select
               value={props.filters.performedBy ?? "__all__"}
               onValueChange={(v) => props.onChange({ ...props.filters, performedBy: v === "__all__" ? null : v })}
             >
               <SelectTrigger className="h-8 text-xs">
-                <SelectValue placeholder="All" />
+                <SelectValue placeholder="Todos" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="__all__">All</SelectItem>
+                <SelectItem value="__all__">Todos</SelectItem>
                 {props.performers.map((p) => (
                   <SelectItem key={p} value={p}>{p}</SelectItem>
                 ))}
@@ -236,7 +236,7 @@ export function MovementsFilters(props: MovementsFiltersProps) {
           </div>
           {isFiltersActive(props.filters) && (
             <Button variant="ghost" size="sm" className="h-8 gap-1 text-xs" onClick={() => props.onChange(EMPTY_MOVEMENT_FILTERS)}>
-              <X className="h-3 w-3" />Clear
+              <X className="h-3 w-3" />Limpar
             </Button>
           )}
         </div>

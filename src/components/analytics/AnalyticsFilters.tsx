@@ -20,9 +20,9 @@ interface AnalyticsFiltersProps {
 }
 
 const DATE_PRESETS = [
-  { label: "Last 30 days", value: 30 },
-  { label: "Last 90 days", value: 90 },
-  { label: "This Year", value: 365 },
+  { label: "Últimos 30 dias", value: 30 },
+  { label: "Últimos 90 dias", value: 90 },
+  { label: "Este Ano", value: 365 },
 ];
 
 export function AnalyticsFilters({ filters, onChange, categories, suppliers, locations }: AnalyticsFiltersProps) {
@@ -45,34 +45,34 @@ export function AnalyticsFilters({ filters, onChange, categories, suppliers, loc
       <div className="h-4 w-px bg-border" />
 
       <Select value={filters.categoryId ?? "__all__"} onValueChange={(v) => set("categoryId", v === "__all__" ? null : v)}>
-        <SelectTrigger className="h-8 w-[130px] text-xs"><SelectValue placeholder="Category" /></SelectTrigger>
+        <SelectTrigger className="h-8 w-[130px] text-xs"><SelectValue placeholder="Categoria" /></SelectTrigger>
         <SelectContent>
-          <SelectItem value="__all__">All Categories</SelectItem>
+          <SelectItem value="__all__">Todas as Categorias</SelectItem>
           {categories.map((c) => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
         </SelectContent>
       </Select>
 
       <Select value={filters.supplierId ?? "__all__"} onValueChange={(v) => set("supplierId", v === "__all__" ? null : v)}>
-        <SelectTrigger className="h-8 w-[130px] text-xs"><SelectValue placeholder="Supplier" /></SelectTrigger>
+        <SelectTrigger className="h-8 w-[130px] text-xs"><SelectValue placeholder="Fornecedor" /></SelectTrigger>
         <SelectContent>
-          <SelectItem value="__all__">All Suppliers</SelectItem>
+          <SelectItem value="__all__">Todos os Fornecedores</SelectItem>
           {suppliers.map((s) => <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>)}
         </SelectContent>
       </Select>
 
       <Select value={filters.locationId ?? "__all__"} onValueChange={(v) => set("locationId", v === "__all__" ? null : v)}>
-        <SelectTrigger className="h-8 w-[130px] text-xs"><SelectValue placeholder="Location" /></SelectTrigger>
+        <SelectTrigger className="h-8 w-[130px] text-xs"><SelectValue placeholder="Local" /></SelectTrigger>
         <SelectContent>
-          <SelectItem value="__all__">All Locations</SelectItem>
+          <SelectItem value="__all__">Todos os Locais</SelectItem>
           {locations.map((l) => <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>)}
         </SelectContent>
       </Select>
 
       {activeCount > 0 && (
         <>
-          <Badge variant="secondary" className="text-xs">{activeCount} filter{activeCount !== 1 && "s"}</Badge>
+          <Badge variant="secondary" className="text-xs">{activeCount} filtro{activeCount !== 1 && "s"}</Badge>
           <Button size="sm" variant="ghost" className="h-7 text-xs" onClick={clearAll}>
-            <X className="mr-1 h-3 w-3" /> Clear
+            <X className="mr-1 h-3 w-3" /> Limpar
           </Button>
         </>
       )}

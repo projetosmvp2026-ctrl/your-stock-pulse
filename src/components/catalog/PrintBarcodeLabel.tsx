@@ -77,7 +77,7 @@ function buildLabelHTML(items: Item[], locationNames: Map<string, string>): stri
   }).join("");
 
   return `<!DOCTYPE html>
-<html><head><title>Barcode Labels</title>
+<html><head><title>Etiquetas de Código de Barras</title>
 <style>
   @page { size: 2.5in 1in; margin: 0; }
   * { box-sizing: border-box; margin: 0; padding: 0; }

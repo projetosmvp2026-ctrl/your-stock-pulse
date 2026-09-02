@@ -98,10 +98,10 @@ export function OnboardingTour({ steps, currentStep, isActive, onNext, onBack, o
           </div>
           <div className="flex gap-2">
             {!isFirst && (
-              <Button size="sm" variant="ghost" onClick={onBack}>Back</Button>
+              <Button size="sm" variant="ghost" onClick={onBack}>Voltar</Button>
             )}
             <Button size="sm" onClick={handleNext}>
-              {isLast ? "Done" : "Next"}
+              {isLast ? "Concluir" : "Próximo"}
             </Button>
           </div>
         </div>

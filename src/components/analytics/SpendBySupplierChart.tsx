@@ -37,7 +37,7 @@ export function SpendBySupplierChart({ suppliers, purchaseOrders }: Props) {
   }, [suppliers, purchaseOrders]);
 
   if (data.length === 0) {
-    return <EmptyState icon={DollarSign} title="No spending data" description="No received purchase orders to analyze." />;
+    return <EmptyState icon={DollarSign} title="Sem dados de gastos" description="Nenhum pedido de compra recebido para analisar." />;
   }
 
   return (
@@ -45,7 +45,7 @@ export function SpendBySupplierChart({ suppliers, purchaseOrders }: Props) {
       <BarChart data={data} layout="vertical" margin={{ left: 10, right: 20, top: 5, bottom: 5 }}>
         <XAxis type="number" tickFormatter={(v) => formatCurrency(v)} tick={{ fontSize: 12 }} />
         <YAxis type="category" dataKey="name" width={120} tick={{ fontSize: 12 }} />
-        <Tooltip formatter={(v: number) => formatCurrency(v)} labelFormatter={(l) => `Supplier: ${l}`} />
+        <Tooltip formatter={(v: number) => formatCurrency(v)} labelFormatter={(l) => `Fornecedor: ${l}`} />
         <Bar
           dataKey="spend"
           radius={[0, 4, 4, 0]}

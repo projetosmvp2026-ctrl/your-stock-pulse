@@ -38,11 +38,11 @@ import { cn } from "@/lib/utils";
 import { POPrintView } from "./POPrintView";
 
 const STATUS_LABEL: Record<OrderStatus, string> = {
-  [OrderStatus.Draft]: "Draft",
-  [OrderStatus.Submitted]: "Submitted",
-  [OrderStatus.Partial]: "Partially Received",
-  [OrderStatus.Received]: "Fully Received",
-  [OrderStatus.Cancelled]: "Cancelled",
+  [OrderStatus.Draft]: "Rascunho",
+  [OrderStatus.Submitted]: "Enviado",
+  [OrderStatus.Partial]: "Parcialmente Recebido",
+  [OrderStatus.Received]: "Totalmente Recebido",
+  [OrderStatus.Cancelled]: "Cancelado",
 };
 
 const STATUS_CLASS: Record<OrderStatus, string> = {
@@ -117,7 +117,7 @@ export function PurchaseOrderDetailSheet({
       <SheetContent className="w-full overflow-y-auto sm:max-w-[600px]">
         <SheetHeader>
           <SheetTitle>{purchaseOrder.orderNumber}</SheetTitle>
-          <SheetDescription>Purchase order details</SheetDescription>
+          <SheetDescription>Detalhes do pedido de compra</SheetDescription>
         </SheetHeader>
 
         <div className="mt-6 space-y-5">
@@ -134,7 +134,7 @@ export function PurchaseOrderDetailSheet({
                 onClick={() => onEdit(purchaseOrder)}
               >
                 <Pencil className="h-3.5 w-3.5" />
-                Edit
+                Editar
               </Button>
             )}
             {isDraft && isAdmin && (
@@ -142,23 +142,23 @@ export function PurchaseOrderDetailSheet({
                 <AlertDialogTrigger asChild>
                   <Button size="sm" variant="outline" className="gap-1.5 text-destructive hover:text-destructive">
                     <Trash2 className="h-3.5 w-3.5" />
-                    Delete
+                    Excluir
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
-                    <AlertDialogTitle>Delete {purchaseOrder.orderNumber}?</AlertDialogTitle>
+                    <AlertDialogTitle>Excluir {purchaseOrder.orderNumber}?</AlertDialogTitle>
                     <AlertDialogDescription>
-                      Delete this draft purchase order? This cannot be undone.
+                      Excluir este pedido de compra em rascunho? Isso não pode ser desfeito.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
                     <AlertDialogAction
                       className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                       onClick={() => onDelete(purchaseOrder.id)}
                     >
-                      Confirm Delete
+                      Confirmar Exclusão
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
@@ -172,13 +172,13 @@ export function PurchaseOrderDetailSheet({
                 onClick={() => onReceive(purchaseOrder)}
               >
                 <PackageCheck className="h-3.5 w-3.5" />
-                Receive Shipment
+                Receber Remessa
               </Button>
             )}
             {purchaseOrder.status === OrderStatus.Received && (
               <Badge className="bg-stock-healthy/15 text-stock-healthy border-stock-healthy/20 gap-1">
                 <Check className="h-3 w-3" />
-                Fully Received
+                Totalmente Recebido
               </Badge>
             )}
             <Button
@@ -188,13 +188,13 @@ export function PurchaseOrderDetailSheet({
               onClick={() => window.print()}
             >
               <Printer className="h-3.5 w-3.5" />
-              Print
+              Imprimir
             </Button>
           </div>
 
           {/* Supplier link */}
           <div className="space-y-1">
-            <p className="text-xs font-medium text-muted-foreground">Supplier</p>
+            <p className="text-xs font-medium text-muted-foreground">Fornecedor</p>
             {supplier ? (
               <Link
                 to="/app/suppliers"
@@ -205,23 +205,23 @@ export function PurchaseOrderDetailSheet({
                 <ExternalLink className="h-3 w-3" />
               </Link>
             ) : (
-              <p className="text-sm text-foreground">Unknown</p>
+              <p className="text-sm text-foreground">Desconhecido</p>
             )}
           </div>
 
           {/* Dates */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-xs font-medium text-muted-foreground">Created</p>
+              <p className="text-xs font-medium text-muted-foreground">Criado em</p>
               <p className="text-sm text-foreground">
-                {format(new Date(purchaseOrder.createdAt), "MMM d, yyyy")}
+                {format(new Date(purchaseOrder.createdAt), "dd/MM/yyyy")}
               </p>
             </div>
             <div>
-              <p className="text-xs font-medium text-muted-foreground">Expected Delivery</p>
+              <p className="text-xs font-medium text-muted-foreground">Entrega Prevista</p>
               <p className="text-sm text-foreground">
                 {purchaseOrder.expectedDelivery
-                  ? format(new Date(purchaseOrder.expectedDelivery), "MMM d, yyyy")
+                  ? format(new Date(purchaseOrder.expectedDelivery), "dd/MM/yyyy")
                   : "—"}
               </p>
             </div>
@@ -229,7 +229,7 @@ export function PurchaseOrderDetailSheet({
 
           {purchaseOrder.notes && (
             <div>
-              <p className="text-xs font-medium text-muted-foreground">Notes</p>
+              <p className="text-xs font-medium text-muted-foreground">Observações</p>
               <p className="text-sm text-foreground">{purchaseOrder.notes}</p>
             </div>
           )}
@@ -239,17 +239,17 @@ export function PurchaseOrderDetailSheet({
           {/* Line items */}
           <div>
             <p className="mb-2 text-sm font-medium text-foreground">
-              Line Items ({purchaseOrder.items.length})
+              Itens do Pedido ({purchaseOrder.items.length})
             </p>
             <div className="overflow-x-auto rounded-md border border-border bg-white">
               <Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead>Item</TableHead>
-                    <TableHead className="w-[60px] text-right">Ordered</TableHead>
-                    <TableHead className="w-[70px] text-right">Received</TableHead>
-                    <TableHead className="w-[70px] text-right">Remaining</TableHead>
-                    <TableHead className="w-[100px]">Progress</TableHead>
+                    <TableHead className="w-[60px] text-right">Pedido</TableHead>
+                    <TableHead className="w-[70px] text-right">Recebido</TableHead>
+                    <TableHead className="w-[70px] text-right">Restante</TableHead>
+                    <TableHead className="w-[100px]">Progresso</TableHead>
                     <TableHead className="w-[80px] text-right">Total</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -269,7 +269,7 @@ export function PurchaseOrderDetailSheet({
                     return (
                       <TableRow key={li.id}>
                         <TableCell>
-                          <p className={`text-sm font-medium ${!item ? "italic text-muted-foreground/60 line-through" : ""}`}>{item?.name ?? "Deleted Item"}</p>
+                          <p className={`text-sm font-medium ${!item ? "italic text-muted-foreground/60 line-through" : ""}`}>{item?.name ?? "Item Excluído"}</p>
                           <p className="font-mono text-xs text-muted-foreground">{item?.sku ?? "—"}</p>
                         </TableCell>
                         <TableCell className="text-right font-mono text-sm">
@@ -323,9 +323,9 @@ export function PurchaseOrderDetailSheet({
           {/* Receiving History */}
           {showHistory && (
             <div>
-              <p className="mb-2 text-sm font-medium text-foreground">Receiving History</p>
+              <p className="mb-2 text-sm font-medium text-foreground">Histórico de Recebimento</p>
               {poMovements.length === 0 ? (
-                <p className="text-sm text-muted-foreground">No shipments received yet.</p>
+                <p className="text-sm text-muted-foreground">Nenhuma remessa recebida ainda.</p>
               ) : (
                 <div className="space-y-3">
                   {poMovements.map((m) => {
@@ -336,7 +336,7 @@ export function PurchaseOrderDetailSheet({
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2 text-sm">
                             <span className={`font-medium ${!item ? "italic text-muted-foreground/60 line-through" : "text-foreground"}`}>
-                              {item?.name ?? "[Item Deleted]"}
+                              {item?.name ?? "[Item Excluído]"}
                             </span>
                             <span className="font-mono text-xs text-muted-foreground">
                               +{m.quantity}

@@ -17,7 +17,7 @@ export function NotificationBell({ onClick }: NotificationBellProps) {
       variant="ghost"
       className="relative shrink-0"
       onClick={onClick}
-      aria-label={count > 0 ? `${count} unread notifications` : "Notifications"}
+      aria-label={count > 0 ? `${count} notificações não lidas` : "Notificações"}
     >
       <Bell className={cn("h-4 w-4", count > 0 && "animate-[shake_0.5s_ease-in-out]")} />
       {count > 0 && (

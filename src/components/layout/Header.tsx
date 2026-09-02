@@ -33,9 +33,9 @@ const ROLE_BADGE_STYLES: Record<string, string> = {
 };
 
 const ROLE_LABELS: Record<string, string> = {
-  admin: "Admin",
-  manager: "Manager",
-  requestor: "Requestor",
+  admin: "Administrador",
+  manager: "Gerente",
+  requestor: "Solicitante",
 };
 
 export function Header() {
@@ -49,7 +49,7 @@ export function Header() {
   const { role } = useRole();
   const navigate = useNavigate();
 
-  const displayName = "Demo Admin";
+  const displayName = "Admin Demo";
 
   const handleExit = async () => {
     await navigate({ to: "/" });
@@ -70,24 +70,24 @@ export function Header() {
 
   return (
     <header className="flex h-16 items-center gap-3 border-b border-border bg-card px-4 shadow-sm md:px-8">
-      <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileOpen(true)} aria-label="Open menu">
+      <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileOpen(true)} aria-label="Abrir menu">
         <Menu className="h-5 w-5" />
       </Button>
 
       <button data-tour="search" type="button" onClick={() => setPaletteOpen(true)} className="flex h-9 flex-1 items-center gap-2 rounded-md border border-input bg-white px-3 text-sm text-muted-foreground transition-colors hover:border-primary/40 md:max-w-sm">
         <Search className="h-4 w-4 shrink-0" />
-        <span>Search…</span>
+        <span>Buscar…</span>
         <kbd className="ml-auto hidden rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-xs md:inline-block">⌘K</kbd>
       </button>
 
       <PermissionGate permission="log_movement">
-        <Button size="icon" variant="outline" className="shrink-0" aria-label="Quick entry" onClick={() => setQuickEntryOpen(true)}>
+        <Button size="icon" variant="outline" className="shrink-0" aria-label="Entrada rápida" onClick={() => setQuickEntryOpen(true)}>
           <ScanBarcode className="h-4 w-4" />
         </Button>
       </PermissionGate>
 
       <PermissionGate permission="create_item">
-        <Button size="icon" variant="outline" className="shrink-0" aria-label="New item" onClick={() => navigate({ to: "/app/catalog", search: { newItem: "true" } })}>
+        <Button size="icon" variant="outline" className="shrink-0" aria-label="Novo item" onClick={() => navigate({ to: "/app/catalog", search: { newItem: "true" } })}>
           <Plus className="h-4 w-4" />
         </Button>
       </PermissionGate>
@@ -96,7 +96,7 @@ export function Header() {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button type="button" className="flex items-center gap-1.5 rounded-full pl-1 pr-2 py-1 hover:bg-muted transition-colors" aria-label="User menu">
+          <button type="button" className="flex items-center gap-1.5 rounded-full pl-1 pr-2 py-1 hover:bg-muted transition-colors" aria-label="Menu do usuário">
             <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted">
               <User className="h-3.5 w-3.5 text-muted-foreground" />
             </div>
@@ -114,18 +114,18 @@ export function Header() {
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => navigate({ to: "/app/settings" })}>
             <Settings className="mr-2 h-4 w-4" />
-            Settings
+            Configurações
           </DropdownMenuItem>
           <DropdownMenuItem onClick={handleExit}>
             <LogOut className="mr-2 h-4 w-4" />
-            Exit demo
+            Sair da demonstração
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
         <SheetContent side="left" className="w-[260px] p-0">
-          <SheetTitle className="sr-only">Navigation</SheetTitle>
+          <SheetTitle className="sr-only">Navegação</SheetTitle>
           <Sidebar onNavigate={() => setMobileOpen(false)} />
         </SheetContent>
       </Sheet>

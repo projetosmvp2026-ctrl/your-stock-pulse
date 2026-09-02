@@ -64,16 +64,16 @@ export function LineItemsEditor({ items, lineItems, onChange, error }: LineItems
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <Label className="text-sm font-medium">Line Items</Label>
+        <Label className="text-sm font-medium">Itens do Pedido</Label>
         <Button type="button" variant="outline" size="sm" onClick={addRow} className="gap-1">
           <Plus className="h-3.5 w-3.5" />
-          Add Item
+          Adicionar Item
         </Button>
       </div>
 
       {lineItems.length === 0 && (
         <p className="py-4 text-center text-sm text-muted-foreground">
-          No line items. Click "Add Item" to start.
+          Nenhum item. Clique em "Adicionar Item" para começar.
         </p>
       )}
 
@@ -94,10 +94,10 @@ export function LineItemsEditor({ items, lineItems, onChange, error }: LineItems
                 onValueChange={(v) => handleItemSelect(row.id, v === "__none__" ? "" : v)}
               >
                 <SelectTrigger className="h-8 text-xs">
-                  <SelectValue placeholder="Select item" />
+                  <SelectValue placeholder="Selecione o item" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="__none__" disabled>Select item</SelectItem>
+                  <SelectItem value="__none__" disabled>Selecione o item</SelectItem>
                   {items.map((item) => (
                     <SelectItem key={item.id} value={item.id}>
                       {item.name} ({item.sku})
@@ -110,7 +110,7 @@ export function LineItemsEditor({ items, lineItems, onChange, error }: LineItems
             {/* Quantity */}
             <div>
               {idx === 0 && (
-                <Label className="mb-1 block text-xs text-muted-foreground">Qty</Label>
+                <Label className="mb-1 block text-xs text-muted-foreground">Qtd</Label>
               )}
               <Input
                 type="number"
@@ -124,7 +124,7 @@ export function LineItemsEditor({ items, lineItems, onChange, error }: LineItems
             {/* Unit Cost */}
             <div>
               {idx === 0 && (
-                <Label className="mb-1 block text-xs text-muted-foreground">Unit Cost</Label>
+                <Label className="mb-1 block text-xs text-muted-foreground">Custo Unitário</Label>
               )}
               <Input
                 type="number"
@@ -155,7 +155,7 @@ export function LineItemsEditor({ items, lineItems, onChange, error }: LineItems
                 size="sm"
                 className="h-8 w-8 p-0 text-muted-foreground hover:text-destructive"
                 onClick={() => removeRow(row.id)}
-                aria-label="Remove line item"
+                aria-label="Remover item"
               >
                 <X className="h-4 w-4" />
               </Button>

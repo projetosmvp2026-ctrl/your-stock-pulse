@@ -14,7 +14,7 @@ export function ShortcutsHelpDialog({ open, onOpenChange }: ShortcutsHelpDialogP
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>Keyboard Shortcuts</DialogTitle>
+          <DialogTitle>Atalhos de Teclado</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-4 text-sm">
@@ -22,14 +22,14 @@ export function ShortcutsHelpDialog({ open, onOpenChange }: ShortcutsHelpDialogP
           <div>
             <h4 className="mb-2 font-medium text-muted-foreground">Global</h4>
             <div className="space-y-1">
-              <ShortcutRow keys="⌘ K" label="Open command palette" />
-              <ShortcutRow keys="?" label="Show this help" />
+              <ShortcutRow keys="⌘ K" label="Abrir paleta de comandos" />
+              <ShortcutRow keys="?" label="Mostrar esta ajuda" />
             </div>
           </div>
 
           {/* Navigation */}
           <div>
-            <h4 className="mb-2 font-medium text-muted-foreground">Navigation</h4>
+            <h4 className="mb-2 font-medium text-muted-foreground">Navegação</h4>
             <div className="space-y-1">
               {navShortcuts.map((s) => (
                 <ShortcutRow
@@ -43,7 +43,7 @@ export function ShortcutsHelpDialog({ open, onOpenChange }: ShortcutsHelpDialogP
 
           {/* Create */}
           <div>
-            <h4 className="mb-2 font-medium text-muted-foreground">Create</h4>
+            <h4 className="mb-2 font-medium text-muted-foreground">Criar</h4>
             <div className="space-y-1">
               {createShortcuts.map((s) => (
                 <ShortcutRow

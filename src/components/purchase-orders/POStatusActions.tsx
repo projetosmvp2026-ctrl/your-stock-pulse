@@ -40,7 +40,7 @@ export function POStatusActions({ purchaseOrder }: POStatusActionsProps) {
         updates: { status: OrderStatus.Submitted, updatedAt: new Date().toISOString() },
       },
       {
-        onSuccess: () => toast.success(`${purchaseOrder.orderNumber} submitted`),
+        onSuccess: () => toast.success(`${purchaseOrder.orderNumber} enviado`),
       },
     );
   }
@@ -53,7 +53,7 @@ export function POStatusActions({ purchaseOrder }: POStatusActionsProps) {
       },
       {
         onSuccess: () => {
-          toast.success(`${purchaseOrder.orderNumber} cancelled`);
+          toast.success(`${purchaseOrder.orderNumber} cancelado`);
           setCancelOpen(false);
         },
       },
@@ -66,7 +66,7 @@ export function POStatusActions({ purchaseOrder }: POStatusActionsProps) {
         {status === OrderStatus.Draft && (
           <Button size="sm" onClick={handleSubmit} className="gap-1.5">
             <Send className="h-3.5 w-3.5" />
-            Submit
+            Enviar
           </Button>
         )}
         <Button
@@ -76,25 +76,25 @@ export function POStatusActions({ purchaseOrder }: POStatusActionsProps) {
           onClick={() => setCancelOpen(true)}
         >
           <Ban className="h-3.5 w-3.5" />
-          Cancel PO
+          Cancelar Pedido
         </Button>
       </div>
 
       <AlertDialog open={cancelOpen} onOpenChange={setCancelOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Cancel {purchaseOrder.orderNumber}?</AlertDialogTitle>
+            <AlertDialogTitle>Cancelar {purchaseOrder.orderNumber}?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will mark the purchase order as cancelled. This action cannot be undone.
+              Isso marcará o pedido de compra como cancelado. Esta ação não pode ser desfeita.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Keep Order</AlertDialogCancel>
+            <AlertDialogCancel>Manter Pedido</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleCancel}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              Confirm Cancel
+              Confirmar Cancelamento
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

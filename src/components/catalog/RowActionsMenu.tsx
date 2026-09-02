@@ -34,24 +34,24 @@ export function RowActionsMenu({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-8 w-8" aria-label="Row actions">
+        <Button variant="ghost" size="icon" className="h-8 w-8" aria-label="Ações da linha">
           <MoreVertical className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => onViewDetails(item)}>
-          <Eye className="mr-2 h-4 w-4" />View Details
+          <Eye className="mr-2 h-4 w-4" />Ver Detalhes
         </DropdownMenuItem>
 
         {canEdit && (
           <DropdownMenuItem onClick={() => onEdit(item)}>
-            <Pencil className="mr-2 h-4 w-4" />Edit
+            <Pencil className="mr-2 h-4 w-4" />Editar
           </DropdownMenuItem>
         )}
 
         {canLog && (
           <DropdownMenuItem onClick={() => onLogMovement(item)}>
-            <ArrowRightLeft className="mr-2 h-4 w-4" />Log Movement
+            <ArrowRightLeft className="mr-2 h-4 w-4" />Registrar Movimentação
           </DropdownMenuItem>
         )}
 
@@ -60,11 +60,11 @@ export function RowActionsMenu({
             <DropdownMenuSeparator />
             {isAdmin ? (
               <DropdownMenuItem onClick={() => onDelete(item)} className="text-destructive">
-                <Trash2 className="mr-2 h-4 w-4" />Delete
+                <Trash2 className="mr-2 h-4 w-4" />Excluir
               </DropdownMenuItem>
             ) : (
               <DropdownMenuItem onClick={() => onDelete(item)}>
-                <Archive className="mr-2 h-4 w-4" />Archive
+                <Archive className="mr-2 h-4 w-4" />Arquivar
               </DropdownMenuItem>
             )}
           </>

@@ -24,17 +24,17 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
   head: () => ({
     meta: [
-      { title: "Stackwise — Inventory Command Center" },
+      { title: "Stackwise — Central de Comando de Estoque" },
       {
         name: "description",
         content:
-          "Real-time inventory management for businesses of any size. Track stock, manage suppliers, automate reorders, and keep your team aligned.",
+          "Gestão de estoque em tempo real para empresas de qualquer tamanho. Acompanhe o estoque, gerencie fornecedores, automatize reposições e mantenha sua equipe alinhada.",
       },
-      { property: "og:title", content: "Stackwise — Inventory Command Center" },
+      { property: "og:title", content: "Stackwise — Central de Comando de Estoque" },
       {
         property: "og:description",
         content:
-          "Real-time inventory management for businesses of any size. Track stock, manage suppliers, automate reorders, and keep your team aligned.",
+          "Gestão de estoque em tempo real para empresas de qualquer tamanho. Acompanhe o estoque, gerencie fornecedores, automatize reposições e mantenha sua equipe alinhada.",
       },
     ],
   }),
@@ -42,52 +42,52 @@ export const Route = createFileRoute("/")({
 
 /* ─── Data ──────────────────────────────────────────── */
 const navLinks = [
-  { label: "Features", href: "#features" },
-  { label: "Solutions", href: "#solutions" },
-  { label: "Analytics", href: "#analytics" },
+  { label: "Recursos", href: "#features" },
+  { label: "Soluções", href: "#solutions" },
+  { label: "Análises", href: "#analytics" },
 ];
 
 const solutions = [
   {
     icon: BarChart3,
-    title: "Real-time tracking",
-    description: "Monitor stock levels across every location with live dashboards and instant status updates.",
+    title: "Rastreamento em tempo real",
+    description: "Monitore os níveis de estoque em todos os locais com painéis ao vivo e atualizações de status instantâneas.",
     color: "bg-primary/10 text-primary",
   },
   {
     icon: Bell,
-    title: "Smart reorders",
-    description: "Automated thresholds and AI-powered forecasting prevent stockouts before they happen.",
+    title: "Reposições inteligentes",
+    description: "Limites automatizados e previsão com IA evitam a falta de estoque antes que ela aconteça.",
     color: "bg-secondary/10 text-secondary",
   },
   {
     icon: Truck,
-    title: "Supplier management",
-    description: "Unified view of contacts, lead times, purchase history, and performance scoring.",
+    title: "Gestão de fornecedores",
+    description: "Visão unificada de contatos, prazos de entrega, histórico de compras e pontuação de desempenho.",
     color: "bg-accent/20 text-accent-foreground",
   },
   {
     icon: TrendingUp,
-    title: "Analytics & reports",
-    description: "Turn movement data into insights with trend charts, turnover analysis, and exports.",
+    title: "Análises e relatórios",
+    description: "Transforme dados de movimentação em insights com gráficos de tendência, análise de giro e exportações.",
     color: "bg-primary/10 text-primary",
   },
 ];
 
 const featureTabs = [
   {
-    label: "Dashboard",
-    description: "See what matters most: stock levels, pending orders, recent movements, and alerts that need attention.",
+    label: "Painel",
+    description: "Veja o que mais importa: níveis de estoque, pedidos pendentes, movimentações recentes e alertas que precisam de atenção.",
     image: uiScreenshot.url,
   },
   {
-    label: "Catalog",
-    description: "Powerful search, filters, bulk actions, and custom fields let you manage hundreds of SKUs effortlessly.",
+    label: "Catálogo",
+    description: "Busca poderosa, filtros, ações em massa e campos personalizados permitem gerenciar centenas de SKUs sem esforço.",
     image: uiScreenshot.url,
   },
   {
-    label: "Analytics",
-    description: "From stock trends to supplier performance, turn raw data into actionable insights and forecasts.",
+    label: "Análises",
+    description: "De tendências de estoque a desempenho de fornecedores, transforme dados brutos em insights acionáveis e previsões.",
     image: uiScreenshot.url,
   },
 ];
@@ -95,41 +95,41 @@ const featureTabs = [
 const features = [
   {
     icon: BarChart3,
-    title: "Real-time tracking",
-    description: "Monitor stock levels across every location as changes happen, with instant dashboards and live status indicators.",
+    title: "Rastreamento em tempo real",
+    description: "Monitore os níveis de estoque em todos os locais conforme as mudanças acontecem, com painéis instantâneos e indicadores de status ao vivo.",
   },
   {
     icon: Bell,
-    title: "Smart reorder alerts",
-    description: "Get notified before you run out. Automated thresholds and AI-powered forecasting keep shelves stocked.",
+    title: "Alertas inteligentes de reposição",
+    description: "Seja notificado antes de faltar estoque. Limites automatizados e previsão com IA mantêm as prateleiras abastecidas.",
   },
   {
     icon: Truck,
-    title: "Supplier management",
-    description: "Organize contacts, lead times, and purchase history in one unified view with performance scoring.",
+    title: "Gestão de fornecedores",
+    description: "Organize contatos, prazos de entrega e histórico de compras em uma visão unificada com pontuação de desempenho.",
   },
   {
     icon: ScanLine,
-    title: "Barcode scanning",
-    description: "Speed up receiving and cycle counts with built-in barcode support and quick-entry mode.",
+    title: "Leitura de código de barras",
+    description: "Acelere o recebimento e as contagens cíclicas com suporte nativo a código de barras e modo de entrada rápida.",
   },
   {
     icon: TrendingUp,
-    title: "Analytics & reports",
-    description: "Turn movement data into insights with trend charts, turnover analysis, and exportable reports.",
+    title: "Análises e relatórios",
+    description: "Transforme dados de movimentação em insights com gráficos de tendência, análise de giro e relatórios exportáveis.",
   },
   {
     icon: Users,
-    title: "Team roles & permissions",
-    description: "Control who can view, edit, or approve with granular role-based access and approval workflows.",
+    title: "Funções e permissões da equipe",
+    description: "Controle quem pode visualizar, editar ou aprovar com acesso granular baseado em função e fluxos de aprovação.",
   },
 ];
 
 const capabilities = [
-  { icon: Shield, text: "Role-based access" },
-  { icon: Globe, text: "Multi-location support" },
-  { icon: ScanLine, text: "Barcode ready" },
-  { icon: Zap, text: "AI-powered insights" },
+  { icon: Shield, text: "Acesso baseado em função" },
+  { icon: Globe, text: "Suporte a múltiplos locais" },
+  { icon: ScanLine, text: "Pronto para código de barras" },
+  { icon: Zap, text: "Insights com IA" },
 ];
 
 /* ─── Components ────────────────────────────────────── */
@@ -205,7 +205,7 @@ function StickyNav({ onTryDemo }: { onTryDemo: () => void }) {
           onClick={onTryDemo}
           className="hidden items-center gap-2 rounded-lg border border-border bg-muted/60 px-5 py-2 text-sm font-medium text-foreground transition-all hover:bg-muted md:inline-flex"
         >
-          Try demo
+          Testar demo
         </button>
 
         {/* Mobile hamburger */}
@@ -213,7 +213,7 @@ function StickyNav({ onTryDemo }: { onTryDemo: () => void }) {
           type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
           className="md:hidden p-2 text-foreground"
-          aria-label="Toggle menu"
+          aria-label="Alternar menu"
         >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -244,7 +244,7 @@ function StickyNav({ onTryDemo }: { onTryDemo: () => void }) {
             }}
             className="mt-2 w-full rounded-lg border border-border bg-muted/60 px-5 py-2.5 text-sm font-medium text-foreground"
           >
-            Try demo
+            Testar demo
           </button>
         </div>
       )}
@@ -272,13 +272,13 @@ function FeatureTabsSection() {
     <section id="analytics" className="px-4 py-20 sm:py-28">
       <RevealSection className="text-center">
         <span className="inline-block rounded-md bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-          Product tour
+          Tour do produto
         </span>
         <h2 className="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
-          Drive your business forward
+          Impulsione o seu negócio
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
-          Explore the modules that give you complete control over your supply chain.
+          Explore os módulos que dão a você controle total sobre sua cadeia de suprimentos.
         </p>
       </RevealSection>
 
@@ -311,7 +311,7 @@ function FeatureTabsSection() {
           <BrowserFrame>
             <img
               src={featureTabs[activeTab].image}
-              alt={`Stackwise ${featureTabs[activeTab].label} view`}
+              alt={`Visão ${featureTabs[activeTab].label} do Stackwise`}
               className="w-full transition-opacity duration-300"
             />
           </BrowserFrame>
@@ -344,18 +344,18 @@ function LandingPage() {
           <div className="animate-fade-in" style={{ animationDelay: "200ms", animationFillMode: "backwards" }}>
             <img
               src={heroBox3d}
-              alt="3D illustration of a cardboard box"
+              alt="Ilustração 3D de uma caixa de papelão"
               className="mx-auto w-48 drop-shadow-xl sm:w-56"
             />
           </div>
 
           <h1 className="mt-5 text-[32px] font-semibold leading-[1.05] tracking-tight sm:text-[44px] lg:text-[52px]">
-            The inventory platform that scales your business
+            A plataforma de estoque que faz seu negócio crescer
           </h1>
 
           <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Track stock, manage suppliers, automate reorders, and keep your
-            team aligned from one powerful command center.
+            Acompanhe o estoque, gerencie fornecedores, automatize reposições e mantenha
+            sua equipe alinhada em uma central de comando poderosa.
           </p>
 
           <div className="mt-8">
@@ -364,7 +364,7 @@ function LandingPage() {
               onClick={handleTryDemo}
               className="group inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-base font-semibold text-primary-foreground shadow-lg transition-all hover:shadow-xl hover:brightness-110"
             >
-              Try demo
+              Testar demo
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
           </div>
@@ -375,13 +375,13 @@ function LandingPage() {
       <section id="solutions" className="rounded-none bg-muted/50 px-4 py-20 sm:py-28">
         <RevealSection className="text-center">
           <span className="inline-block rounded-md bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-            Solutions
+            Soluções
           </span>
           <h2 className="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">
-            Built for modern inventory teams
+            Feito para equipes modernas de estoque
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
-            Four powerful modules working together to give you complete visibility and control.
+            Quatro módulos poderosos trabalhando juntos para dar a você visibilidade e controle completos.
           </p>
         </RevealSection>
 
@@ -407,7 +407,7 @@ function LandingPage() {
             <BrowserFrame className="shadow-2xl shadow-primary/5">
               <img
                 src={uiScreenshot.url}
-                alt="Stackwise dashboard showing inventory metrics, stock levels chart, and recent activity"
+                alt="Painel do Stackwise mostrando métricas de estoque, gráfico de níveis de estoque e atividade recente"
                 className="w-full"
                 loading="lazy"
               />
@@ -423,10 +423,10 @@ function LandingPage() {
       <section id="features" className="px-4 py-20 sm:py-28">
         <RevealSection className="text-center">
           <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-            Everything you need to manage inventory
+            Tudo o que você precisa para gerenciar o estoque
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
-            Six powerful modules working together to give you complete control over your supply chain.
+            Seis módulos poderosos trabalhando juntos para dar a você controle total sobre sua cadeia de suprimentos.
           </p>
         </RevealSection>
 
@@ -470,10 +470,10 @@ function LandingPage() {
           <RevealSection>
             <img src={heroBox3d} alt="" className="mx-auto mb-6 h-16 w-16 object-contain" />
             <h2 className="text-2xl font-semibold tracking-tight text-background sm:text-3xl lg:text-4xl">
-              Ready to take control of your inventory?
+              Pronto para assumir o controle do seu estoque?
             </h2>
             <p className="mx-auto mt-4 max-w-md text-base text-background/60">
-              Explore Stackwise with sample data. No signup required.
+              Explore o Stackwise com dados de exemplo. Sem necessidade de cadastro.
             </p>
             <div className="mt-8">
               <button
@@ -481,7 +481,7 @@ function LandingPage() {
                 onClick={handleTryDemo}
                 className="group inline-flex items-center gap-2 rounded-lg bg-background px-5 py-2.5 text-base font-semibold text-foreground shadow-lg transition-all hover:bg-background/90"
               >
-                Try demo
+                Testar demo
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
@@ -493,7 +493,7 @@ function LandingPage() {
       <footer className="border-t border-border px-4 py-10 text-center">
         <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
           <Package className="h-4 w-4 text-primary" />
-          <span>Built with Stackwise · {new Date().getFullYear()}</span>
+          <span>Construído com Stackwise · {new Date().getFullYear()}</span>
         </div>
       </footer>
     </div>

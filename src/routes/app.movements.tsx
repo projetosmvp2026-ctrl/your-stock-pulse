@@ -17,7 +17,7 @@ import type { StockMovement } from "@/types/inventory";
 
 export const Route = createFileRoute("/app/movements")({
   component: MovementsPage,
-  head: () => ({ meta: [{ title: "Movements — Stackwise" }] }),
+  head: () => ({ meta: [{ title: "Movimentações — Stackwise" }] }),
   validateSearch: (search: Record<string, unknown>) => ({
     item: typeof search.item === "string" ? search.item : undefined,
   }),
@@ -74,22 +74,22 @@ function MovementsPage() {
   const filtered = useMemo(() => applyFilters(movements, filters), [movements, filters]);
 
   const movementCsvColumns = useMemo<CSVColumn<StockMovement>[]>(() => [
-    { header: "Date", accessor: (m) => new Date(m.createdAt).toLocaleDateString() },
-    { header: "Type", accessor: (m) => m.type },
-    { header: "Item Name", accessor: (m) => itemNameMap.get(m.itemId) ?? "" },
+    { header: "Data", accessor: (m) => new Date(m.createdAt).toLocaleDateString() },
+    { header: "Tipo", accessor: (m) => m.type },
+    { header: "Nome do Item", accessor: (m) => itemNameMap.get(m.itemId) ?? "" },
     { header: "SKU", accessor: (m) => items.find((i) => i.id === m.itemId)?.sku ?? "" },
-    { header: "Quantity", accessor: (m) => m.quantity },
-    { header: "Performed By", accessor: (m) => m.performedBy },
-    { header: "Reference", accessor: (m) => m.reference },
-    { header: "Notes", accessor: (m) => m.notes },
+    { header: "Quantidade", accessor: (m) => m.quantity },
+    { header: "Realizado Por", accessor: (m) => m.performedBy },
+    { header: "Referência", accessor: (m) => m.reference },
+    { header: "Observações", accessor: (m) => m.notes },
   ], [itemNameMap, items]);
 
   return (
     <div className="mx-auto max-w-[1400px] space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">Stock movements</h1>
-          <p className="text-sm text-muted-foreground">{filtered.length} movements</p>
+          <h1 className="text-2xl font-semibold text-foreground">Movimentações de estoque</h1>
+          <p className="text-sm text-muted-foreground">{filtered.length} movimentações</p>
         </div>
         <div className="flex items-center gap-2">
           <CSVExportButton
@@ -100,7 +100,7 @@ function MovementsPage() {
           <PermissionGate permission="log_movement">
             <Button onClick={() => setFormOpen(true)} className="gap-1.5 bg-amber-600 hover:bg-amber-700 text-white">
               <Plus className="h-4 w-4" />
-              Log Movement
+              Registrar Movimentação
             </Button>
           </PermissionGate>
         </div>
@@ -119,9 +119,9 @@ function MovementsPage() {
       {movements.length === 0 ? (
         <EmptyState
           icon={ArrowUpDown}
-          title="No stock movements recorded"
-          description="Movements track stock changes — receipts, shipments, adjustments, and transfers."
-          actionLabel="Log Movement"
+          title="Nenhuma movimentação de estoque registrada"
+          description="As movimentações registram mudanças no estoque — recebimentos, envios, ajustes e transferências."
+          actionLabel="Registrar Movimentação"
           onAction={() => setFormOpen(true)}
         />
       ) : (

@@ -42,7 +42,7 @@ interface CatalogSearch {
 
 export const Route = createFileRoute("/app/catalog")({
   component: CatalogPage,
-  head: () => ({ meta: [{ title: "Catalog — Stackwise" }] }),
+  head: () => ({ meta: [{ title: "Catálogo — Stackwise" }] }),
   validateSearch: (search: Record<string, unknown>): CatalogSearch => ({
     item: typeof search.item === "string" ? search.item : undefined,
     newItem: typeof search.newItem === "string" ? search.newItem : undefined,
@@ -71,18 +71,18 @@ function CatalogPage() {
   const [importOpen, setImportOpen] = useState(false);
 
   const importFields = useMemo<ImportField[]>(() => [
-    { key: "name", label: "Name", required: true },
+    { key: "name", label: "Nome", required: true },
     { key: "sku", label: "SKU", required: true },
-    { key: "description", label: "Description" },
-    { key: "category", label: "Category" },
-    { key: "supplier", label: "Supplier" },
-    { key: "location", label: "Location" },
-    { key: "quantity", label: "Quantity", numeric: true },
-    { key: "reorderPoint", label: "Reorder Point", numeric: true },
-    { key: "unit", label: "Unit" },
-    { key: "costPrice", label: "Unit Cost", numeric: true },
-    { key: "sellingPrice", label: "Price", numeric: true },
-    { key: "barcode", label: "Barcode" },
+    { key: "description", label: "Descrição" },
+    { key: "category", label: "Categoria" },
+    { key: "supplier", label: "Fornecedor" },
+    { key: "location", label: "Local" },
+    { key: "quantity", label: "Quantidade", numeric: true },
+    { key: "reorderPoint", label: "Ponto de Reposição", numeric: true },
+    { key: "unit", label: "Unidade" },
+    { key: "costPrice", label: "Custo Unitário", numeric: true },
+    { key: "sellingPrice", label: "Preço", numeric: true },
+    { key: "barcode", label: "Código de Barras" },
   ], []);
 
   // Strip stock-level status before passing to store
@@ -125,23 +125,23 @@ function CatalogPage() {
   const existingSkus = useMemo(() => allItems.map((i) => i.sku), [allItems]);
 
   const csvColumns = useMemo<CSVColumn<Item>[]>(() => [
-    { header: "Name", accessor: (i) => i.name },
+    { header: "Nome", accessor: (i) => i.name },
     { header: "SKU", accessor: (i) => i.sku },
-    { header: "Category", accessor: (i) => categories.find((c) => c.id === i.categoryId)?.name ?? "" },
-    { header: "Supplier", accessor: (i) => suppliers.find((s) => s.id === i.supplierId)?.name ?? "" },
-    { header: "Location", accessor: (i) => locations.find((l) => l.id === i.locationId)?.name ?? "" },
-    { header: "Quantity", accessor: (i) => i.currentStock },
-    { header: "Reorder Point", accessor: (i) => i.reorderPoint },
-    { header: "Unit Cost", accessor: (i) => i.costPrice },
-    { header: "Price", accessor: (i) => i.sellingPrice },
+    { header: "Categoria", accessor: (i) => categories.find((c) => c.id === i.categoryId)?.name ?? "" },
+    { header: "Fornecedor", accessor: (i) => suppliers.find((s) => s.id === i.supplierId)?.name ?? "" },
+    { header: "Local", accessor: (i) => locations.find((l) => l.id === i.locationId)?.name ?? "" },
+    { header: "Quantidade", accessor: (i) => i.currentStock },
+    { header: "Ponto de Reposição", accessor: (i) => i.reorderPoint },
+    { header: "Custo Unitário", accessor: (i) => i.costPrice },
+    { header: "Preço", accessor: (i) => i.sellingPrice },
     { header: "Status", accessor: (i) => i.status },
   ], [categories, suppliers, locations]);
 
   const handleSave = useCallback((data: Partial<Item>) => {
     if (editItem) {
       updateItem.mutate({ id: editItem.id, updates: data }, {
-        onSuccess: () => { toast.success("Item updated"); setSheetOpen(false); setEditItem(null); },
-        onError: (e) => toast.error(e.message || "Failed to update item. Please try again."),
+        onSuccess: () => { toast.success("Item atualizado"); setSheetOpen(false); setEditItem(null); },
+        onError: (e) => toast.error(e.message || "Falha ao atualizar item. Tente novamente."),
       });
     } else {
       const newItem: Item = {
@@ -167,13 +167,13 @@ function CatalogPage() {
       };
       createItem.mutate(newItem, {
         onSuccess: () => {
-          toast.success("Item created", {
-            action: { label: "Undo", onClick: () => { deleteItem.mutate(newItem.id, { onSuccess: () => toast.success("Item creation undone") }); } },
+          toast.success("Item criado", {
+            action: { label: "Desfazer", onClick: () => { deleteItem.mutate(newItem.id, { onSuccess: () => toast.success("Criação do item desfeita") }); } },
             duration: 5000,
           });
           setSheetOpen(false);
         },
-        onError: (e) => toast.error(e.message || "Failed to create item. Please try again."),
+        onError: (e) => toast.error(e.message || "Falha ao criar item. Tente novamente."),
       });
     }
   }, [editItem, createItem, updateItem, deleteItem]);
@@ -182,13 +182,13 @@ function CatalogPage() {
     if (!deleteTarget) return;
     if (isAdmin) {
       deleteItem.mutate(deleteTarget.id, {
-        onSuccess: () => { toast.success(`${deleteTarget.name} deleted`); setDeleteTarget(null); },
-        onError: (e) => toast.error(e.message || "Failed to delete item."),
+        onSuccess: () => { toast.success(`${deleteTarget.name} excluído`); setDeleteTarget(null); },
+        onError: (e) => toast.error(e.message || "Falha ao excluir item."),
       });
     } else {
       updateItem.mutate({ id: deleteTarget.id, updates: { status: ItemStatus.Archived } }, {
-        onSuccess: () => { toast.success(`${deleteTarget.name} archived`); setDeleteTarget(null); },
-        onError: (e) => toast.error(e.message || "Failed to archive item."),
+        onSuccess: () => { toast.success(`${deleteTarget.name} arquivado`); setDeleteTarget(null); },
+        onError: (e) => toast.error(e.message || "Falha ao arquivar item."),
       });
     }
   }, [deleteTarget, isAdmin, deleteItem, updateItem]);
@@ -202,7 +202,7 @@ function CatalogPage() {
     ids.forEach((id) => {
       updateItem.mutate({ id, updates });
     });
-    toast.success(`Updated ${count} items`);
+    toast.success(`${count} itens atualizados`);
     setSelected(new Set());
   }, [selected, updateItem]);
 
@@ -220,8 +220,8 @@ function CatalogPage() {
     <div className="mx-auto max-w-[1400px] space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">Product Catalog</h1>
-          <p className="text-sm text-muted-foreground">{items.length} items</p>
+          <h1 className="text-2xl font-semibold text-foreground">Catálogo de Produtos</h1>
+          <p className="text-sm text-muted-foreground">{items.length} itens</p>
         </div>
         <div className="flex items-center gap-2">
           <CSVExportButton
@@ -231,12 +231,12 @@ function CatalogPage() {
           />
           <PermissionGate permission="create_item">
             <Button variant="outline" size="sm" className="hidden gap-1.5 sm:inline-flex" onClick={() => setImportOpen(true)}>
-              <Upload className="h-4 w-4" />Import
+              <Upload className="h-4 w-4" />Importar
             </Button>
           </PermissionGate>
           <PermissionGate permission="create_item">
             <Button onClick={openCreate} className="hidden gap-1.5 sm:inline-flex">
-              <Plus className="h-4 w-4" />New Item
+              <Plus className="h-4 w-4" />Novo Item
             </Button>
           </PermissionGate>
         </div>
@@ -250,9 +250,9 @@ function CatalogPage() {
       {allItems.length === 0 ? (
         <EmptyState
           icon={Package}
-          title="No items in your inventory yet"
-          description="Start building your catalog by adding your first product or item."
-          actionLabel={can("create_item") ? "Add First Item" : undefined}
+          title="Ainda não há itens no seu estoque"
+          description="Comece a montar seu catálogo adicionando seu primeiro produto ou item."
+          actionLabel={can("create_item") ? "Adicionar Primeiro Item" : undefined}
           onAction={can("create_item") ? openCreate : undefined}
         />
       ) : (
@@ -298,16 +298,16 @@ function CatalogPage() {
       <AlertDialog open={!!deleteTarget} onOpenChange={(v) => !v && setDeleteTarget(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>{isAdmin ? "Delete" : "Archive"} {deleteTarget?.name}?</AlertDialogTitle>
+            <AlertDialogTitle>{isAdmin ? "Excluir" : "Arquivar"} {deleteTarget?.name}?</AlertDialogTitle>
             <AlertDialogDescription>
               {isAdmin
-                ? "This action cannot be undone. Movement history will be preserved but the item will be removed."
-                : "The item will be archived and hidden from the default view."}
+                ? "Esta ação não pode ser desfeita. O histórico de movimentações será preservado, mas o item será removido."
+                : "O item será arquivado e ocultado da visualização padrão."}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete}>{isAdmin ? "Delete" : "Archive"}</AlertDialogAction>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDelete}>{isAdmin ? "Excluir" : "Arquivar"}</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
@@ -317,7 +317,7 @@ function CatalogPage() {
           type="button"
           onClick={openCreate}
           className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-amber-accent shadow-lg transition-transform hover:scale-105 sm:hidden"
-          aria-label="New Item"
+          aria-label="Novo Item"
         >
           <Plus className="h-6 w-6" />
         </button>
@@ -390,7 +390,7 @@ function CatalogPage() {
               failed++;
             }
           }
-          toast.success(`Imported ${created} items${failed > 0 ? `, ${failed} failed` : ""}`);
+          toast.success(`${created} itens importados${failed > 0 ? `, ${failed} falharam` : ""}`);
           return { created, failed };
         }}
       />

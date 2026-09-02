@@ -39,7 +39,7 @@ export function LowStockSuggestions({ items, supplierId, lineItems, onAdd }: Low
   return (
     <div className="rounded-md border border-amber-accent/30 bg-amber-accent/5 p-3">
       <p className="mb-2 text-xs font-medium text-amber-accent">
-        Low-stock items from this supplier
+        Itens com estoque baixo deste fornecedor
       </p>
       <div className="space-y-1.5">
         {suggestions.map((item) => (
@@ -53,7 +53,7 @@ export function LowStockSuggestions({ items, supplierId, lineItems, onAdd }: Low
                 {item.sku}
               </span>
               <span className="ml-2 text-xs text-muted-foreground">
-                Stock: {item.currentStock} / Reorder: {item.reorderPoint}
+                Estoque: {item.currentStock} / Reposição: {item.reorderPoint}
               </span>
             </div>
             <Button
@@ -64,7 +64,7 @@ export function LowStockSuggestions({ items, supplierId, lineItems, onAdd }: Low
               onClick={() => handleAdd(item)}
             >
               <Plus className="h-3 w-3" />
-              Add
+              Adicionar
             </Button>
           </div>
         ))}

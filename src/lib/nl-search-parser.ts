@@ -18,37 +18,37 @@ export interface ParsedQuery {
   isNaturalLanguage: boolean;
 }
 
-const NL_KEYWORDS = ["show", "find", "what", "which", "list", "give", "get", "where"];
+const NL_KEYWORDS = ["show", "find", "what", "which", "list", "give", "get", "where", "mostrar", "buscar", "encontrar", "qual", "quais", "listar", "onde", "quero"];
 
 const STATUS_PATTERNS: [RegExp, string][] = [
-  [/\b(running low|low stock|below reorder)\b/i, "low_stock"],
-  [/\b(out of stock|zero stock|no stock|stockout)\b/i, "out_of_stock"],
-  [/\b(active|in stock|available)\b/i, "active"],
-  [/\b(discontinued|archived)\b/i, "discontinued"],
+  [/\b(running low|low stock|below reorder|estoque baixo|acabando|abaixo do ponto de reposição)\b/i, "low_stock"],
+  [/\b(out of stock|zero stock|no stock|stockout|sem estoque|esgotado|zerado)\b/i, "out_of_stock"],
+  [/\b(active|in stock|available|ativo|em estoque|disponível)\b/i, "active"],
+  [/\b(discontinued|archived|descontinuado|arquivado)\b/i, "discontinued"],
 ];
 
 const MOVEMENT_PATTERNS: [RegExp, string][] = [
-  [/\breceived\b/i, "received"],
-  [/\bshipped\b/i, "shipped"],
-  [/\badjusted\b/i, "adjusted"],
-  [/\btransferred\b/i, "transferred"],
+  [/\b(received|recebido)\b/i, "received"],
+  [/\b(shipped|enviado)\b/i, "shipped"],
+  [/\b(adjusted|ajustado)\b/i, "adjusted"],
+  [/\b(transferred|transferido)\b/i, "transferred"],
 ];
 
 const DATE_PATTERNS: [RegExp, () => { from: Date; to: Date }][] = [
   [
-    /\blast (7 days|week)\b/i,
+    /\b(last (7 days|week)|últimos 7 dias|última semana)\b/i,
     () => ({ from: daysAgo(7), to: new Date() }),
   ],
   [
-    /\blast (30 days|month)\b/i,
+    /\b(last (30 days|month)|últimos 30 dias|último mês)\b/i,
     () => ({ from: daysAgo(30), to: new Date() }),
   ],
   [
-    /\blast (90 days|quarter|3 months)\b/i,
+    /\b(last (90 days|quarter|3 months)|últimos 90 dias|último trimestre|últimos 3 meses)\b/i,
     () => ({ from: daysAgo(90), to: new Date() }),
   ],
   [
-    /\btoday\b/i,
+    /\b(today|hoje)\b/i,
     () => {
       const d = new Date();
       d.setHours(0, 0, 0, 0);
@@ -56,7 +56,7 @@ const DATE_PATTERNS: [RegExp, () => { from: Date; to: Date }][] = [
     },
   ],
   [
-    /\byesterday\b/i,
+    /\b(yesterday|ontem)\b/i,
     () => {
       const d = daysAgo(1);
       d.setHours(0, 0, 0, 0);
@@ -77,6 +77,10 @@ const NOISE = new Set([
   "where", "is", "are", "the", "a", "an", "of", "in", "from",
   "that", "items", "products", "things", "stuff", "all", "my",
   "have", "has", "been", "with", "for", "to", "and", "or",
+  "mostrar", "buscar", "encontrar", "qual", "quais", "listar",
+  "onde", "quero", "os", "as", "um", "uma", "de", "em", "do",
+  "da", "dos", "das", "que", "itens", "produtos", "coisas",
+  "todos", "todas", "meu", "minha", "tem", "com", "para", "e", "ou",
 ]);
 
 export function parseQuery(query: string): ParsedQuery {

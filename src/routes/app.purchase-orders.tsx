@@ -31,7 +31,7 @@ interface POSearch {
 
 export const Route = createFileRoute("/app/purchase-orders")({
   component: PurchaseOrdersPage,
-  head: () => ({ meta: [{ title: "Purchase Orders — Stackwise" }] }),
+  head: () => ({ meta: [{ title: "Pedidos de Compra — Stackwise" }] }),
   validateSearch: (search: Record<string, unknown>): POSearch => ({
     po: typeof search.po === "string" ? search.po : undefined,
   }),
@@ -110,13 +110,13 @@ function PurchaseOrdersPage() {
     <div className="mx-auto max-w-[1400px] space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">Purchase orders</h1>
-          <p className="text-sm text-muted-foreground">{filtered.length} orders</p>
+          <h1 className="text-2xl font-semibold text-foreground">Pedidos de compra</h1>
+          <p className="text-sm text-muted-foreground">{filtered.length} pedidos</p>
         </div>
         {canManagePOs && (
           <Button size="sm" onClick={openCreate}>
             <Plus className="mr-1.5 h-4 w-4" />
-            New PO
+            Novo Pedido
           </Button>
         )}
       </div>
@@ -129,9 +129,9 @@ function PurchaseOrdersPage() {
       {purchaseOrders.length === 0 ? (
         <EmptyState
           icon={ClipboardList}
-          title="No purchase orders created"
-          description="Create purchase orders to track inventory procurement from your suppliers."
-          actionLabel={canManagePOs ? "Create PO" : undefined}
+          title="Nenhum pedido de compra criado"
+          description="Crie pedidos de compra para acompanhar a aquisição de estoque junto a seus fornecedores."
+          actionLabel={canManagePOs ? "Criar Pedido" : undefined}
           onAction={canManagePOs ? openCreate : undefined}
         />
       ) : (
@@ -158,7 +158,7 @@ function PurchaseOrdersPage() {
             onSuccess: () => {
               setDetailOpen(false);
               setDetailPO(null);
-              toast.success("Purchase order deleted");
+              toast.success("Pedido de compra excluído");
             },
           });
         }}
@@ -188,7 +188,7 @@ function PurchaseOrdersPage() {
                 fromLocationId: null,
                 toLocationId: null,
                 reference: po.orderNumber,
-                notes: notes || `Received via ${po.orderNumber}`,
+                notes: notes || `Recebido via ${po.orderNumber}`,
                 performedBy: "demo-user",
                 createdAt: now,
               });
@@ -225,7 +225,7 @@ function PurchaseOrdersPage() {
 
             const totalQty = receivedLines.reduce((sum, l) => sum + l.qty, 0);
             toast.success(
-              `Received ${totalQty} items across ${receivedLines.length} line items`,
+              `${totalQty} itens recebidos em ${receivedLines.length} itens de linha`,
             );
             setReceiveOpen(false);
           }}

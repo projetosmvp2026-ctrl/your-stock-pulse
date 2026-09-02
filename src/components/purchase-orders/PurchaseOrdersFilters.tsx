@@ -19,11 +19,11 @@ import type { POFilters } from "./po-filter-types";
 import { EMPTY_PO_FILTERS, isFiltersActive, activeFilterCount } from "./po-filter-types";
 
 const STATUS_OPTIONS = [
-  { value: OrderStatus.Draft, label: "Draft" },
-  { value: OrderStatus.Submitted, label: "Submitted" },
-  { value: OrderStatus.Partial, label: "Partially Received" },
-  { value: OrderStatus.Received, label: "Fully Received" },
-  { value: OrderStatus.Cancelled, label: "Cancelled" },
+  { value: OrderStatus.Draft, label: "Rascunho" },
+  { value: OrderStatus.Submitted, label: "Enviado" },
+  { value: OrderStatus.Partial, label: "Parcialmente Recebido" },
+  { value: OrderStatus.Received, label: "Totalmente Recebido" },
+  { value: OrderStatus.Cancelled, label: "Cancelado" },
 ];
 
 interface PurchaseOrdersFiltersProps {
@@ -60,16 +60,16 @@ function FilterControls({ filters, onChange, suppliers }: PurchaseOrdersFiltersP
 
       {/* Supplier select */}
       <div>
-        <Label className="mb-1.5 block text-xs text-muted-foreground">Supplier</Label>
+        <Label className="mb-1.5 block text-xs text-muted-foreground">Fornecedor</Label>
         <Select
           value={filters.supplierId ?? "__all__"}
           onValueChange={(v) => onChange({ ...filters, supplierId: v === "__all__" ? null : v })}
         >
           <SelectTrigger className="h-8 text-xs">
-            <SelectValue placeholder="All suppliers" />
+            <SelectValue placeholder="Todos os fornecedores" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="__all__">All suppliers</SelectItem>
+            <SelectItem value="__all__">Todos os fornecedores</SelectItem>
             {suppliers.map((s) => (
               <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>
             ))}
@@ -80,7 +80,7 @@ function FilterControls({ filters, onChange, suppliers }: PurchaseOrdersFiltersP
       {/* Date range */}
       <div className="flex gap-2">
         <div className="flex-1">
-          <Label className="mb-1.5 block text-xs text-muted-foreground">From</Label>
+          <Label className="mb-1.5 block text-xs text-muted-foreground">De</Label>
           <Input
             type="date"
             className="h-8 text-xs"
@@ -89,7 +89,7 @@ function FilterControls({ filters, onChange, suppliers }: PurchaseOrdersFiltersP
           />
         </div>
         <div className="flex-1">
-          <Label className="mb-1.5 block text-xs text-muted-foreground">To</Label>
+          <Label className="mb-1.5 block text-xs text-muted-foreground">Até</Label>
           <Input
             type="date"
             className="h-8 text-xs"
@@ -101,7 +101,7 @@ function FilterControls({ filters, onChange, suppliers }: PurchaseOrdersFiltersP
 
       {isFiltersActive(filters) && (
         <Button variant="ghost" size="sm" className="w-fit gap-1 text-xs" onClick={() => onChange(EMPTY_PO_FILTERS)}>
-          <X className="h-3 w-3" />Clear Filters
+          <X className="h-3 w-3" />Limpar Filtros
         </Button>
       )}
     </div>
@@ -118,13 +118,13 @@ export function PurchaseOrdersFilters(props: PurchaseOrdersFiltersProps) {
         <SheetTrigger asChild>
           <Button variant="outline" size="sm" className="gap-1.5">
             <Filter className="h-4 w-4" />
-            Filters
+            Filtros
             {count > 0 && <Badge variant="secondary" className="ml-1 h-5 px-1.5 text-xs">{count}</Badge>}
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="w-[300px]">
           <SheetHeader>
-            <SheetTitle>Filters</SheetTitle>
+            <SheetTitle>Filtros</SheetTitle>
           </SheetHeader>
           <div className="mt-4">
             <FilterControls {...props} />
@@ -160,16 +160,16 @@ export function PurchaseOrdersFilters(props: PurchaseOrdersFiltersProps) {
 
         {/* Supplier */}
         <div>
-          <Label className="mb-1.5 block text-xs text-muted-foreground">Supplier</Label>
+          <Label className="mb-1.5 block text-xs text-muted-foreground">Fornecedor</Label>
           <Select
             value={props.filters.supplierId ?? "__all__"}
             onValueChange={(v) => props.onChange({ ...props.filters, supplierId: v === "__all__" ? null : v })}
           >
             <SelectTrigger className="h-8 text-xs">
-              <SelectValue placeholder="All suppliers" />
+              <SelectValue placeholder="Todos os fornecedores" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="__all__">All suppliers</SelectItem>
+              <SelectItem value="__all__">Todos os fornecedores</SelectItem>
               {props.suppliers.map((s) => (
                 <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>
               ))}
@@ -179,7 +179,7 @@ export function PurchaseOrdersFilters(props: PurchaseOrdersFiltersProps) {
 
         {/* Date range */}
         <div>
-          <Label className="mb-1.5 block text-xs text-muted-foreground">Date Range</Label>
+          <Label className="mb-1.5 block text-xs text-muted-foreground">Período</Label>
           <div className="flex gap-1">
             <Input
               type="date"
@@ -200,7 +200,7 @@ export function PurchaseOrdersFilters(props: PurchaseOrdersFiltersProps) {
         <div className="flex items-end">
           {isFiltersActive(props.filters) && (
             <Button variant="ghost" size="sm" className="h-8 gap-1 text-xs" onClick={() => props.onChange(EMPTY_PO_FILTERS)}>
-              <X className="h-3 w-3" />Clear Filters
+              <X className="h-3 w-3" />Limpar Filtros
             </Button>
           )}
         </div>

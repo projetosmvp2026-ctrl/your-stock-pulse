@@ -29,10 +29,10 @@ import type { StockMovement } from "@/types/inventory";
 import { formatDistanceToNow, format } from "date-fns";
 
 const TYPE_META: Record<MovementType, { icon: typeof PackageCheck; label: string }> = {
-  [MovementType.Received]: { icon: PackageCheck, label: "Received" },
-  [MovementType.Shipped]: { icon: PackageMinus, label: "Shipped" },
-  [MovementType.Adjusted]: { icon: PenLine, label: "Adjusted" },
-  [MovementType.Transferred]: { icon: ArrowLeftRight, label: "Transferred" },
+  [MovementType.Received]: { icon: PackageCheck, label: "Recebido" },
+  [MovementType.Shipped]: { icon: PackageMinus, label: "Enviado" },
+  [MovementType.Adjusted]: { icon: PenLine, label: "Ajustado" },
+  [MovementType.Transferred]: { icon: ArrowLeftRight, label: "Transferido" },
 };
 
 function directionOf(type: MovementType, qty: number): "in" | "out" {
@@ -66,15 +66,15 @@ export function MovementsTable({ movements, itemNameMap, locationNameMap }: Move
   const end = Math.min((safePage + 1) * PER_PAGE, sorted.length);
 
   if (sorted.length === 0) {
-    return <p className="py-16 text-center text-sm text-muted-foreground">No stock movements recorded</p>;
+    return <p className="py-16 text-center text-sm text-muted-foreground">Nenhuma movimentação de estoque registrada</p>;
   }
 
   const pagination = (
     <div className="mt-3 flex items-center justify-between text-sm text-muted-foreground">
-      <span>Showing {start}–{end} of {sorted.length} movements</span>
+      <span>Mostrando {start}–{end} de {sorted.length} movimentações</span>
       <div className="flex gap-2">
-        <Button variant="outline" size="sm" disabled={safePage === 0} onClick={() => setPage(safePage - 1)}>Previous</Button>
-        <Button variant="outline" size="sm" disabled={safePage >= totalPages - 1} onClick={() => setPage(safePage + 1)}>Next</Button>
+        <Button variant="outline" size="sm" disabled={safePage === 0} onClick={() => setPage(safePage - 1)}>Anterior</Button>
+        <Button variant="outline" size="sm" disabled={safePage >= totalPages - 1} onClick={() => setPage(safePage + 1)}>Próximo</Button>
       </div>
     </div>
   );
@@ -107,19 +107,19 @@ export function MovementsTable({ movements, itemNameMap, locationNameMap }: Move
                     <span className="truncate ml-2 font-medium">{itemNameMap.get(m.itemId) ?? "Unknown"}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">By</span>
+                    <span className="text-muted-foreground">Por</span>
                     <span>{m.performedBy}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Time</span>
+                    <span className="text-muted-foreground">Horário</span>
                     <span>{formatDistanceToNow(new Date(m.createdAt), { addSuffix: true })}</span>
                   </div>
                   {expandedId === m.id && (
                     <div className="pt-2 border-t border-border mt-2 space-y-1">
                       {m.reference && <div><span className="text-muted-foreground">Ref:</span> {m.reference}</div>}
-                      {m.notes && <div><span className="text-muted-foreground">Note:</span> {m.notes}</div>}
+                      {m.notes && <div><span className="text-muted-foreground">Nota:</span> {m.notes}</div>}
                       <a href={`/app/catalog?item=${m.itemId}`} className="inline-flex items-center gap-1 text-primary hover:underline text-xs" onClick={(e) => e.stopPropagation()}>
-                        <ExternalLink className="h-3 w-3" /> View Item
+                        <ExternalLink className="h-3 w-3" /> Ver Item
                       </a>
                     </div>
                   )}
@@ -141,13 +141,13 @@ export function MovementsTable({ movements, itemNameMap, locationNameMap }: Move
             <TableHeader className="sticky top-0 bg-card">
               <TableRow>
                 <TableHead className="w-[36px]" />
-                <TableHead className="w-[140px]">Type</TableHead>
+                <TableHead className="w-[140px]">Tipo</TableHead>
                 <TableHead>Item</TableHead>
-                <TableHead className="w-[100px]">Quantity</TableHead>
-                <TableHead className="w-[80px]">Direction</TableHead>
-                <TableHead>Performed By</TableHead>
-                <TableHead>Reference</TableHead>
-                <TableHead className="w-[140px]">Time</TableHead>
+                <TableHead className="w-[100px]">Quantidade</TableHead>
+                <TableHead className="w-[80px]">Direção</TableHead>
+                <TableHead>Realizado Por</TableHead>
+                <TableHead>Referência</TableHead>
+                <TableHead className="w-[140px]">Horário</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -167,7 +167,7 @@ export function MovementsTable({ movements, itemNameMap, locationNameMap }: Move
                       <TableCell>
                         <span className="inline-flex items-center gap-1.5 text-sm"><Icon className="h-4 w-4 text-muted-foreground" />{meta.label}</span>
                       </TableCell>
-                      <TableCell className="font-medium">{itemNameMap.get(m.itemId) ?? <span className="italic text-muted-foreground/60 line-through">[Item Deleted]</span>}</TableCell>
+                      <TableCell className="font-medium">{itemNameMap.get(m.itemId) ?? <span className="italic text-muted-foreground/60 line-through">[Item Excluído]</span>}</TableCell>
                       <TableCell>
                         <span className={`font-mono text-sm font-medium ${dir === "in" ? "text-emerald-600" : "text-red-500"}`}>{dir === "in" ? "+" : "−"}{absQty}</span>
                       </TableCell>
@@ -221,14 +221,14 @@ function MovementDetail({ movement, itemName, fromLocation, toLocation }: Moveme
   return (
     <div className="space-y-2 text-sm">
       {(movement.notes || movement.reference) && (
-        <div><span className="font-medium text-foreground">Note: </span><span className="text-muted-foreground">{movement.notes || movement.reference}</span></div>
+        <div><span className="font-medium text-foreground">Nota: </span><span className="text-muted-foreground">{movement.notes || movement.reference}</span></div>
       )}
       {isTransfer && (fromLocation || toLocation) && (
-        <div><span className="font-medium text-foreground">Transfer: </span><span className="text-muted-foreground">{fromLocation ?? "—"} → {toLocation ?? "—"}</span></div>
+        <div><span className="font-medium text-foreground">Transferência: </span><span className="text-muted-foreground">{fromLocation ?? "—"} → {toLocation ?? "—"}</span></div>
       )}
       <div>
         <a href={`/app/catalog?item=${movement.itemId}`} className="inline-flex items-center gap-1 text-primary hover:underline" onClick={(e) => e.stopPropagation()}>
-          <ExternalLink className="h-3 w-3" />View {itemName}
+          <ExternalLink className="h-3 w-3" />Ver {itemName}
         </a>
       </div>
     </div>

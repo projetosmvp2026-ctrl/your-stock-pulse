@@ -16,11 +16,11 @@ import { OrderStatus } from "@/types/inventory";
 import type { PurchaseOrder, Supplier } from "@/types/inventory";
 
 const STATUS_STYLE: Record<OrderStatus, { label: string; variant: "secondary" | "default" | "destructive" | "outline" }> = {
-  [OrderStatus.Draft]: { label: "Draft", variant: "secondary" },
-  [OrderStatus.Submitted]: { label: "Submitted", variant: "default" },
-  [OrderStatus.Partial]: { label: "Partially Received", variant: "outline" },
-  [OrderStatus.Received]: { label: "Fully Received", variant: "default" },
-  [OrderStatus.Cancelled]: { label: "Cancelled", variant: "destructive" },
+  [OrderStatus.Draft]: { label: "Rascunho", variant: "secondary" },
+  [OrderStatus.Submitted]: { label: "Enviado", variant: "default" },
+  [OrderStatus.Partial]: { label: "Parcialmente Recebido", variant: "outline" },
+  [OrderStatus.Received]: { label: "Totalmente Recebido", variant: "default" },
+  [OrderStatus.Cancelled]: { label: "Cancelado", variant: "destructive" },
 };
 
 const STATUS_CLASS: Record<OrderStatus, string> = {
@@ -53,15 +53,15 @@ export function PurchaseOrdersTable({ purchaseOrders, suppliers, onRowClick }: P
   const end = Math.min((safePage + 1) * PER_PAGE, sorted.length);
 
   if (sorted.length === 0) {
-    return <p className="py-16 text-center text-sm text-muted-foreground">No purchase orders yet</p>;
+    return <p className="py-16 text-center text-sm text-muted-foreground">Nenhum pedido de compra ainda</p>;
   }
 
   const pagination = sorted.length > PER_PAGE && (
     <div className="mt-3 flex items-center justify-between text-sm text-muted-foreground">
-      <span>Showing {start}–{end} of {sorted.length} orders</span>
+      <span>Mostrando {start}–{end} de {sorted.length} pedidos</span>
       <div className="flex gap-2">
-        <Button variant="outline" size="sm" disabled={safePage === 0} onClick={() => setPage(safePage - 1)}>Previous</Button>
-        <Button variant="outline" size="sm" disabled={safePage >= totalPages - 1} onClick={() => setPage(safePage + 1)}>Next</Button>
+        <Button variant="outline" size="sm" disabled={safePage === 0} onClick={() => setPage(safePage - 1)}>Anterior</Button>
+        <Button variant="outline" size="sm" disabled={safePage >= totalPages - 1} onClick={() => setPage(safePage + 1)}>Próximo</Button>
       </div>
     </div>
   );
@@ -81,10 +81,10 @@ export function PurchaseOrdersTable({ purchaseOrders, suppliers, onRowClick }: P
                   </div>
                 </CardHeader>
                 <CardContent className="px-4 pb-3 space-y-1 text-sm">
-                  <div className="flex justify-between"><span className="text-muted-foreground">Supplier</span><span className="truncate ml-2">{supplierMap.get(po.supplierId) ?? "Unknown"}</span></div>
-                  <div className="flex justify-between"><span className="text-muted-foreground">Items</span><span className="font-mono">{po.items.length}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Fornecedor</span><span className="truncate ml-2">{supplierMap.get(po.supplierId) ?? "Desconhecido"}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Itens</span><span className="font-mono">{po.items.length}</span></div>
                   <div className="flex justify-between"><span className="text-muted-foreground">Total</span><span className="font-mono font-medium">${po.totalCost.toLocaleString("en-US", { minimumFractionDigits: 2 })}</span></div>
-                  <div className="flex justify-between"><span className="text-muted-foreground">Created</span><span>{format(new Date(po.createdAt), "MMM d, yyyy")}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Criado</span><span>{format(new Date(po.createdAt), "dd/MM/yyyy")}</span></div>
                 </CardContent>
               </Card>
             );
@@ -101,13 +101,13 @@ export function PurchaseOrdersTable({ purchaseOrders, suppliers, onRowClick }: P
         <Table>
           <TableHeader className="sticky top-0 bg-card">
             <TableRow>
-              <TableHead className="w-[130px]">PO Number</TableHead>
-              <TableHead>Supplier</TableHead>
+              <TableHead className="w-[130px]">Número do Pedido</TableHead>
+              <TableHead>Fornecedor</TableHead>
               <TableHead className="w-[160px]">Status</TableHead>
-              <TableHead className="w-[80px] text-center">Items</TableHead>
-              <TableHead className="w-[120px] text-right">Total Cost</TableHead>
-              <TableHead className="w-[130px]">Expected</TableHead>
-              <TableHead className="w-[130px]">Created</TableHead>
+              <TableHead className="w-[80px] text-center">Itens</TableHead>
+              <TableHead className="w-[120px] text-right">Custo Total</TableHead>
+              <TableHead className="w-[130px]">Previsto</TableHead>
+              <TableHead className="w-[130px]">Criado</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -116,12 +116,12 @@ export function PurchaseOrdersTable({ purchaseOrders, suppliers, onRowClick }: P
               return (
                 <TableRow key={po.id} className="cursor-pointer hover:bg-muted/50" onClick={() => onRowClick(po)}>
                   <TableCell className="font-mono text-sm font-medium">{po.orderNumber}</TableCell>
-                  <TableCell>{supplierMap.get(po.supplierId) ?? "Unknown"}</TableCell>
+                  <TableCell>{supplierMap.get(po.supplierId) ?? "Desconhecido"}</TableCell>
                   <TableCell><Badge variant={statusMeta.variant} className={STATUS_CLASS[po.status]}>{statusMeta.label}</Badge></TableCell>
                   <TableCell className="text-center font-mono text-sm">{po.items.length}</TableCell>
                   <TableCell className="text-right font-mono text-sm font-medium">${po.totalCost.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableCell>
-                  <TableCell className="text-sm text-muted-foreground">{po.expectedDelivery ? format(new Date(po.expectedDelivery), "MMM d, yyyy") : "—"}</TableCell>
-                  <TableCell className="text-sm text-muted-foreground">{format(new Date(po.createdAt), "MMM d, yyyy")}</TableCell>
+                  <TableCell className="text-sm text-muted-foreground">{po.expectedDelivery ? format(new Date(po.expectedDelivery), "dd/MM/yyyy") : "—"}</TableCell>
+                  <TableCell className="text-sm text-muted-foreground">{format(new Date(po.createdAt), "dd/MM/yyyy")}</TableCell>
                 </TableRow>
               );
             })}
