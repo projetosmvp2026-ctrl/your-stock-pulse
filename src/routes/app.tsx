@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
-import { DemoBanner } from "@/components/layout/DemoBanner";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { ShortcutsHelpDialog } from "@/components/command/ShortcutsHelpDialog";
 import { PageTransition } from "@/components/shared/PageTransition";
+import { useAuth } from "@/hooks/useAuth";
 import { useDemo } from "@/hooks/useDemo";
 import { useRole } from "@/hooks/useRole";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
@@ -18,7 +18,8 @@ export const Route = createFileRoute("/app")({
 });
 
 function AppLayout() {
-  const { isDemo } = useDemo();
+  const { session, loading } = useAuth();
+  const { isDemo, enterDemoMode } = useDemo();
   const { role } = useRole();
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,22 +28,27 @@ function AppLayout() {
   // Global keyboard shortcuts
   useKeyboardShortcuts({ onHelpOpen: () => setHelpOpen(true) });
 
+  // Auth guard
+  useEffect(() => {
+    if (!loading && !session) {
+      navigate({ to: "/login" });
+    }
+  }, [loading, session, navigate]);
+
+  // Initialise the working data set once signed in
+  useEffect(() => {
+    if (session && !isDemo) enterDemoMode();
+  }, [session, isDemo, enterDemoMode]);
+
   // Role-based route guard
   useEffect(() => {
-    if (isDemo && !canAccessRoute(location.pathname, role)) {
+    if (session && !canAccessRoute(location.pathname, role)) {
       toast.error("Você não tem permissão para acessar essa página.");
       navigate({ to: "/app/dashboard" });
     }
-  }, [location.pathname, role, navigate, isDemo]);
+  }, [location.pathname, role, navigate, session]);
 
-  // Demo guard — redirect to landing if not in demo
-  useEffect(() => {
-    if (!isDemo) {
-      navigate({ to: "/" });
-    }
-  }, [isDemo, navigate]);
-
-  if (!isDemo) {
+  if (loading || !session || !isDemo) {
     return (
       <div className="flex h-screen items-center justify-center bg-background">
         <div className="h-6 w-6 animate-spin rounded-full border-2 border-muted-foreground/30 border-t-muted-foreground" />
@@ -52,7 +58,7 @@ function AppLayout() {
 
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-background">
-      <DemoBanner />
+
       <div className="flex flex-1 overflow-hidden">
         <aside className="hidden w-[260px] shrink-0 md:block">
           <Sidebar />

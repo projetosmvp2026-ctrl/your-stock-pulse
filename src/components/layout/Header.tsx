@@ -22,7 +22,7 @@ import { Sidebar } from "./Sidebar";
 import { QuickEntryMode } from "@/components/data/QuickEntryMode";
 import { CommandPalette } from "@/components/command/CommandPalette";
 import { NotificationCenter } from "@/components/notifications/NotificationCenter";
-import { useDemo } from "@/hooks/useDemo";
+import { useAuth } from "@/hooks/useAuth";
 import { useRole } from "@/hooks/useRole";
 import { PermissionGate } from "@/hooks/usePermissions";
 
@@ -45,15 +45,15 @@ export function Header() {
   const [notifOpen, setNotifOpen] = useState(false);
   const [prefsOpen, setPrefsOpen] = useState(false);
   
-  const { exitDemoMode } = useDemo();
+  const { user, signOut } = useAuth();
   const { role } = useRole();
   const navigate = useNavigate();
 
-  const displayName = "Admin Demo";
+  const displayName = user?.email ?? "Conta";
 
-  const handleExit = async () => {
-    await navigate({ to: "/" });
-    exitDemoMode();
+  const handleSignOut = async () => {
+    await signOut();
+    await navigate({ to: "/login" });
   };
 
   // CMD+K / Ctrl+K shortcut
@@ -100,7 +100,7 @@ export function Header() {
             <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted">
               <User className="h-3.5 w-3.5 text-muted-foreground" />
             </div>
-            <span className="hidden text-sm font-medium md:inline-block">{displayName}</span>
+            <span className="hidden max-w-[160px] truncate text-sm font-medium md:inline-block">{displayName}</span>
             <ChevronDown className="hidden h-3.5 w-3.5 text-muted-foreground md:inline-block" />
           </button>
         </DropdownMenuTrigger>
@@ -116,9 +116,9 @@ export function Header() {
             <Settings className="mr-2 h-4 w-4" />
             Configurações
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={handleExit}>
+          <DropdownMenuItem onClick={handleSignOut}>
             <LogOut className="mr-2 h-4 w-4" />
-            Sair da demonstração
+            Sair
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
