@@ -205,7 +205,7 @@ function StickyNav({ onTryDemo }: { onTryDemo: () => void }) {
           onClick={onTryDemo}
           className="hidden items-center gap-2 rounded-lg border border-border bg-muted/60 px-5 py-2 text-sm font-medium text-foreground transition-all hover:bg-muted md:inline-flex"
         >
-          Testar demo
+          Entrar no sistema
         </button>
 
         {/* Mobile hamburger */}
@@ -244,7 +244,7 @@ function StickyNav({ onTryDemo }: { onTryDemo: () => void }) {
             }}
             className="mt-2 w-full rounded-lg border border-border bg-muted/60 px-5 py-2.5 text-sm font-medium text-foreground"
           >
-            Testar demo
+            Entrar no sistema
           </button>
         </div>
       )}
@@ -326,12 +326,10 @@ function FeatureTabsSection() {
 
 /* ─── Page ───────────────────────────────────────────── */
 function LandingPage() {
-  const { enterDemoMode } = useDemo();
   const navigate = useNavigate();
 
   const handleTryDemo = () => {
-    enterDemoMode();
-    navigate({ to: "/app/dashboard" });
+    navigate({ to: "/login" });
   };
 
   return (
@@ -364,7 +362,7 @@ function LandingPage() {
               onClick={handleTryDemo}
               className="group inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-base font-semibold text-primary-foreground shadow-lg transition-all hover:shadow-xl hover:brightness-110"
             >
-              Testar demo
+              Entrar no sistema
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
           </div>
@@ -481,7 +479,7 @@ function LandingPage() {
                 onClick={handleTryDemo}
                 className="group inline-flex items-center gap-2 rounded-lg bg-background px-5 py-2.5 text-base font-semibold text-foreground shadow-lg transition-all hover:bg-background/90"
               >
-                Testar demo
+                Entrar no sistema
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
