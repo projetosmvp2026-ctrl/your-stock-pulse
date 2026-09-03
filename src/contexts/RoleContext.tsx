@@ -1,5 +1,5 @@
-import { createContext, useMemo, useState, type ReactNode } from "react";
-import { useDemo } from "@/hooks/useDemo";
+import { createContext, useMemo, type ReactNode } from "react";
+import { useAuth } from "@/hooks/useAuth";
 import { getPermissionsForRole, type RolePermissions, type UserRoleType } from "@/lib/roles";
 
 export interface RoleContextValue {
@@ -8,17 +8,12 @@ export interface RoleContextValue {
   isAdmin: boolean;
   isManager: boolean;
   isRequestor: boolean;
-  /** Demo-only: override the current role */
-  setDemoRole: (role: UserRoleType) => void;
 }
 
 export const RoleContext = createContext<RoleContextValue | null>(null);
 
 export function RoleProvider({ children }: { children: ReactNode }) {
-  const { isDemo } = useDemo();
-  const [demoRole, setDemoRole] = useState<UserRoleType>("admin");
-
-  const role: UserRoleType = isDemo ? demoRole : "requestor"; // stub: non-demo defaults to requestor
+  const { role } = useAuth();
 
   const value = useMemo<RoleContextValue>(() => {
     const permissions = getPermissionsForRole(role);
@@ -28,7 +23,6 @@ export function RoleProvider({ children }: { children: ReactNode }) {
       isAdmin: role === "admin",
       isManager: role === "manager",
       isRequestor: role === "requestor",
-      setDemoRole,
     };
   }, [role]);
 
