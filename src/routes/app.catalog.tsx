@@ -42,7 +42,7 @@ interface CatalogSearch {
 
 export const Route = createFileRoute("/app/catalog")({
   component: CatalogPage,
-  head: () => ({ meta: [{ title: "Catálogo — Stackwise" }] }),
+  head: () => ({ meta: [{"title": "Catálogo — Stackwise"}, {"name": "description", "content": "Consulta e gestão de itens do catálogo de estoque Stackwise."}, {"property": "og:title", "content": "Catálogo — Stackwise"}, {"property": "og:description", "content": "Consulta e gestão de itens do catálogo de estoque Stackwise."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
   validateSearch: (search: Record<string, unknown>): CatalogSearch => ({
     item: typeof search.item === "string" ? search.item : undefined,
     newItem: typeof search.newItem === "string" ? search.newItem : undefined,

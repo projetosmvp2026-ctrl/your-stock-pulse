@@ -12,7 +12,7 @@ import { FAQ_DATA } from "@/lib/faq-data";
 
 export const Route = createFileRoute("/app/help")({
   component: HelpPage,
-  head: () => ({ meta: [{ title: "Central de Ajuda — Stackwise" }] }),
+  head: () => ({ meta: [{"title": "Central de Ajuda — Stackwise"}, {"name": "description", "content": "Perguntas frequentes e suporte ao uso do Stackwise."}, {"property": "og:title", "content": "Central de Ajuda — Stackwise"}, {"property": "og:description", "content": "Perguntas frequentes e suporte ao uso do Stackwise."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
 });
 
 function HelpPage() {

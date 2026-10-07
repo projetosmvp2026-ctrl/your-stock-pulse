@@ -20,7 +20,7 @@ interface SuppliersSearch {
 
 export const Route = createFileRoute("/app/suppliers")({
   component: SuppliersPage,
-  head: () => ({ meta: [{ title: "Fornecedores — Stackwise" }] }),
+  head: () => ({ meta: [{"title": "Fornecedores — Stackwise"}, {"name": "description", "content": "Consulta de fornecedores, contatos e histórico de compras no Stackwise."}, {"property": "og:title", "content": "Fornecedores — Stackwise"}, {"property": "og:description", "content": "Consulta de fornecedores, contatos e histórico de compras no Stackwise."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
   validateSearch: (search: Record<string, unknown>): SuppliersSearch => ({
     supplier: typeof search.supplier === "string" ? search.supplier : undefined,
   }),

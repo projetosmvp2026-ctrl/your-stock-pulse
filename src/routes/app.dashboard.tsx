@@ -25,7 +25,7 @@ const TOUR_STEPS: TourStep[] = [
 
 export const Route = createFileRoute("/app/dashboard")({
   component: DashboardPage,
-  head: () => ({ meta: [{ title: "Painel — Stackwise" }] }),
+  head: () => ({ meta: [{"title": "Painel — Stackwise"}, {"name": "description", "content": "Resumo do estoque, atividades recentes e alertas no painel Stackwise."}, {"property": "og:title", "content": "Painel — Stackwise"}, {"property": "og:description", "content": "Resumo do estoque, atividades recentes e alertas no painel Stackwise."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
 });
 
 function DashboardPage() {

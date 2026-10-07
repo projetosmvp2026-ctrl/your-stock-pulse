@@ -31,7 +31,7 @@ interface POSearch {
 
 export const Route = createFileRoute("/app/purchase-orders")({
   component: PurchaseOrdersPage,
-  head: () => ({ meta: [{ title: "Pedidos de Compra — Stackwise" }] }),
+  head: () => ({ meta: [{"title": "Pedidos de Compra — Stackwise"}, {"name": "description", "content": "Gestão de pedidos de compra e recebimentos no Stackwise."}, {"property": "og:title", "content": "Pedidos de Compra — Stackwise"}, {"property": "og:description", "content": "Gestão de pedidos de compra e recebimentos no Stackwise."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
   validateSearch: (search: Record<string, unknown>): POSearch => ({
     po: typeof search.po === "string" ? search.po : undefined,
   }),

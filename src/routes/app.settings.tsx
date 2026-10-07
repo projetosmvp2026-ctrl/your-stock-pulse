@@ -13,7 +13,7 @@ import { UserManagement } from "@/components/settings/UserManagement";
 
 export const Route = createFileRoute("/app/settings")({
   component: SettingsPage,
-  head: () => ({ meta: [{ title: "Configurações — Stackwise" }] }),
+  head: () => ({ meta: [{"title": "Configurações — Stackwise"}, {"name": "description", "content": "Configurações de estoque, equipe e permissões no Stackwise."}, {"property": "og:title", "content": "Configurações — Stackwise"}, {"property": "og:description", "content": "Configurações de estoque, equipe e permissões no Stackwise."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
 });
 
 function SettingsPage() {
