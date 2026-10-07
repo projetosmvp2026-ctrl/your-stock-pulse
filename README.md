@@ -30,6 +30,8 @@ bunx playwright test e2e/direct-access.spec.ts
 
 A saída de produção usa Cloudflare Workers. O teste de acesso direto inicia o servidor quando necessário. Os arquivos `eval-session.tmp.*` são verificações históricas do antigo demo em inglês; o teste padrão atualizado é `direct-access.spec.ts`.
 
+O acesso por `/`, `/login` e `/app/dashboard` foi verificado no navegador sem erros de execução. A execução do teste JavaScript neste ambiente não encontrou a versão correspondente do navegador; execute a instalação de Chromium acima antes de rodar esse teste no computador.
+
 ## Mapa do projeto
 
 - `src/routes/`: páginas e navegação; `__root.tsx` contém os provedores compartilhados.
