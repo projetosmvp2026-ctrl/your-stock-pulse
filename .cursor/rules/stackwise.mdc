@@ -1,0 +1,15 @@
+---
+description: Stackwise architecture, safety and current handoff status
+alwaysApply: true
+---
+
+- Read README.md and AGENTS.md before changes. Communicate in Brazilian Portuguese.
+- Preserve React 19, TanStack Start v1, file-based TanStack Router, Vite 7 and Tailwind CSS v4.
+- Root and /login open /app/dashboard directly. Do not restore landing or login UI unless requested.
+- Public UI access is not admin authorization. Validate private operations on the server using a real session and user_roles. Never use hardcoded credentials or client storage for authorization.
+- Inventory currently uses a seeded in-memory store. Do not claim changes persist to Cloud without implementing and verifying persistence.
+- Do not edit generated routeTree.gen.ts or generated integration clients. Add route files with matching createFileRoute IDs.
+- Use createServerFn for internal server logic; authenticate private handlers. Verify callers of public webhook routes.
+- Keep private credentials out of source and VITE_ variables. Never print .env or session tokens.
+- Use semantic style tokens and existing UI components. Preserve Portuguese text.
+- Historical PRDs and demo tests may be outdated; current code and explicit requirements take precedence.

@@ -1,11 +1,17 @@
-import { createLovableConfig } from "lovable-agent-playwright-config/config";
+import { defineConfig } from "@playwright/test";
 
-export default createLovableConfig({
-  // Tests should be placed in the 'e2e' folder (default)
-  // Add your custom playwright configuration overrides here
-  // Example:
-  // timeout: 60000,
-  // use: {
-  //   baseURL: 'http://localhost:3000',
-  // },
+export default defineConfig({
+  testDir: "./e2e",
+  testMatch: "direct-access.spec.ts",
+  use: {
+    baseURL: "http://localhost:8080",
+    viewport: { width: 1280, height: 1800 },
+    headless: true,
+  },
+  webServer: {
+    command: "bun run dev",
+    url: "http://localhost:8080",
+    reuseExistingServer: true,
+    timeout: 60_000,
+  },
 });
