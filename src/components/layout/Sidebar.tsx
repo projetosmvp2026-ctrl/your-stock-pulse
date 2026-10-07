@@ -97,8 +97,8 @@ export function Sidebar({ onNavigate }: SidebarProps) {
   return (
     <nav data-tour="sidebar" className="flex h-full flex-col bg-sidebar text-sidebar-foreground">
       <div className="flex h-14 items-center gap-2 px-5">
-        <Package className="h-5 w-5 text-sidebar-primary" />
-        <span className="text-lg font-semibold tracking-tight text-sidebar-primary-foreground">Stackwise</span>
+        <Package className="h-5 w-5 shrink-0 text-sidebar-primary" />
+        <span className="min-w-0 text-sm leading-tight font-semibold text-sidebar-primary-foreground">Drilling do Brasil</span>
       </div>
 
       <div className="flex-1 overflow-y-auto px-3 py-2">

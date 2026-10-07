@@ -20,7 +20,7 @@ interface SuppliersSearch {
 
 export const Route = createFileRoute("/app/suppliers")({
   component: SuppliersPage,
-  head: () => ({ meta: [{"title": "Fornecedores — Stackwise"}, {"name": "description", "content": "Consulta de fornecedores, contatos e histórico de compras no Stackwise."}, {"property": "og:title", "content": "Fornecedores — Stackwise"}, {"property": "og:description", "content": "Consulta de fornecedores, contatos e histórico de compras no Stackwise."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
+  head: () => ({ meta: [{"title": "Fornecedores — Drilling do Brasil"}, {"name": "description", "content": "Consulta de fornecedores, contatos e histórico de compras no Drilling do Brasil."}, {"property": "og:title", "content": "Fornecedores — Drilling do Brasil"}, {"property": "og:description", "content": "Consulta de fornecedores, contatos e histórico de compras no Drilling do Brasil."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
   validateSearch: (search: Record<string, unknown>): SuppliersSearch => ({
     supplier: typeof search.supplier === "string" ? search.supplier : undefined,
   }),
@@ -108,7 +108,7 @@ function SuppliersPage() {
           <CSVExportButton
             data={suppliers}
             columns={supplierCsvColumns}
-            filename="stackwise-suppliers"
+            filename="drilling-do-brasil-suppliers"
           />
           {canManageSuppliers && (
             <Button size="sm" onClick={openCreate}>

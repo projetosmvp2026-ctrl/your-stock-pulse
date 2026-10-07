@@ -33,7 +33,7 @@ import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
 
 export const Route = createFileRoute("/app/requests")({
   component: RequestsPage,
-  head: () => ({ meta: [{"title": "Solicitações — Stackwise"}, {"name": "description", "content": "Consulta e acompanhamento de solicitações de estoque no Stackwise."}, {"property": "og:title", "content": "Solicitações — Stackwise"}, {"property": "og:description", "content": "Consulta e acompanhamento de solicitações de estoque no Stackwise."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
+  head: () => ({ meta: [{"title": "Solicitações — Drilling do Brasil"}, {"name": "description", "content": "Consulta e acompanhamento de solicitações de estoque no Drilling do Brasil."}, {"property": "og:title", "content": "Solicitações — Drilling do Brasil"}, {"property": "og:description", "content": "Consulta e acompanhamento de solicitações de estoque no Drilling do Brasil."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
   validateSearch: (search: Record<string, unknown>) => ({
     request: (search.request as string) || undefined,
   }),
