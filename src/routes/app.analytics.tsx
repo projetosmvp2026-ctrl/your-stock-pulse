@@ -24,7 +24,7 @@ import { CostTrendChart } from "@/components/analytics/CostTrendChart";
 
 export const Route = createFileRoute("/app/analytics")({
   component: AnalyticsPage,
-  head: () => ({ meta: [{ title: "Análises — Stackwise" }] }),
+  head: () => ({ meta: [{"title": "Análises — Stackwise"}, {"name": "description", "content": "Análises de estoque, movimentações, custos e desempenho de fornecedores no Stackwise."}, {"property": "og:title", "content": "Análises — Stackwise"}, {"property": "og:description", "content": "Análises de estoque, movimentações, custos e desempenho de fornecedores no Stackwise."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
 });
 
 function AnalyticsPage() {

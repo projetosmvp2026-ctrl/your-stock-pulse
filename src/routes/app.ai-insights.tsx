@@ -27,7 +27,7 @@ import { subDays } from "date-fns";
 export const Route = createFileRoute("/app/ai-insights")({
   component: AiInsightsPage,
   head: () => ({
-    meta: [{ title: "Insights — Stackwise" }],
+    meta: [{"title": "Insights — Stackwise"}, {"name": "description", "content": "Sugestões de reposição, previsões de demanda e alertas de estoque no Stackwise."}, {"property": "og:title", "content": "Insights — Stackwise"}, {"property": "og:description", "content": "Sugestões de reposição, previsões de demanda e alertas de estoque no Stackwise."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}],
   }),
 });
 

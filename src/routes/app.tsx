@@ -18,7 +18,7 @@ export const Route = createFileRoute("/app")({
 });
 
 function AppLayout() {
-  const { session, loading } = useAuth();
+  const { session } = useAuth();
   const { isDemo, enterDemoMode } = useDemo();
   const { role } = useRole();
   const navigate = useNavigate();
@@ -28,17 +28,10 @@ function AppLayout() {
   // Global keyboard shortcuts
   useKeyboardShortcuts({ onHelpOpen: () => setHelpOpen(true) });
 
-  // Auth guard
+  // Public dashboard access does not confer authenticated permissions.
   useEffect(() => {
-    if (!loading && !session) {
-      navigate({ to: "/login" });
-    }
-  }, [loading, session, navigate]);
-
-  // Initialise the working data set once signed in
-  useEffect(() => {
-    if (session && !isDemo) enterDemoMode();
-  }, [session, isDemo, enterDemoMode]);
+    if (!isDemo) enterDemoMode();
+  }, [isDemo, enterDemoMode]);
 
   // Role-based route guard
   useEffect(() => {
@@ -48,7 +41,7 @@ function AppLayout() {
     }
   }, [location.pathname, role, navigate, session]);
 
-  if (loading || !session || !isDemo) {
+  if (!isDemo) {
     return (
       <div className="flex h-screen items-center justify-center bg-background">
         <div className="h-6 w-6 animate-spin rounded-full border-2 border-muted-foreground/30 border-t-muted-foreground" />

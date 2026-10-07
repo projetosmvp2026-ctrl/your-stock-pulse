@@ -17,7 +17,7 @@ import type { StockMovement } from "@/types/inventory";
 
 export const Route = createFileRoute("/app/movements")({
   component: MovementsPage,
-  head: () => ({ meta: [{ title: "Movimentações — Stackwise" }] }),
+  head: () => ({ meta: [{"title": "Movimentações — Stackwise"}, {"name": "description", "content": "Histórico de entradas, saídas e ajustes do estoque Stackwise."}, {"property": "og:title", "content": "Movimentações — Stackwise"}, {"property": "og:description", "content": "Histórico de entradas, saídas e ajustes do estoque Stackwise."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
   validateSearch: (search: Record<string, unknown>) => ({
     item: typeof search.item === "string" ? search.item : undefined,
   }),

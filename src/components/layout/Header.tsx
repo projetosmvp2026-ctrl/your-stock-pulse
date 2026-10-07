@@ -53,7 +53,7 @@ export function Header() {
 
   const handleSignOut = async () => {
     await signOut();
-    await navigate({ to: "/login" });
+    await navigate({ to: "/app/dashboard", replace: true });
   };
 
   // CMD+K / Ctrl+K shortcut
@@ -116,10 +116,12 @@ export function Header() {
             <Settings className="mr-2 h-4 w-4" />
             Configurações
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={handleSignOut}>
-            <LogOut className="mr-2 h-4 w-4" />
-            Sair
-          </DropdownMenuItem>
+          {user && (
+            <DropdownMenuItem onClick={handleSignOut}>
+              <LogOut className="mr-2 h-4 w-4" />
+              Sair
+            </DropdownMenuItem>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
 
