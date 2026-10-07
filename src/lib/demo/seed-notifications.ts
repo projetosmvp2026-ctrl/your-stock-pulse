@@ -67,7 +67,7 @@ export function generateNotifications(): Notification[] {
     {
       id: "notif-007",
       type: "system",
-      title: "Bem-vindo ao Stackwise",
+      title: "Bem-vindo ao Drilling do Brasil",
       message: "Seu sistema de gestão de estoque está pronto. Explore o painel para começar.",
       isRead: true,
       link: "/app/dashboard",

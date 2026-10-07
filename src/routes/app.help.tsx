@@ -12,7 +12,7 @@ import { FAQ_DATA } from "@/lib/faq-data";
 
 export const Route = createFileRoute("/app/help")({
   component: HelpPage,
-  head: () => ({ meta: [{"title": "Central de Ajuda — Stackwise"}, {"name": "description", "content": "Perguntas frequentes e suporte ao uso do Stackwise."}, {"property": "og:title", "content": "Central de Ajuda — Stackwise"}, {"property": "og:description", "content": "Perguntas frequentes e suporte ao uso do Stackwise."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
+  head: () => ({ meta: [{"title": "Central de Ajuda — Drilling do Brasil"}, {"name": "description", "content": "Perguntas frequentes e suporte ao uso do Drilling do Brasil."}, {"property": "og:title", "content": "Central de Ajuda — Drilling do Brasil"}, {"property": "og:description", "content": "Perguntas frequentes e suporte ao uso do Drilling do Brasil."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
 });
 
 function HelpPage() {
@@ -37,7 +37,7 @@ function HelpPage() {
         <HelpCircle className="h-7 w-7 text-primary shrink-0" />
         <div>
           <h1 className="text-2xl font-semibold text-foreground">Central de Ajuda</h1>
-          <p className="text-sm text-muted-foreground">Encontre respostas para perguntas comuns sobre o Stackwise.</p>
+          <p className="text-sm text-muted-foreground">Encontre respostas para perguntas comuns sobre o Drilling do Brasil.</p>
         </div>
       </div>
 

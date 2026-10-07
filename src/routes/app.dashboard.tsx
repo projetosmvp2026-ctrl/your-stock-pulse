@@ -15,7 +15,7 @@ import { useDemo } from "@/hooks/useDemo";
 import { useOnboarding, type TourStep } from "@/hooks/useOnboarding";
 
 const TOUR_STEPS: TourStep[] = [
-  { title: "Bem-vindo ao Stackwise!", description: "Vamos fazer um tour rápido pelos principais recursos. Isso leva apenas um minuto." },
+  { title: "Bem-vindo ao Drilling do Brasil!", description: "Vamos fazer um tour rápido pelos principais recursos. Isso leva apenas um minuto." },
   { target: "sidebar", title: "Navegação", description: "Use a barra lateral para alternar entre seções — catálogo, movimentações, fornecedores e mais." },
   { target: "metrics", title: "Saúde do estoque", description: "A saúde do seu estoque em um relance — total de SKUs, contagem de itens em estoque, estoque baixo e sem estoque." },
   { target: "needs-attention", title: "Precisa de atenção", description: "Itens que precisam de ação aparecem aqui — estoque baixo, pedidos atrasados e solicitações pendentes." },
@@ -25,7 +25,7 @@ const TOUR_STEPS: TourStep[] = [
 
 export const Route = createFileRoute("/app/dashboard")({
   component: DashboardPage,
-  head: () => ({ meta: [{"title": "Painel — Stackwise"}, {"name": "description", "content": "Resumo do estoque, atividades recentes e alertas no painel Stackwise."}, {"property": "og:title", "content": "Painel — Stackwise"}, {"property": "og:description", "content": "Resumo do estoque, atividades recentes e alertas no painel Stackwise."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
+  head: () => ({ meta: [{"title": "Painel — Drilling do Brasil"}, {"name": "description", "content": "Resumo do estoque, atividades recentes e alertas no painel Drilling do Brasil."}, {"property": "og:title", "content": "Painel — Drilling do Brasil"}, {"property": "og:description", "content": "Resumo do estoque, atividades recentes e alertas no painel Drilling do Brasil."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
 });
 
 function DashboardPage() {

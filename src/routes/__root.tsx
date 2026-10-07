@@ -13,15 +13,15 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Stackwise" },
+      { title: "Drilling do Brasil" },
       { name: "description", content: "Gerencie o estoque com rastreamento em tempo real, gestão de fornecedores, pedidos de compra e previsão de demanda com IA. Inclui acesso baseado em função, suporte a código de barras" },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Stackwise" },
+      { property: "og:title", content: "Drilling do Brasil" },
       { property: "og:description", content: "Gerencie o estoque com rastreamento em tempo real, gestão de fornecedores, pedidos de compra e previsão de demanda com IA. Inclui acesso baseado em função, suporte a código de barras" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Stackwise" },
+      { name: "twitter:title", content: "Drilling do Brasil" },
       { name: "twitter:description", content: "Gerencie o estoque com rastreamento em tempo real, gestão de fornecedores, pedidos de compra e previsão de demanda com IA. Inclui acesso baseado em função, suporte a código de barras" },
     ],
     links: [

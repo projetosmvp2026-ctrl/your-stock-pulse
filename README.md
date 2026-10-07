@@ -1,4 +1,4 @@
-# Stackwise — continuidade no Cursor
+# Drilling do Brasil — continuidade no Cursor
 
 Sistema de estoque em React 19, TanStack Start, TypeScript e Tailwind CSS v4.
 

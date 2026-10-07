@@ -15,7 +15,7 @@ import type { LocationTreeNode } from "@/hooks/useLocations";
 
 export const Route = createFileRoute("/app/locations")({
   component: LocationsPage,
-  head: () => ({ meta: [{"title": "Locais — Stackwise"}, {"name": "description", "content": "Organização dos locais de armazenamento e transferências no Stackwise."}, {"property": "og:title", "content": "Locais — Stackwise"}, {"property": "og:description", "content": "Organização dos locais de armazenamento e transferências no Stackwise."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
+  head: () => ({ meta: [{"title": "Locais — Drilling do Brasil"}, {"name": "description", "content": "Organização dos locais de armazenamento e transferências no Drilling do Brasil."}, {"property": "og:title", "content": "Locais — Drilling do Brasil"}, {"property": "og:description", "content": "Organização dos locais de armazenamento e transferências no Drilling do Brasil."}, {"property": "og:type", "content": "website"}, {"name": "twitter:card", "content": "summary_large_image"}] }),
 });
 
 function findNode(nodes: LocationTreeNode[], id: string): LocationTreeNode | null {

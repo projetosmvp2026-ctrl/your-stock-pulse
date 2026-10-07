@@ -12,7 +12,7 @@ export const FAQ_DATA: FaqCategory[] = [
   {
     title: "Primeiros Passos",
     items: [
-      { question: "O que é o Stackwise?", answer: "Stackwise é um sistema de gestão de estoque que ajuda você a acompanhar níveis de estoque, gerenciar fornecedores, criar pedidos de compra e obter insights por meio de análises." },
+      { question: "O que é o Drilling do Brasil?", answer: "Drilling do Brasil é um sistema de gestão de estoque que ajuda você a acompanhar níveis de estoque, gerenciar fornecedores, criar pedidos de compra e obter insights por meio de análises." },
       { question: "Como entro no modo demonstração?", answer: "Clique em 'Experimentar Demonstração' na página inicial. O modo demonstração pré-carrega dados de exemplo para você explorar todos os recursos sem criar uma conta." },
       { question: "Como navego pelo aplicativo?", answer: "Use a barra lateral (desktop) ou a barra de navegação inferior (mobile) para alternar entre as seções. Pressione CMD+K para abrir a paleta de comandos e fazer buscas rápidas." },
       { question: "Posso redefinir os dados de demonstração?", answer: "Sim! Vá em Configurações → Sistema e clique em 'Redefinir Dados de Demonstração' para restaurar todos os dados de exemplo ao estado original." },
